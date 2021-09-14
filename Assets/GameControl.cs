@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Collections;
 
 public class GameControl : MonoBehaviour {
 
@@ -8,49 +10,92 @@ public class GameControl : MonoBehaviour {
     private static GameObject player1;
 
     public static int diceSideThrown = 0;
-    public static int player1StartWaypoint = 0;
 
     public static bool gameOver = false;
 
+    private static bool isRewarded = false;
+
+    private int[] waypoints_reward = {1, 
+                                      -1,    
+                                      1,
+                                      -1}; 
+
     // Use this for initialization
     void Start () {
-
         winsTextShadow = GameObject.Find("WinsText");
         playerMoveCount = GameObject.Find("Player1MoveCount");
 
         player1 = GameObject.Find("Player1");
 
-        player1.GetComponent<FollowThePath>().moveAllowed = false;
+        player1.GetComponent<PlayerMovement>().moveAllowed = false;
 
         winsTextShadow.gameObject.SetActive(false);
         playerMoveCount.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (player1.GetComponent<FollowThePath>().waypointIndex > 
-            player1StartWaypoint + diceSideThrown)
-        {
-            player1.GetComponent<FollowThePath>().moveAllowed = false;
+    void Update() {
+        // Check if the player finish the movement this round
+        if (player1.GetComponent<PlayerMovement>().moveFinished) {
+            player1.GetComponent<PlayerMovement>().moveAllowed = false;
             playerMoveCount.gameObject.SetActive(false);
-            player1StartWaypoint = player1.GetComponent<FollowThePath>().waypointIndex - 1;
+            player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
+
+            // Check for rewarded steps
+            if (!isRewarded) {
+                rewardPlayer();
+            }
         }
 
-        if (player1.GetComponent<FollowThePath>().waypointIndex == 
-            player1.GetComponent<FollowThePath>().waypoints.Length)
-        {
-            winsTextShadow.gameObject.SetActive(true);
-            playerMoveCount.gameObject.SetActive(false);
-            winsTextShadow.GetComponent<Text>().text = "You Wins";
-            gameOver = true;
-        }
+        // // Check if finish the board
+        // if (player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
+        //     winsTextShadow.gameObject.SetActive(true);
+        //     playerMoveCount.gameObject.SetActive(false);
+        //     winsTextShadow.GetComponent<Text>().text = "You Wins";
+        //     gameOver = true;
+        // }
     }
 
-    public static void MovePlayer()
-    {
+    public static void MovePlayer() {
+        // Reset Reward
+        isRewarded = false;
+
+        // Setup UI
         playerMoveCount.gameObject.SetActive(true);
         playerMoveCount.GetComponent<Text>().text = "You move " + diceSideThrown.ToString() + " steps";
-        player1.GetComponent<FollowThePath>().moveAllowed = true;
+
+        // Setup player movement
+        player1.GetComponent<PlayerMovement>().moveForward = true;
+        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex + diceSideThrown;
+        player1.GetComponent<PlayerMovement>().moveFinished = false;
+        player1.GetComponent<PlayerMovement>().moveAllowed = true;
+    }
+
+    private void rewardPlayer() {
+        // Set rewarded
+        isRewarded = true;
+
+        // Check steps
+        int rewardedSteps = -1;
+
+        // Early return if there's no reward
+        if (rewardedSteps == 0) {
+            return;
+        }
+
+        // Setup UI
+        playerMoveCount.gameObject.SetActive(true);
+        playerMoveCount.GetComponent<Text>().text = "You are rewarded to move" + rewardedSteps + " steps";
+
+        // Setup player movement
+        if (rewardedSteps > 0) {
+            player1.GetComponent<PlayerMovement>().moveForward = true;
+        } else if (rewardedSteps < 0) {
+            player1.GetComponent<PlayerMovement>().moveForward = false;
+        }
+
+        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
+        player1.GetComponent<PlayerMovement>().moveFinished = false;
+        player1.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameControl : MonoBehaviour {
 
@@ -13,7 +15,7 @@ public class GameControl : MonoBehaviour {
 
     public static bool gameOver = false;
 
-    private static bool isRewarded = false;
+    private static bool isRewarded = true;
 
     private int[] waypoints_reward = {5, 
                                       -1,    
@@ -21,7 +23,8 @@ public class GameControl : MonoBehaviour {
                                       -5,
                                       3,
                                       -2,
-                                      1}; 
+                                      1,
+                                      0}; 
 
     // Use this for initialization
     void Start () {
@@ -82,8 +85,9 @@ public class GameControl : MonoBehaviour {
         int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
         int rewardedSteps = waypoints_reward[randomRewardIndex];
 
-        // Early return if there's no reward
+        // Load mini game if no reward -> for testing
         if (rewardedSteps == 0) {
+            SceneManager.LoadScene(sceneName: "MiniGame-1");
             return;
         }
 

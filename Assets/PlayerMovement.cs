@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [HideInInspector]
     public int currentWaypointIndex = 0;
-    public int destinationWaypointIndex = -1;
+    public int destinationWaypointIndex = 0;
     public bool moveAllowed = false;
     public bool moveForward = true;
     public bool moveFinished = false;

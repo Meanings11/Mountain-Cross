@@ -537,10 +537,10 @@ MonoBehaviour:
   - {fileID: 1286634789}
   moveSpeed: 3
   currentWaypointIndex: 0
-  destinationWaypointIndex: -1
+  destinationWaypointIndex: 0
   moveAllowed: 0
   moveForward: 1
-  moveFinished: 1
+  moveFinished: 0
 --- !u!1 &365678672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49.2, y: -18.9}
+  m_AnchoredPosition: {x: -49.200012, y: -18.900024}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &917670472

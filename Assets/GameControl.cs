@@ -15,10 +15,13 @@ public class GameControl : MonoBehaviour {
 
     private static bool isRewarded = false;
 
-    private int[] waypoints_reward = {1, 
+    private int[] waypoints_reward = {5, 
                                       -1,    
-                                      1,
-                                      -1}; 
+                                      4,
+                                      -5,
+                                      3,
+                                      -2,
+                                      1}; 
 
     // Use this for initialization
     void Start () {
@@ -38,7 +41,7 @@ public class GameControl : MonoBehaviour {
         // Check if the player finish the movement this round
         if (player1.GetComponent<PlayerMovement>().moveFinished) {
             player1.GetComponent<PlayerMovement>().moveAllowed = false;
-            playerMoveCount.gameObject.SetActive(false);
+            // playerMoveCount.gameObject.SetActive(false);
             player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
 
             // Check for rewarded steps
@@ -76,7 +79,8 @@ public class GameControl : MonoBehaviour {
         isRewarded = true;
 
         // Check steps
-        int rewardedSteps = -1;
+        int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
+        int rewardedSteps = waypoints_reward[randomRewardIndex];
 
         // Early return if there's no reward
         if (rewardedSteps == 0) {

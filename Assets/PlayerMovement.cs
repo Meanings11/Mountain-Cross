@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	private void Start () {
+        // Load data from Playerprefs -- This might be from the previous scene, or meaybe even from the previous execution.
+        currentWaypointIndex = PlayerPrefs.GetInt("lastWaypointIndex", 0);
         transform.position = waypoints[currentWaypointIndex].transform.position;
 	}
 	
@@ -24,6 +26,11 @@ public class PlayerMovement : MonoBehaviour {
         if (moveAllowed)
             moveToDestination();
 	}
+
+    void OnDestroy() {
+        // Before we get destroyed, we save data to our save file.
+        PlayerPrefs.SetInt("lastWaypointIndex", destinationWaypointIndex);
+    }
 
     private void moveToDestination() {
         if (moveForward) {

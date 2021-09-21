@@ -8,10 +8,13 @@ public class returnAction : MonoBehaviour
 {
     public Button returnButton;
     private int previousSceneToLoad = 0;
+    private static GameObject sceneManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneManager = GameObject.Find("SceneManager");
+
         previousSceneToLoad = SceneManager.GetActiveScene().buildIndex - 1;
         Button btn = returnButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
@@ -19,7 +22,7 @@ public class returnAction : MonoBehaviour
 
     private void TaskOnClick()
     {
-        SceneManager.LoadScene(previousSceneToLoad);
+        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneIndex: previousSceneToLoad);
     }
 
     // Update is called once per frame

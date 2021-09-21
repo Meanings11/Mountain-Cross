@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +9,8 @@ public class GameControl : MonoBehaviour {
     private static GameObject winsTextShadow, playerMoveCount;
 
     private static GameObject player1;
+
+    private static GameObject sceneManager;
 
     public static int diceSideThrown = 0;
 
@@ -30,8 +31,8 @@ public class GameControl : MonoBehaviour {
     void Start () {
         winsTextShadow = GameObject.Find("WinsText");
         playerMoveCount = GameObject.Find("Player1MoveCount");
-
         player1 = GameObject.Find("Player1");
+        sceneManager = GameObject.Find("SceneManager");
 
         player1.GetComponent<PlayerMovement>().moveAllowed = false;
 
@@ -83,11 +84,11 @@ public class GameControl : MonoBehaviour {
 
         // Check steps
         int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
-        int rewardedSteps = waypoints_reward[randomRewardIndex];
+        int rewardedSteps = 0; //waypoints_reward[randomRewardIndex];
 
         // Load mini game if no reward -> for testing
         if (rewardedSteps == 0) {
-            SceneManager.LoadScene(sceneName: "MiniGame-1");
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MiniGame-1");
             return;
         }
 

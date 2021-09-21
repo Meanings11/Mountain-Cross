@@ -84,7 +84,7 @@ public class GameControl : MonoBehaviour {
 
         // Check steps
         int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
-        int rewardedSteps = 0; //waypoints_reward[randomRewardIndex];
+        int rewardedSteps = waypoints_reward[randomRewardIndex];
 
         // Load mini game if no reward -> for testing
         if (rewardedSteps == 0) {

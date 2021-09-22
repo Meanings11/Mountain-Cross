@@ -19,7 +19,10 @@ public class GameControl : MonoBehaviour {
     private static bool isRewarded = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
-
+    private int[] waypoints_reward = {0, 0, 0, 4, -1, 0, 0,
+                                      0, 0, 0, -10, 0, 0,
+                                      0, 0, 0, -1, 0, -2,
+                                      0, 0, 0, 0, 0};
     // Use this for initialization
     void Start () {
         minigamesIndexes.Add(3);
@@ -89,30 +92,31 @@ public class GameControl : MonoBehaviour {
         // Set rewarded
         isRewarded = true;
 
-        // Check steps
-        // int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
-        // int rewardedSteps = waypoints_reward[randomRewardIndex];
-
-        // Load mini game if no reward -> for testing
+        // Current Index
         int currentIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex;
-        if (minigamesIndexes.Contains(currentIndex)) {
+
+        // Check steps
+        int rewardedSteps = waypoints_reward[currentIndex];
+
+        // Load mini game if no reward and is in minigamesIndexes
+        if (rewardedSteps == 0 && minigamesIndexes.Contains(currentIndex)) {
             sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MiniGame-1");
             return;
         }
 
         // Setup UI
-        // playerMoveCount.gameObject.SetActive(true);
-        // playerMoveCount.GetComponent<Text>().text = "You are rewarded to move" + rewardedSteps + " steps";
+        playerMoveCount.gameObject.SetActive(true);
+        playerMoveCount.GetComponent<Text>().text = "You are rewarded to move" + rewardedSteps + " steps";
 
-        // // Setup player movement
-        // if (rewardedSteps > 0) {
-        //     player1.GetComponent<PlayerMovement>().moveForward = true;
-        // } else if (rewardedSteps < 0) {
-        //     player1.GetComponent<PlayerMovement>().moveForward = false;
-        // }
+        // Setup player movement
+        if (rewardedSteps > 0) {
+            player1.GetComponent<PlayerMovement>().moveForward = true;
+        } else if (rewardedSteps < 0) {
+            player1.GetComponent<PlayerMovement>().moveForward = false;
+        }
 
-        // player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
-        // player1.GetComponent<PlayerMovement>().moveFinished = false;
-        // player1.GetComponent<PlayerMovement>().moveAllowed = true;
+        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
+        player1.GetComponent<PlayerMovement>().moveFinished = false;
+        player1.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 }

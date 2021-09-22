@@ -18,17 +18,24 @@ public class GameControl : MonoBehaviour {
 
     private static bool isRewarded = true;
 
-    private int[] waypoints_reward = {5, 
-                                      -1,    
-                                      4,
-                                      -5,
-                                      3,
-                                      -2,
-                                      1,
-                                      0}; 
+    HashSet<int> minigamesIndexes = new HashSet<int>();
 
     // Use this for initialization
     void Start () {
+        minigamesIndexes.Add(3);
+        minigamesIndexes.Add(4);
+        minigamesIndexes.Add(5);
+        minigamesIndexes.Add(6);
+        minigamesIndexes.Add(9);
+        minigamesIndexes.Add(10);
+        minigamesIndexes.Add(12);
+        minigamesIndexes.Add(13);
+        minigamesIndexes.Add(15);
+        minigamesIndexes.Add(16);
+        minigamesIndexes.Add(19);
+        minigamesIndexes.Add(21);
+        minigamesIndexes.Add(23);
+
         winsTextShadow = GameObject.Find("WinsText");
         playerMoveCount = GameObject.Find("Player1MoveCount");
         player1 = GameObject.Find("Player1");
@@ -83,28 +90,29 @@ public class GameControl : MonoBehaviour {
         isRewarded = true;
 
         // Check steps
-        int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
-        int rewardedSteps = waypoints_reward[randomRewardIndex];
+        // int randomRewardIndex = UnityEngine.Random.Range(0, waypoints_reward.Length - 1);
+        // int rewardedSteps = waypoints_reward[randomRewardIndex];
 
         // Load mini game if no reward -> for testing
-        if (rewardedSteps == 0) {
+        int currentIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex;
+        if (minigamesIndexes.Contains(currentIndex)) {
             sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MiniGame-1");
             return;
         }
 
         // Setup UI
-        playerMoveCount.gameObject.SetActive(true);
-        playerMoveCount.GetComponent<Text>().text = "You are rewarded to move" + rewardedSteps + " steps";
+        // playerMoveCount.gameObject.SetActive(true);
+        // playerMoveCount.GetComponent<Text>().text = "You are rewarded to move" + rewardedSteps + " steps";
 
-        // Setup player movement
-        if (rewardedSteps > 0) {
-            player1.GetComponent<PlayerMovement>().moveForward = true;
-        } else if (rewardedSteps < 0) {
-            player1.GetComponent<PlayerMovement>().moveForward = false;
-        }
+        // // Setup player movement
+        // if (rewardedSteps > 0) {
+        //     player1.GetComponent<PlayerMovement>().moveForward = true;
+        // } else if (rewardedSteps < 0) {
+        //     player1.GetComponent<PlayerMovement>().moveForward = false;
+        // }
 
-        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
-        player1.GetComponent<PlayerMovement>().moveFinished = false;
-        player1.GetComponent<PlayerMovement>().moveAllowed = true;
+        // player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
+        // player1.GetComponent<PlayerMovement>().moveFinished = false;
+        // player1.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 }

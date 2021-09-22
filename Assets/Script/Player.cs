@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{   
+{
     public float velocity = 2.4f;
+    public GameManager gameManager;
+    public bool isDead = false;
     private Rigidbody2D rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();    
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -20,5 +22,11 @@ public class Player : MonoBehaviour
         {
             rigidbody.velocity = Vector2.up * velocity;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isDead = true;
+        gameManager.GameOver();
     }
 }

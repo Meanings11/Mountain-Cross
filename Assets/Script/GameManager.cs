@@ -6,11 +6,29 @@ using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    // UI
     public GameObject startButton;
-    public Player player;
 
     public Text gameOverCountdown;
-    public float countTimer = 5;
+    public Text scoreText;
+
+
+    // Parameters
+    public float countTimer = 2;
+    public float scrollSpeed = 1.5f;
+    public bool isGameOver = false;
+    private int score = 0;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        }    
+        else if (instance != this) {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if( player.isDead )
+        if( isGameOver )
         {
             gameOverCountdown.gameObject.SetActive(true);
             countTimer -= Time.unscaledDeltaTime;
@@ -35,6 +53,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Score
+    public void BirdScored() {
+        if (isGameOver) return;
+
+        score++;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+
     public void StartGame()
     {
         startButton.SetActive(false);
@@ -44,11 +72,17 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+        isGameOver = true;
     }
 
 
     public void RestartGame()
     {
-        EditorSceneManager.LoadScene(0);
+        EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().buildIndex);
+    }
+
+    // API to main board
+    public int getScore() {
+        return score;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float velocity = 2.4f;
-    public GameManager gameManager;
     public bool isDead = false;
     private Rigidbody2D rigidbody;
 
@@ -27,6 +26,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isDead = true;
-        gameManager.GameOver();
+        GameManager.instance.GameOver();
     }
 }

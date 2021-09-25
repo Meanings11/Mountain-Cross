@@ -26,6 +26,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isDead = true;
-        GameManager.instance.GameOver();
+        GameManager.instance.GamePause();
     }
 }

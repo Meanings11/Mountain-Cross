@@ -10,14 +10,17 @@ public class GameManager : MonoBehaviour
 
     // UI
     public GameObject startButton;
-
-    public Text gameOverCountdown;
+    public Text gameTimerText;
+    public Text respawnTimerText;
     public Text scoreText;
+    public Image gameOverImage;
 
 
     // Parameters
-    public float countTimer = 2;
+    public float gameTime = 60;
+    public float respawnTime = 2;
     public float scrollSpeed = 1.5f;
+    public bool isGamePaused = false;
     public bool isGameOver = false;
     private int score = 0;
 
@@ -33,30 +36,43 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameOverCountdown.gameObject.SetActive(false);
+        respawnTimerText.gameObject.SetActive(false);
+        gameOverImage.gameObject.SetActive(false);
         Time.timeScale = 0;
     }
 
     private void Update()
     {
-        if( isGameOver )
+        
+        if (gameTime <= 0) 
         {
-            gameOverCountdown.gameObject.SetActive(true);
-            countTimer -= Time.unscaledDeltaTime;
+            GameOver();
+            enabled = false;
         }
 
-        gameOverCountdown.text = "Restarting in " + (countTimer).ToString("0");
-
-        if(countTimer < 0)
+        if( isGamePaused)
         {
-            RestartGame();
+            respawnTimerText.gameObject.SetActive(true);
+            respawnTime -= Time.unscaledDeltaTime;
+
+            respawnTimerText.text = "Restarting in " + (respawnTime).ToString("0");
+
+            if(respawnTime < 0)
+            {
+                RestartGame();
+            }
+
+        } else {
+            gameTime -= Time.unscaledDeltaTime;
+            gameTimerText.text = gameTime.ToString("0");
         }
+
     }
 
 
     // Score
     public void BirdScored() {
-        if (isGameOver) return;
+        if (isGamePaused) return;
 
         score++;
         scoreText.text = "Score: " + score.ToString();
@@ -69,10 +85,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void GameOver()
+    public void GamePause()
     {
         Time.timeScale = 0;
-        isGameOver = true;
+        isGamePaused = true;
+    }
+
+    public void GameOver()
+    {
+         Time.timeScale = 0;
+         isGameOver = true;
+         gameOverImage.gameObject.SetActive(true);
     }
 
 

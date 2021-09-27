@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour {
     private static bool isRewarded = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
-    private int[] waypoints_reward = {0, 0, 0, 4, 0, 0, 0,
+    private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
                                       0, 0, 0, -10, 0, 0,
                                       0, 0, 0, -1, 0, -2,
                                       0, 0, 0, 0, 0};
@@ -55,7 +55,6 @@ public class GameControl : MonoBehaviour {
         // Check if the player finish the movement this round
         if (player1.GetComponent<PlayerMovement>().moveFinished) {
             player1.GetComponent<PlayerMovement>().moveAllowed = false;
-            // playerMoveCount.gameObject.SetActive(false);
             player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
 
             // Check for rewarded steps
@@ -64,13 +63,16 @@ public class GameControl : MonoBehaviour {
             }
         }
 
-        // // Check if finish the board
-        // if (player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
-        //     winsTextShadow.gameObject.SetActive(true);
-        //     playerMoveCount.gameObject.SetActive(false);
-        //     winsTextShadow.GetComponent<Text>().text = "You Wins";
-        //     gameOver = true;
-        // }
+        // Check if finish the board once
+        if (player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
+           player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex - player1.GetComponent<PlayerMovement>().currentWaypointIndex;
+           player1.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
+            // TODO: Add dialog to show the reward when every round is finished.
+            // winsTextShadow.gameObject.SetActive(true);
+            // playerMoveCount.gameObject.SetActive(false);
+            // winsTextShadow.GetComponent<Text>().text = "Your first round finished, HERE IS THE REWARD OPTIONS...";
+            // gameOver = true; The gameover will be used when the user finished the game
+        }
     }
 
     public static void MovePlayer() {

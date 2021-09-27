@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour {
     private static bool isRewarded = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
-    private int[] waypoints_reward = {0, 0, 0, 4, -1, 0, 0,
+    private int[] waypoints_reward = {0, 0, 0, 4, 0, 0, 0,
                                       0, 0, 0, -10, 0, 0,
                                       0, 0, 0, -1, 0, -2,
                                       0, 0, 0, 0, 0};

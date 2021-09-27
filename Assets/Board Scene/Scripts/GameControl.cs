@@ -25,6 +25,9 @@ public class GameControl : MonoBehaviour {
                                       0, 0, 0, 0, 0};
     // Use this for initialization
     void Start () {
+        // Only play the board with landscape mode
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         minigamesIndexes.Add(3);
         minigamesIndexes.Add(4);
         minigamesIndexes.Add(5);

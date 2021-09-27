@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGame-1.unity
     guid: 3abf5e16a37534508a2b3e058531203a
+  - enabled: 1
+    path: Assets/Hexgon/Scenes/HexgonScene.unity
+    guid: 7d198ba147ed9ef448c916b8af65bf2a
   m_configObjects: {}

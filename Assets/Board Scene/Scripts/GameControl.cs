@@ -22,7 +22,7 @@ public class GameControl : MonoBehaviour {
     private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
                                       0, 0, 0, -10, 0, 0,
                                       0, 0, 0, -1, 0, -2,
-                                      0, 0, 0, 0, 0};
+                                      0, 0, 0, 0, 0, 0};
     // Use this for initialization
     void Start () {
         // Only play the board with landscape mode
@@ -64,16 +64,21 @@ public class GameControl : MonoBehaviour {
             rewardPlayer();
         }
 
-        // Check if finish the board once
-        if (player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
-           player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex - player1.GetComponent<PlayerMovement>().currentWaypointIndex;
-           player1.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
-            // TODO: Add dialog to show the reward when every round is finished.
-            // winsTextShadow.gameObject.SetActive(true);
-            // playerMoveCount.gameObject.SetActive(false);
-            // winsTextShadow.GetComponent<Text>().text = "Your first round finished, HERE IS THE REWARD OPTIONS...";
-            // gameOver = true; The gameover will be used when the user finished the game
-        }
+        // // Check if finish the board once
+        // if (player1.GetComponent<PlayerMovement>().moveFinished && player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
+        //    print(player1.GetComponent<PlayerMovement>().destinationWaypointIndex);
+        //    print(player1.GetComponent<PlayerMovement>().currentWaypointIndex);
+        //    player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex - player1.GetComponent<PlayerMovement>().currentWaypointIndex;
+        //    player1.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
+        //    print("Destination Set");
+        //    print(player1.GetComponent<PlayerMovement>().destinationWaypointIndex);
+
+        //     // TODO: Add dialog to show the reward when every round is finished.
+        //     // winsTextShadow.gameObject.SetActive(true);
+        //     // playerMoveCount.gameObject.SetActive(false);
+        //     // winsTextShadow.GetComponent<Text>().text = "Your first round finished, HERE IS THE REWARD OPTIONS...";
+        //     // gameOver = true; The gameover will be used when the user finished the game
+        // }
     }
 
     public static void MovePlayer() {
@@ -103,7 +108,7 @@ public class GameControl : MonoBehaviour {
             if (!hasPlayedMiniGame) {
                 // Set game play
                 hasPlayedMiniGame = true;
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
                 return;
             } else {
                 return;

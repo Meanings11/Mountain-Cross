@@ -33,8 +33,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void moveToDestination() {
+        if (currentWaypointIndex == waypoints.Length) {
+            destinationWaypointIndex = destinationWaypointIndex % waypoints.Length;
+            currentWaypointIndex = 0;
+        }
+
         if (moveForward) {
-            if (currentWaypointIndex <= destinationWaypointIndex && currentWaypointIndex < waypoints.Length)
+            if (currentWaypointIndex < destinationWaypointIndex && currentWaypointIndex < waypoints.Length)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
                 waypoints[currentWaypointIndex].transform.position,
@@ -45,23 +50,39 @@ public class PlayerMovement : MonoBehaviour {
                     currentWaypointIndex += 1;
                 }
                 moveFinished = false;
-            } else {
-                moveFinished = true;
+            } else if (currentWaypointIndex == destinationWaypointIndex) {
+                transform.position = Vector2.MoveTowards(transform.position,
+                waypoints[currentWaypointIndex].transform.position,
+                moveSpeed * Time.deltaTime);
+
+                if (transform.position == waypoints[currentWaypointIndex].transform.position) {
+                    moveFinished = true;
+                } else {
+                    moveFinished = false;
+                }
             }
         } else {
-            if (currentWaypointIndex >= destinationWaypointIndex && currentWaypointIndex >= 0)
+            if (currentWaypointIndex > destinationWaypointIndex && currentWaypointIndex >= 0)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
                 waypoints[currentWaypointIndex].transform.position,
                 moveSpeed * Time.deltaTime);
 
-                if (transform.position == waypoints[currentWaypointIndex].transform.position)
+                if (transform.position == waypoints[currentWaypointIndex].transform.position                                 )
                 {
                     currentWaypointIndex -= 1;
                 }
                 moveFinished = false;
-            } else {
-                moveFinished = true;
+            } else if (currentWaypointIndex == destinationWaypointIndex) {
+                transform.position = Vector2.MoveTowards(transform.position,
+                waypoints[currentWaypointIndex].transform.position,
+                moveSpeed * Time.deltaTime);
+
+                if (transform.position == waypoints[currentWaypointIndex].transform.position) {
+                    moveFinished = true;
+                } else {
+                    moveFinished = false;
+                }
             }
         }
     }

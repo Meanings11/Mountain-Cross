@@ -13,6 +13,9 @@ public class PalyerMovement : MonoBehaviour
     public GameObject Canvas;
     public GameObject CenterPlayer;
 
+    public AudioSource spinSource;
+    public AudioClip hitPlayer;
+
     public bool firstHit = true;
 
     public float moveSpeed = 500f;
@@ -22,6 +25,8 @@ public class PalyerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spinSource = GetComponent<AudioSource> ();
+
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
         TotalPoint.gameObject.SetActive(false);
@@ -78,6 +83,7 @@ public class PalyerMovement : MonoBehaviour
         // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
         Canvas.gameObject.SetActive(false);
         // CenterPlayer.gameObject.SetActive(false);
+        spinSource.PlayOneShot(hitPlayer);
 
         if (firstHit == true)
         {
@@ -92,7 +98,7 @@ public class PalyerMovement : MonoBehaviour
     }
 
     IEnumerator LoadEndScene() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         SceneManager.LoadScene("MiniGame-1");
     }
 

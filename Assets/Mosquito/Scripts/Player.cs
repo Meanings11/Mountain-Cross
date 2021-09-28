@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
     public float velocity = 2.4f;
     public bool isDead = false;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            rigidbody.velocity = Vector2.up * velocity;
+            rb.velocity = Vector2.up * velocity;
         }
     }
 

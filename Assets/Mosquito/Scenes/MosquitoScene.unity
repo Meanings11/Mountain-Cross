@@ -1195,6 +1195,7 @@ MonoBehaviour:
   gameTime: 30
   respawnTime: 2
   scrollSpeed: 1.5
+  isGamePaused: 0
   isGameOver: 0
 --- !u!4 &1337222647
 Transform:

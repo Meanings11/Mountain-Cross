@@ -581,7 +581,7 @@ MonoBehaviour:
   pointText: {fileID: 773569578}
   Canvas: {fileID: 1856611531}
   CenterPlayer: {fileID: 771229770}
-  spinSource: {fileID: 0}
+  spinSource: {fileID: 689725666}
   hitPlayer: {fileID: 8300000, guid: ed249e373679d4a11adc0b58a4477f45, type: 3}
   firstHit: 1
   moveSpeed: 200

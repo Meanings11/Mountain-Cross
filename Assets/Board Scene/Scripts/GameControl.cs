@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour {
 
     private static GameObject winsTextShadow, playerMoveCount;
 
-    private static GameObject player1;
+    private static GameObject player;
 
     private static GameObject sceneManager;
 
@@ -43,11 +43,11 @@ public class GameControl : MonoBehaviour {
         minigamesIndexes.Add(23);
 
         winsTextShadow = GameObject.Find("WinsText");
-        playerMoveCount = GameObject.Find("Player1MoveCount");
-        player1 = GameObject.Find("Player1");
+        playerMoveCount = GameObject.Find("PlayerMoveCount");
+        player = GameObject.Find("Player");
         sceneManager = GameObject.Find("SceneManager");
 
-        player1.GetComponent<PlayerMovement>().moveAllowed = false;
+        player.GetComponent<PlayerMovement>().moveAllowed = false;
 
         winsTextShadow.gameObject.SetActive(false);
         playerMoveCount.gameObject.SetActive(false);
@@ -56,9 +56,9 @@ public class GameControl : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Check if the player finish the movement this round
-        if (player1.GetComponent<PlayerMovement>().moveFinished) {
-            player1.GetComponent<PlayerMovement>().moveAllowed = false;
-            player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
+        if (player.GetComponent<PlayerMovement>().moveFinished) {
+            player.GetComponent<PlayerMovement>().moveAllowed = false;
+            player.GetComponent<PlayerMovement>().currentWaypointIndex = player.GetComponent<PlayerMovement>().destinationWaypointIndex;
 
             // Check for rewarded steps
             if (!hasFinishedReward) {
@@ -67,13 +67,13 @@ public class GameControl : MonoBehaviour {
         }
 
         // // Check if finish the board once
-        // if (player1.GetComponent<PlayerMovement>().moveFinished && player1.GetComponent<PlayerMovement>().currentWaypointIndex == player1.GetComponent<PlayerMovement>().waypoints.Length) {
-        //    print(player1.GetComponent<PlayerMovement>().destinationWaypointIndex);
-        //    print(player1.GetComponent<PlayerMovement>().currentWaypointIndex);
-        //    player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex - player1.GetComponent<PlayerMovement>().currentWaypointIndex;
-        //    player1.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
+        // if (player.GetComponent<PlayerMovement>().moveFinished && player.GetComponent<PlayerMovement>().currentWaypointIndex == player.GetComponent<PlayerMovement>().waypoints.Length) {
+        //    print(player.GetComponent<PlayerMovement>().destinationWaypointIndex);
+        //    print(player.GetComponent<PlayerMovement>().currentWaypointIndex);
+        //    player.GetComponent<PlayerMovement>().destinationWaypointIndex = player.GetComponent<PlayerMovement>().destinationWaypointIndex - player.GetComponent<PlayerMovement>().currentWaypointIndex;
+        //    player.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
         //    print("Destination Set");
-        //    print(player1.GetComponent<PlayerMovement>().destinationWaypointIndex);
+        //    print(player.GetComponent<PlayerMovement>().destinationWaypointIndex);
 
         //     // TODO: Add dialog to show the reward when every round is finished.
         //     // winsTextShadow.gameObject.SetActive(true);
@@ -92,15 +92,15 @@ public class GameControl : MonoBehaviour {
         playerMoveCount.GetComponent<Text>().text = "You move " + diceSideThrown.ToString() + " steps";
 
         // Setup player movement
-        player1.GetComponent<PlayerMovement>().moveForward = true;
-        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex + diceSideThrown;
-        player1.GetComponent<PlayerMovement>().moveFinished = false;
-        player1.GetComponent<PlayerMovement>().moveAllowed = true;
+        player.GetComponent<PlayerMovement>().moveForward = true;
+        player.GetComponent<PlayerMovement>().destinationWaypointIndex = player.GetComponent<PlayerMovement>().currentWaypointIndex + diceSideThrown;
+        player.GetComponent<PlayerMovement>().moveFinished = false;
+        player.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 
     private void rewardPlayer() {
         // Current Index
-        int currentIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex;
+        int currentIndex = player.GetComponent<PlayerMovement>().currentWaypointIndex;
 
         // Check steps
         int rewardedSteps = waypoints_reward[currentIndex];
@@ -122,13 +122,13 @@ public class GameControl : MonoBehaviour {
 
         // Setup player movement
         if (rewardedSteps > 0) {
-            player1.GetComponent<PlayerMovement>().moveForward = true;
+            player.GetComponent<PlayerMovement>().moveForward = true;
         } else if (rewardedSteps < 0) {
-            player1.GetComponent<PlayerMovement>().moveForward = false;
+            player.GetComponent<PlayerMovement>().moveForward = false;
         }
 
-        player1.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player1.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
-        player1.GetComponent<PlayerMovement>().moveFinished = false;
-        player1.GetComponent<PlayerMovement>().moveAllowed = true;
+        player.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
+        player.GetComponent<PlayerMovement>().moveFinished = false;
+        player.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 }

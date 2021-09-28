@@ -35,8 +35,6 @@ public class PalyerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // movement = Input.GetAxisRaw("Horizontal");
-
         // touchscreen movement
         if (Input.GetMouseButtonDown(0)) {
             if (Input.mousePosition.x > Screen.width / 2)
@@ -46,10 +44,6 @@ public class PalyerMovement : MonoBehaviour
             {
                 RotateCounterClockwise();
             }
-        }
-
-        if (Input.GetMouseButtonUp(0)) {
-            movement = 0f;
         }
 
         // keyboard movement
@@ -63,8 +57,8 @@ public class PalyerMovement : MonoBehaviour
             RotateClockwise();
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
-        {
+        // stop movement
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) {
             movement = 0f;
         }
 
@@ -94,12 +88,12 @@ public class PalyerMovement : MonoBehaviour
         
         firstHit = false;
         StartCoroutine(LoadEndScene());
-        // SceneManager.LoadScene("MiniGame-1", LoadSceneMode.Single);
+        // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
     }
 
     IEnumerator LoadEndScene() {
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("MiniGame-1");
+        SceneManager.LoadScene("BoardScene");
     }
 
     private void RotateClockwise() {

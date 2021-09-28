@@ -14,11 +14,17 @@ public class PlayerMovement : MonoBehaviour {
     public bool moveForward = true;
     public bool moveFinished = false;
 
+    public AudioSource jumpAudio;
+
 	// Use this for initialization
 	private void Start () {
         // Load data from Playerprefs -- This might be from the previous scene, or meaybe even from the previous execution.
         currentWaypointIndex = PlayerPrefs.GetInt("lastWaypointIndex", 0);
         transform.position = waypoints[currentWaypointIndex].transform.position;
+
+        // Initialize audio source
+        jumpAudio = GetComponent<AudioSource> ();
+        jumpAudio.Stop();
 	}
 	
 	// Update is called once per frame
@@ -47,6 +53,7 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (transform.position == waypoints[currentWaypointIndex].transform.position)
                 {
+                    jumpAudio.Play();
                     currentWaypointIndex += 1;
                 }
                 moveFinished = false;
@@ -70,6 +77,7 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (transform.position == waypoints[currentWaypointIndex].transform.position                                 )
                 {
+                    jumpAudio.Play();
                     currentWaypointIndex -= 1;
                 }
                 moveFinished = false;

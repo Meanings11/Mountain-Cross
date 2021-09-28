@@ -10,7 +10,7 @@ public class tokenObject : MonoBehaviour
 
     
     private void Awake() {
-        speed = GameManager.instance.scrollSpeed;    
+        speed = GameManager.instance.scrollSpeed;
     }
 
     void Update()

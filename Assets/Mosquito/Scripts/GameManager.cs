@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Image gameOverImage;
 
+    // Sound
+    public AudioSource flySound;
 
     // Parameters
     public float gameTime = 60;
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
         respawnTimerText.gameObject.SetActive(false);
         gameOverImage.gameObject.SetActive(false);
         Time.timeScale = 0;
+
+        flySound = GetComponent<AudioSource> ();
     }
 
     private void Update()
@@ -83,19 +87,25 @@ public class GameManager : MonoBehaviour
     {
         startButton.SetActive(false);
         Time.timeScale = 1;
+
+        flySound.Play();
     }
 
     public void GamePause()
     {
         Time.timeScale = 0;
         isGamePaused = true;
+
+        flySound.Stop();
     }
 
     public void GameOver()
     {
-         Time.timeScale = 0;
-         isGameOver = true;
-         gameOverImage.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        isGameOver = true;
+        gameOverImage.gameObject.SetActive(true);
+
+        flySound.Stop();
     }
 
 

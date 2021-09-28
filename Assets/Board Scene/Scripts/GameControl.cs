@@ -16,7 +16,7 @@ public class GameControl : MonoBehaviour {
 
     public static bool gameOver = false;
 
-    private static bool hasPlayedMiniGame = true;
+    public static bool hasFinishedReward = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
     private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
@@ -61,7 +61,9 @@ public class GameControl : MonoBehaviour {
             player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
 
             // Check for rewarded steps
-            rewardPlayer();
+            if (!hasFinishedReward) {
+                rewardPlayer();
+            }
         }
 
         // // Check if finish the board once
@@ -82,8 +84,8 @@ public class GameControl : MonoBehaviour {
     }
 
     public static void MovePlayer() {
-        // Reset game play
-        hasPlayedMiniGame = false;
+        // Reset reward status
+        hasFinishedReward = false;
 
         // Setup UI
         playerMoveCount.gameObject.SetActive(true);
@@ -103,16 +105,15 @@ public class GameControl : MonoBehaviour {
         // Check steps
         int rewardedSteps = waypoints_reward[currentIndex];
 
-        // Load mini game if no reward and is in minigamesIndexes
-        if (rewardedSteps == 0 && minigamesIndexes.Contains(currentIndex)) {
-            if (!hasPlayedMiniGame) {
-                // Set game play
-                hasPlayedMiniGame = true;
-                // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
-                return;
-            } else {
-                return;
+        // Set reward finish if no reward
+        if (rewardedSteps == 0) {
+            hasFinishedReward = true;
+
+            // Load mini game if no reward and is in minigamesIndexes
+            if (minigamesIndexes.Contains(currentIndex)) {
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
             }
+            return;
         }
 
         // Setup UI

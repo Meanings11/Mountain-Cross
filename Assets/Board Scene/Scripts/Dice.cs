@@ -16,7 +16,7 @@ public class Dice : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!GameControl.gameOver && coroutineAllowed)
+        if (!GameControl.gameOver && GameControl.hasFinishedReward && coroutineAllowed)
             StartCoroutine("RollTheDice");
     }
 

@@ -5,6 +5,7 @@ public class Dice : MonoBehaviour {
 
     private Sprite[] diceSides;
     private SpriteRenderer rend;
+    public AudioSource diceAudio;
     private bool coroutineAllowed = true;
 
 	// Use this for initialization
@@ -12,6 +13,10 @@ public class Dice : MonoBehaviour {
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
         rend.sprite = diceSides[5];
+
+        // Initialize audio source
+        diceAudio = GetComponent<AudioSource> ();
+        diceAudio.Stop();
 	}
 
     private void OnMouseDown()
@@ -22,6 +27,9 @@ public class Dice : MonoBehaviour {
 
     private IEnumerator RollTheDice()
     {
+        // play sound
+        diceAudio.Play();
+
         coroutineAllowed = false;
         int randomDiceSide = 0;
         for (int i = 0; i <= 20; i++)
@@ -30,6 +38,9 @@ public class Dice : MonoBehaviour {
             rend.sprite = diceSides[randomDiceSide];
             yield return new WaitForSeconds(0.05f);
         }
+
+        // stop sound
+        diceAudio.Stop();
 
         GameControl.diceSideThrown = randomDiceSide + 1;
         GameControl.MovePlayer();

@@ -16,7 +16,7 @@ public class GameControl : MonoBehaviour {
 
     public static bool gameOver = false;
 
-    private static bool isRewarded = true;
+    private static bool hasPlayedMiniGame = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
     private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
@@ -61,9 +61,7 @@ public class GameControl : MonoBehaviour {
             player1.GetComponent<PlayerMovement>().currentWaypointIndex = player1.GetComponent<PlayerMovement>().destinationWaypointIndex;
 
             // Check for rewarded steps
-            if (!isRewarded) {
-                rewardPlayer();
-            }
+            rewardPlayer();
         }
 
         // Check if finish the board once
@@ -79,8 +77,8 @@ public class GameControl : MonoBehaviour {
     }
 
     public static void MovePlayer() {
-        // Reset Reward
-        isRewarded = false;
+        // Reset game play
+        hasPlayedMiniGame = false;
 
         // Setup UI
         playerMoveCount.gameObject.SetActive(true);
@@ -94,9 +92,6 @@ public class GameControl : MonoBehaviour {
     }
 
     private void rewardPlayer() {
-        // Set rewarded
-        isRewarded = true;
-
         // Current Index
         int currentIndex = player1.GetComponent<PlayerMovement>().currentWaypointIndex;
 
@@ -105,8 +100,14 @@ public class GameControl : MonoBehaviour {
 
         // Load mini game if no reward and is in minigamesIndexes
         if (rewardedSteps == 0 && minigamesIndexes.Contains(currentIndex)) {
-            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
-            return;
+            if (!hasPlayedMiniGame) {
+                // Set game play
+                hasPlayedMiniGame = true;
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                return;
+            } else {
+                return;
+            }
         }
 
         // Setup UI

@@ -51,25 +51,26 @@ public class GameManager : MonoBehaviour
         if (gameTime <= 0) 
         {
             GameOver();
-            enabled = false;
-        }
-
-        if( isGamePaused)
-        {
-            respawnTimerText.gameObject.SetActive(true);
-            respawnTime -= Time.unscaledDeltaTime;
-
-            respawnTimerText.text = "Restarting in " + (respawnTime).ToString("0");
-
-            if(respawnTime < 0)
-            {
-                RestartGame();
-            }
-
+            // enabled = false;
         } else {
-            gameTime -= Time.unscaledDeltaTime;
-            gameTimerText.text = gameTime.ToString("0");
+            if( isGamePaused)
+            {
+                respawnTimerText.gameObject.SetActive(true);
+                respawnTime -= Time.unscaledDeltaTime;
+
+                respawnTimerText.text = "Restarting in " + (respawnTime).ToString("0");
+
+                if(respawnTime < 0)
+                {
+                    RestartGame();
+                }
+
+            } else {
+                gameTime -= Time.unscaledDeltaTime;
+                gameTimerText.text = gameTime.ToString("0");
+            }
         }
+
 
     }
 
@@ -108,14 +109,16 @@ public class GameManager : MonoBehaviour
         flySound.Stop();
 
         // jump back to main board
-        SceneManager.LoadScene("BoardScene");
-        // StartCoroutine(LoadEndScene());
+        // SceneManager.LoadScene("BoardScene");
+        Time.timeScale = 1;
+        StartCoroutine(LoadEndScene());
     }
 
-    // IEnumerator LoadEndScene() {
-    //     yield return new WaitForSeconds(2f);
-    //     SceneManager.LoadScene("BoardScene");
-    // }
+    IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("BoardScene");
+
+    }
 
     public void RestartGame()
     {

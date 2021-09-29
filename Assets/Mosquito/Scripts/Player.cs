@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = Vector2.up * velocity;
+            if (!GameManager.instance.isGameOver) rb.velocity = Vector2.up * velocity;
         }
     }
 

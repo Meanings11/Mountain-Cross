@@ -120,6 +120,8 @@ public class GameControl : MonoBehaviour {
                 playerMoveCount.gameObject.SetActive(true);
                 if (score_rewad[currentIndex] > 0) {
                     playerMoveCount.GetComponent<Text>().text = "You get " + score_rewad[currentIndex] + " dollars";
+                } else if (score_rewad[currentIndex] == -100000) {
+                    playerMoveCount.GetComponent<Text>().text = "You lose all the money...";
                 } else {
                     playerMoveCount.GetComponent<Text>().text = "You lose " + score_rewad[currentIndex] + " dollars";
                 }

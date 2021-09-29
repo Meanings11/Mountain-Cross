@@ -1,3 +1,0 @@
-groom:Hello! How are you?
-bride:I'm fine. Thank you and you?
-kidnapper:I'm also fine. Thank you!

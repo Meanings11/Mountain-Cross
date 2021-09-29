@@ -139,7 +139,7 @@ public class GameControl : MonoBehaviour {
                 playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                 // Go to mini-game
-                int randomIndex = UnityEngine.Random.Range(0, 1); // random decide for now
+                int randomIndex = UnityEngine.Random.Range(0, 2); // random decide for now
                 if (randomIndex == 0) {
                     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                 } else {

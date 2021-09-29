@@ -11,12 +11,14 @@ public class ScoreManager : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
     TotalGameScore.text = "$" + totalgamescore.ToString();
   }
 
   // Update is called once per frame
   void Update()
   {
-
+    totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
+    TotalGameScore.text = "$" + totalgamescore.ToString();
   }
 }

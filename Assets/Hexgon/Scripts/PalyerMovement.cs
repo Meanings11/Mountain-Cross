@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PalyerMovement : MonoBehaviour
 {
@@ -83,9 +84,16 @@ public class PalyerMovement : MonoBehaviour
             TotalPoint.text = "Earned $" + pointText.text.ToString() + " in total";
             GameoverText.gameObject.SetActive(true);
             TotalPoint.gameObject.SetActive(true);
+
+            // Set score
+            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+            int addedScore = Int16.Parse(pointText.text);
+            PlayerPrefs.SetInt("totalGameScore", currentGameScore+addedScore);
         }
         
         firstHit = false;
+        
+        // End scene
         StartCoroutine(LoadEndScene());
         // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
     }

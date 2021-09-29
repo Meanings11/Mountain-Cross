@@ -106,12 +106,20 @@ public class GameManager : MonoBehaviour
         gameOverImage.gameObject.SetActive(true);
 
         flySound.Stop();
+
+        // jump back to main board
+        SceneManager.LoadScene("BoardScene");
+        // StartCoroutine(LoadEndScene());
     }
 
+    // IEnumerator LoadEndScene() {
+    //     yield return new WaitForSeconds(2f);
+    //     SceneManager.LoadScene("BoardScene");
+    // }
 
     public void RestartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     // API to main board

@@ -71,7 +71,6 @@ public class PalyerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // StartCoroutine(LoadEndScene());
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         // Debug.Log("collide");
         // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
@@ -92,7 +91,7 @@ public class PalyerMovement : MonoBehaviour
     }
 
     IEnumerator LoadEndScene() {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3.5f);
         SceneManager.LoadScene("BoardScene");
     }
 

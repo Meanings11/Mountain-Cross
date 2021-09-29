@@ -110,11 +110,15 @@ public class GameControl : MonoBehaviour {
             hasFinishedReward = true;
 
             // Load mini game if no reward and is in minigamesIndexes
-            if (currentIndex == 21) {
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-            } else if (minigamesIndexes.Contains(currentIndex)) {
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+            if (minigamesIndexes.Contains(currentIndex)) {
+                int randomIndex = UnityEngine.Random.Range(0, 1); // random decide for now
+                if (randomIndex == 0) {
+                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                } else {
+                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                }
             }
+            
             return;
         }
 

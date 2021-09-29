@@ -23,6 +23,11 @@ public class GameControl : MonoBehaviour {
                                       0, 0, 0, -10, 0, 0,
                                       0, 0, 0, -1, 0, -2,
                                       0, 0, 0, 0, 0, 0};
+    private int[] score_rewad = {0, 0, 0, 0, 0, 0, 0,
+                                -100000, -200, 0, 0, 0, 0,
+                                0, 0, 0, 0, +340, 0,
+                                0, -120, 0, 0, 0, 0};
+    
     // Use this for initialization
     void Start () {
         // Only play the board with landscape mode
@@ -109,13 +114,34 @@ public class GameControl : MonoBehaviour {
         if (rewardedSteps == 0) {
             hasFinishedReward = true;
 
+            // Adjust gamescore if it is scroe rewad
+            if (score_rewad[currentIndex] != 0) {
+                // Show reward
+                playerMoveCount.gameObject.SetActive(true);
+                if (score_rewad[currentIndex] > 0) {
+                    playerMoveCount.GetComponent<Text>().text = "You get " + score_rewad[currentIndex] + " dollars";
+                } else {
+                    playerMoveCount.GetComponent<Text>().text = "You loss " + score_rewad[currentIndex] + " dollars";
+                }
+                
+                // Adjust score
+                int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+                int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
+                PlayerPrefs.SetInt("totalGameScore", newGameScore);
+            }
+
             // Load mini game if no reward and is in minigamesIndexes
             if (minigamesIndexes.Contains(currentIndex)) {
+                // Show reward
+                playerMoveCount.gameObject.SetActive(true);
+                playerMoveCount.GetComponent<Text>().text = "Game Time!";
+
+                // Go to mini-game
                 int randomIndex = UnityEngine.Random.Range(0, 1); // random decide for now
                 if (randomIndex == 0) {
-                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                    // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                 } else {
-                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                    // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
                 }
             }
             

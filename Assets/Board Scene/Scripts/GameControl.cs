@@ -139,9 +139,9 @@ public class GameControl : MonoBehaviour {
                 // Go to mini-game
                 int randomIndex = UnityEngine.Random.Range(0, 1); // random decide for now
                 if (randomIndex == 0) {
-                    // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                 } else {
-                    // sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
                 }
             }
             

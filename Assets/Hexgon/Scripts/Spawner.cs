@@ -24,8 +24,8 @@ public class Spawner : MonoBehaviour
         if (Time.time >= nextTimeToSpawn)
         {
             if (Time.time >= startTime + 2.5) {
-            point++;
-            pointText.text = point.ToString();
+                point++;
+                pointText.text = point.ToString();
             }
             Instantiate(hexagonPrefab);
             nextTimeToSpawn = Time.time + 1f / spawnRate;

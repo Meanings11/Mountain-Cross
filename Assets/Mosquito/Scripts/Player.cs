@@ -29,6 +29,6 @@ public class Player : MonoBehaviour
     {
         isDead = true;
         hitPlayer.Play();
-        GameManager.instance.GamePause();
+        GameManager.instance.GameOver();
     }
 }

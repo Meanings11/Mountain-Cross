@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         gameOverImage.gameObject.SetActive(false);
         Time.timeScale = 0;
 
-        flySound = GetComponent<AudioSource> ();
+        // flySound = GetComponent<AudioSource> ();
     }
 
     private void Update()
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         startButton.SetActive(false);
         Time.timeScale = 1;
 
-        flySound.Play();
+        // flySound.Play();
     }
 
     public void GamePause()
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverImage.gameObject.SetActive(true);
 
-        flySound.Stop();
+        // flySound.Stop();
 
         // Set score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);

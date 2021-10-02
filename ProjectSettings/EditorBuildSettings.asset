@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mosquito/Scenes/MosquitoScene.unity
     guid: 21a74d5cf8146be418aeeec3d2f142b9
+  - enabled: 1
+    path: Assets/Pause Menu Scene/Scenes/PauseMenu.unity
+    guid: 7883e173953fdd446894446db58bfe61
   m_configObjects: {}

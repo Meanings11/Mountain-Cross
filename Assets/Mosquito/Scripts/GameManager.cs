@@ -94,10 +94,13 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        Time.timeScale = 0;
-        isGamePaused = true;
+        // Time.timeScale = 0;
+        // isGamePaused = true;
 
-        flySound.Stop();
+        // flySound.Stop();
+        Time.timeScale = 0;
+        SceneManager.LoadScene("PauseMenu");
+        Time.timeScale = 1;
     }
 
     public void GameOver()

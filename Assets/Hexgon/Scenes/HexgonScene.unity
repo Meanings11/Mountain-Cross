@@ -865,7 +865,7 @@ MonoBehaviour:
   TotalPoint: {fileID: 241979164}
   pointText: {fileID: 773569578}
   Canvas: {fileID: 1856611531}
-  CenterPlayer: {fileID: 771229770}
+  bonePrefab: {fileID: 1590979917}
   spinSource: {fileID: 689725666}
   eatSound: {fileID: 8300000, guid: 8e8218f6a01e74bd5894788e3f912635, type: 3}
   hitPlayer: {fileID: 8300000, guid: ed249e373679d4a11adc0b58a4477f45, type: 3}

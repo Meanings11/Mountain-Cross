@@ -13,7 +13,8 @@ public class PalyerMovement : MonoBehaviour
     public Text pointText;
 
     public GameObject Canvas;
-    public GameObject CenterPlayer;
+    // public GameObject CenterPlayer;
+    public GameObject bonePrefab;
 
     public AudioSource spinSource;
     public AudioClip eatSound;
@@ -95,6 +96,7 @@ public class PalyerMovement : MonoBehaviour
                     // Debug.Log("collide");
                     // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
                     Canvas.gameObject.SetActive(false);
+                    bonePrefab.gameObject.SetActive(false);
                     // CenterPlayer.gameObject.SetActive(false);
 
                     if (firstHit == true)

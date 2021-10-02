@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Globalization;
 
 public class PalyerMovement : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PalyerMovement : MonoBehaviour
     public GameObject CenterPlayer;
 
     public AudioSource spinSource;
+    public AudioClip eatSound;
     public AudioClip hitPlayer;
 
     public bool firstHit = true;
@@ -34,6 +36,7 @@ public class PalyerMovement : MonoBehaviour
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
         TotalPoint.gameObject.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -82,30 +85,51 @@ public class PalyerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // Debug.Log("collide");
-        // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
-        Canvas.gameObject.SetActive(false);
-        // CenterPlayer.gameObject.SetActive(false);
-        spinSource.PlayOneShot(hitPlayer);
+        GameObject healthBar = GameObject.Find("HealthBar");
+        if (healthBar != null) {
+            HealthBar healthBarScript = healthBar.GetComponent<HealthBar>();
+            if (other.gameObject.tag == "lightCircle") {
+                spinSource.PlayOneShot(hitPlayer);
+                if (healthBarScript.currentHealth <= 1) {
+                    // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    // Debug.Log("collide");
+                    // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
+                    Canvas.gameObject.SetActive(false);
+                    // CenterPlayer.gameObject.SetActive(false);
 
-        if (firstHit == true)
-        {
-            TotalPoint.text = "Earned $" + pointText.text.ToString() + " in total";
-            GameoverText.gameObject.SetActive(true);
-            TotalPoint.gameObject.SetActive(true);
+                    if (firstHit == true)
+                    {
+                        TotalPoint.text = "Earned " + pointText.text + " in total";
+                        GameoverText.gameObject.SetActive(true);
+                        TotalPoint.gameObject.SetActive(true);
 
-            // Set score
-            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-            int addedScore = Int16.Parse(pointText.text);
-            PlayerPrefs.SetInt("totalGameScore", currentGameScore+addedScore);
+                        // Set score
+                        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+
+                        CultureInfo provider = new CultureInfo("en-US");
+                        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+
+                        decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
+                        int addedScore = Decimal.ToInt32(pointNumber);
+                        // Debug.Log(addedScore);
+                        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+                    }
+                    
+                    firstHit = false;
+                    
+                    // End scene
+                    StartCoroutine(LoadEndScene());
+                    // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
+                } else {
+                    healthBarScript.currentHealth--;
+                }
+            } else {
+                if (healthBarScript.currentHealth < healthBarScript.maxHealth) {
+                    healthBarScript.currentHealth++;
+                    spinSource.PlayOneShot(eatSound);
+                }
+            }
         }
-        
-        firstHit = false;
-        
-        // End scene
-        StartCoroutine(LoadEndScene());
-        // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
     }
 
     IEnumerator LoadEndScene() {

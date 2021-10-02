@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3479738609652543721}
   m_Layer: 0
   m_Name: light_circle
-  m_TagString: Untagged
+  m_TagString: lightCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -3.708566, y: 1.5086206}
+  - {x: -3.6888433, y: 1.015548}
   - {x: -3.7869568, y: 0.4225336}
   - {x: -3.6419036, y: -0.68188703}
   - {x: -3.2705963, y: -1.6786956}
@@ -155,7 +155,7 @@ EdgeCollider2D:
   - {x: 2.4660068, y: 2.876342}
   - {x: 1.7120603, y: 3.3288863}
   - {x: 0.8338234, y: 3.6877365}
-  - {x: -0.096301645, y: 3.6392426}
+  - {x: 0.37704808, y: 3.6984115}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

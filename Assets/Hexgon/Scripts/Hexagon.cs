@@ -21,7 +21,7 @@ public class Hexagon : MonoBehaviour
     {
         transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
 
-        if (transform.localScale.x <= 0.1f)
+        if (transform.localScale.x <= 0.2f)
         {
             Destroy(gameObject);
         }

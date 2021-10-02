@@ -20,11 +20,12 @@ public class GameManager : MonoBehaviour
 
     // Parameters
     public float gameTime = 60;
-    public float respawnTime = 2;
     public float scrollSpeed = 1.5f;
     public bool isGamePaused = false;
     public bool isGameOver = false;
     private int score = 0;
+    private float leftTime;
+    private float speedTimer;
 
     void Awake() {
         if (instance == null) {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this) {
             Destroy(gameObject);
         }
+        leftTime = gameTime;
     }
 
     // Start is called before the first frame update
@@ -48,27 +50,22 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         
-        if (gameTime <= 0) 
+        if (leftTime <= 0) 
         {
             GameOver();
             // enabled = false;
         } else {
-            if( isGamePaused)
-            {
-                respawnTimerText.gameObject.SetActive(true);
-                respawnTime -= Time.unscaledDeltaTime;
+            
+                leftTime -= Time.unscaledDeltaTime;
+                speedTimer += Time.unscaledDeltaTime;
+                
+                gameTimerText.text = leftTime.ToString("0");
 
-                respawnTimerText.text = "Restarting in " + (respawnTime).ToString("0");
-
-                if(respawnTime < 0)
-                {
-                    RestartGame();
+                // speed up based on the gaming time
+                if (speedTimer > 5.0) {
+                    scrollSpeed +=  speedTimer * (float)0.05;
+                    speedTimer = 0;
                 }
-
-            } else {
-                gameTime -= Time.unscaledDeltaTime;
-                gameTimerText.text = gameTime.ToString("0");
-            }
         }
 
 

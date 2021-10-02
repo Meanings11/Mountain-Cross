@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PalyerMovement : MonoBehaviour
 {
@@ -22,10 +23,13 @@ public class PalyerMovement : MonoBehaviour
     
     float movement = 0f;
 
+    private SpriteRenderer playerRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         spinSource = GetComponent<AudioSource> ();
+        playerRenderer = GetComponent<SpriteRenderer> ();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -40,9 +44,13 @@ public class PalyerMovement : MonoBehaviour
             if (Input.mousePosition.x > Screen.width / 2)
             {
                 RotateClockwise();
+                playerRenderer.flipX = false;
+                // transform.localRotation = Quaternion.Euler(0, 0, 0);
             } else
             {
                 RotateCounterClockwise();
+                playerRenderer.flipX = true;
+                // transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
         }
 
@@ -50,18 +58,21 @@ public class PalyerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             RotateCounterClockwise();
+            playerRenderer.flipX = true;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             RotateClockwise();
+            playerRenderer.flipX = false;
+            // transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
         // stop movement
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) {
             movement = 0f;
         }
-
     }
 
     private void FixedUpdate()
@@ -83,9 +94,16 @@ public class PalyerMovement : MonoBehaviour
             TotalPoint.text = "Earned $" + pointText.text.ToString() + " in total";
             GameoverText.gameObject.SetActive(true);
             TotalPoint.gameObject.SetActive(true);
+
+            // Set score
+            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+            int addedScore = Int16.Parse(pointText.text);
+            PlayerPrefs.SetInt("totalGameScore", currentGameScore+addedScore);
         }
         
         firstHit = false;
+        
+        // End scene
         StartCoroutine(LoadEndScene());
         // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
     }

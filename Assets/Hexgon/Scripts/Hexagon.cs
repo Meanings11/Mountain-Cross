@@ -5,13 +5,15 @@ using UnityEngine;
 public class Hexagon : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float shrinkSpeed = 3f;
-    
+    private float shrinkSpeed = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
+        // hitSource = GetComponent<AudioSource> ();
+
         rb.rotation = Random.Range(0f, 360f);
-        transform.localScale = Vector3.one * 10f;
+        transform.localScale = Vector3.one * 5f;
     }
 
     // Update is called once per frame
@@ -19,7 +21,7 @@ public class Hexagon : MonoBehaviour
     {
         transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
 
-        if (transform.localScale.x <= 0.02f)
+        if (transform.localScale.x <= 0.1f)
         {
             Destroy(gameObject);
         }

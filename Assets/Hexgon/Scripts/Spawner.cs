@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
-
-    public float spawnRate = 1f;
     public GameObject hexagonPrefab;
     public Text pointText;
 
     private int point = 0;
+    private float spawnSpeed = 1.5f;
     private float nextTimeToSpawn = 0f;
     private float startTime = 0f;
 
@@ -23,12 +22,12 @@ public class Spawner : MonoBehaviour
     {
         if (Time.time >= nextTimeToSpawn)
         {
-            if (Time.time >= startTime + 2.5) {
+            if (Time.time >= startTime + 4.55) {
                 point++;
                 pointText.text = point.ToString();
             }
             Instantiate(hexagonPrefab);
-            nextTimeToSpawn = Time.time + 1f / spawnRate;
+            nextTimeToSpawn = Time.time + spawnSpeed;
         }
     }
 }

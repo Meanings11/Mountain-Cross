@@ -111,6 +111,10 @@ public class GameManager : MonoBehaviour
 
         flySound.Stop();
 
+        // Set score
+        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score);
+
         // jump back to main board
         // SceneManager.LoadScene("BoardScene");
         Time.timeScale = 1;

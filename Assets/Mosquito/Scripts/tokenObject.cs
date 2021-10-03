@@ -6,6 +6,8 @@ public class tokenObject : MonoBehaviour
 {
     public float speed;
     public GameObject splash;
+    public AudioSource eat;
+
 
     private Animator _animator;
     private bool isDead = false;
@@ -18,6 +20,7 @@ public class tokenObject : MonoBehaviour
         speed = GameManager.instance.scrollSpeed;
         _animator = GetComponent<Animator>();
         mosCollider = GetComponent<BoxCollider2D>();
+        eat = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,6 +33,7 @@ public class tokenObject : MonoBehaviour
         {
             if (other.GetComponent<Player>() != null) {
                 mosCollider.enabled = false;
+                eat.Play();
                 GameManager.instance.BirdScored ();
 
                 _animator.SetTrigger("mosDie");

@@ -5,15 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - lightCircle
+  - MainGame
+  - box
+  - Cloud
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Cloud
   - 
   - 
   - 
@@ -39,6 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 68397955
+    locked: 0
+  - name: Cloud
+    uniqueID: 966593573
+    locked: 0
+  - name: Player
+    uniqueID: 1928463415
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

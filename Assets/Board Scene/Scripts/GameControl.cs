@@ -19,13 +19,13 @@ public class GameControl : MonoBehaviour {
     public static bool hasFinishedReward = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
-    private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
+    private int[] waypoints_reward = {0, 0, 0, 0, 0, 0, 0,
                                       0, 0, 0, -10, 0, 0,
-                                      0, 0, 0, -1, 0, -2,
+                                      0, 0, 0, 0, 0, -2,
                                       0, 0, 0, 0, 0, 0};
     private int[] score_rewad = {0, 0, 0, 0, 0, 0, 0,
                                 -100000, -200, 0, 0, 0, 0,
-                                0, 0, 0, 0, +340, 0,
+                                0, 0, 0, 0, 340, 0,
                                 0, -120, 0, 0, 0, 0};
     
     // Use this for initialization
@@ -33,7 +33,6 @@ public class GameControl : MonoBehaviour {
         // Only play the board with landscape mode
         Screen.orientation = ScreenOrientation.LandscapeLeft;
 
-        minigamesIndexes.Add(3);
         minigamesIndexes.Add(4);
         minigamesIndexes.Add(5);
         minigamesIndexes.Add(6);
@@ -42,7 +41,6 @@ public class GameControl : MonoBehaviour {
         minigamesIndexes.Add(12);
         minigamesIndexes.Add(13);
         minigamesIndexes.Add(15);
-        minigamesIndexes.Add(16);
         minigamesIndexes.Add(19);
         minigamesIndexes.Add(21);
         minigamesIndexes.Add(23);
@@ -60,6 +58,9 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // Only play the board with landscape mode
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         // Check if the player finish the movement this round
         if (player.GetComponent<PlayerMovement>().moveFinished) {
             player.GetComponent<PlayerMovement>().moveAllowed = false;
@@ -94,7 +95,7 @@ public class GameControl : MonoBehaviour {
 
         // Setup UI
         playerMoveCount.gameObject.SetActive(true);
-        playerMoveCount.GetComponent<Text>().text = "You move " + diceSideThrown.ToString() + " steps";
+        playerMoveCount.GetComponent<Text>().text = "Move " + diceSideThrown.ToString() + " steps";
 
         // Setup player movement
         player.GetComponent<PlayerMovement>().moveForward = true;
@@ -113,38 +114,69 @@ public class GameControl : MonoBehaviour {
         // Set reward finish if no reward
         if (rewardedSteps == 0) {
             hasFinishedReward = true;
+            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
             // Adjust gamescore if it is scroe rewad
             if (score_rewad[currentIndex] != 0) {
                 // Show reward
                 playerMoveCount.gameObject.SetActive(true);
                 if (score_rewad[currentIndex] > 0) {
-                    playerMoveCount.GetComponent<Text>().text = "You get " + score_rewad[currentIndex] + " dollars";
+                    playerMoveCount.GetComponent<Text>().text = "Rewarded with $" + score_rewad[currentIndex];
                 } else if (score_rewad[currentIndex] == -100000) {
-                    playerMoveCount.GetComponent<Text>().text = "You lose all the money...";
+                    playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
                 } else {
-                    playerMoveCount.GetComponent<Text>().text = "You lose " + score_rewad[currentIndex] + " dollars";
+                    if (currentGameScore + score_rewad[currentIndex] <= 0) {
+                        playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
+                    } else {
+                        playerMoveCount.GetComponent<Text>().text = "Lose $" + Mathf.Abs(score_rewad[currentIndex]);
+                    }
                 }
                 
                 // Adjust score
-                int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
                 int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
                 PlayerPrefs.SetInt("totalGameScore", newGameScore);
-            }
-
-            // Load mini game if no reward and is in minigamesIndexes
-            if (minigamesIndexes.Contains(currentIndex)) {
+            } else {
+                if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
+                    playerMoveCount.GetComponent<Text>().text = "Skip";
+                } else if (currentIndex == 14) {
+                    int newGameScore = currentGameScore * 2;
+                    playerMoveCount.GetComponent<Text>().text = "Double your money!";
+                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                } else if (currentIndex == 3 || currentIndex == 16) {
+                    int randomReward = UnityEngine.Random.Range(-100, 101);
+                    int adjustedReward = randomReward * 10;
+                    if (adjustedReward > 0) {
+                        playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
+                    } else {
+                        if (currentGameScore + adjustedReward <= 0) {
+                            playerMoveCount.GetComponent<Text>().text = "Surprise! You lose all your money...";
+                        } else {
+                            playerMoveCount.GetComponent<Text>().text = "Surprise! You lose $" + Mathf.Abs(adjustedReward);
+                        }
+                    }
+                    // Adjust score
+                    int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
+                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                } else if (minigamesIndexes.Contains(currentIndex)) { // Load mini game if no reward and is in minigamesIndexes
                 // Show reward
                 playerMoveCount.gameObject.SetActive(true);
                 playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                 // Go to mini-game
-                int randomIndex = UnityEngine.Random.Range(0, 2); // random decide for now
-                if (randomIndex == 0) {
-                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-                } else {
-                    sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                int randomIndex = UnityEngine.Random.Range(0, 3); // random decide for now
+                // if (randomIndex == 0) {
+                //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                // } else {
+                //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                // }
+
+                switch (randomIndex)
+                {
+                    case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
+                    case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene"); break;
+                    case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
                 }
+            }
             }
             
             return;
@@ -152,12 +184,17 @@ public class GameControl : MonoBehaviour {
 
         // Setup UI
         playerMoveCount.gameObject.SetActive(true);
-        playerMoveCount.GetComponent<Text>().text = "You are rewarded to move " + rewardedSteps + " steps";
 
         // Setup player movement
         if (rewardedSteps > 0) {
+            playerMoveCount.GetComponent<Text>().text = "Move " + rewardedSteps + " more steps";
             player.GetComponent<PlayerMovement>().moveForward = true;
         } else if (rewardedSteps < 0) {
+            if (currentIndex == 10) {
+                playerMoveCount.GetComponent<Text>().text = "Move back to origin";
+            } else {
+                playerMoveCount.GetComponent<Text>().text = "Reverse " + Mathf.Abs(rewardedSteps) + " steps";
+            }
             player.GetComponent<PlayerMovement>().moveForward = false;
         }
 

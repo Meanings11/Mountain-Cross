@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
         if (Time.time >= nextTimeToSpawn)
         {
             if (Time.time >= startTime + 4.55) {
-                playerPoint += 100;
+                playerPoint += 10;
                 pointText.text = "$" + string.Format("{0:0,0}", Int16.Parse(playerPoint.ToString()));
             }
             Instantiate(hexagonPrefab);

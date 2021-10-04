@@ -9,6 +9,8 @@ public class CameraRotate : MonoBehaviour
     private float rotate = 1f;
     void Start()
     {
+        Screen.orientation = ScreenOrientation.AutoRotation;
+
         if (clockwise)
         {
             rotate = rotate * -1;

@@ -105,7 +105,7 @@ public class PalyerMovement : MonoBehaviour
                         GameoverText.gameObject.SetActive(true);
                         TotalPoint.gameObject.SetActive(true);
 
-                        // Set score
+                        // Set global score
                         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
                         CultureInfo provider = new CultureInfo("en-US");

@@ -6,7 +6,7 @@ using System;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject hexagonPrefab;
+    public GameObject corgiPrefab;
     public GameObject bonePrefab;
     private Text point;
     public Text pointText;
@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
                 playerPoint += 10;
                 pointText.text = "$" + string.Format("{0:0,0}", Int16.Parse(playerPoint.ToString()));
             }
-            Instantiate(hexagonPrefab);
+            Instantiate(corgiPrefab);
             nextTimeToSpawn = Time.time + spawnSpeed;
         }
 

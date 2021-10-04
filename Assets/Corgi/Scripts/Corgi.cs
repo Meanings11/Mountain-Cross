@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hexagon : MonoBehaviour
+public class Corgi : MonoBehaviour
 {
     public Rigidbody2D rb;
     private float shrinkSpeed = 1f;

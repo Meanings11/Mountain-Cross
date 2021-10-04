@@ -7,14 +7,11 @@ public class CameraOrientaion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Only play the board with portrait mode
-        Screen.orientation = ScreenOrientation.Portrait;
+        Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Only play the board with portrait mode
-        Screen.orientation = ScreenOrientation.Portrait;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class tokenObject : MonoBehaviour
 {
     public float speed;
-    public GameObject splash;
     public AudioSource eat;
 
 

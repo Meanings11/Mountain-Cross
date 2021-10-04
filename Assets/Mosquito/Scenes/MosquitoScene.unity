@@ -1784,6 +1784,7 @@ GameObject:
   - component: {fileID: 2120924008}
   - component: {fileID: 2120924010}
   - component: {fileID: 2120924009}
+  - component: {fileID: 2120924011}
   m_Layer: 5
   m_Name: GameTimerText
   m_TagString: Untagged
@@ -1852,6 +1853,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120924007}
   m_CullTransparentMesh: 1
+--- !u!114 &2120924011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120924007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1.5, y: -1.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2134136082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   queueTime: 1.25
-  token: {fileID: 2683114503950041501, guid: a1ab1f0ad192041d9a06abab3a98a0d9, type: 3}
+  mos: {fileID: 2683114503950041501, guid: a1ab1f0ad192041d9a06abab3a98a0d9, type: 3}
+  big_mos: {fileID: 2576818250846854363, guid: b093234694c64474c80bd3a76970cc5b, type: 3}
   height: 2
 --- !u!4 &2134136084
 Transform:

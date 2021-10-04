@@ -6237,7 +6237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908267e18f198e842ad5ff791320b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexagonPrefab: {fileID: 1367694016235905862, guid: 099d3c40540d6a04bb700921ae96a6a1, type: 3}
+  corgiPrefab: {fileID: 1367694016235905862, guid: 099d3c40540d6a04bb700921ae96a6a1, type: 3}
   bonePrefab: {fileID: 1590979917}
   pointText: {fileID: 773569578}
 --- !u!4 &1245167430

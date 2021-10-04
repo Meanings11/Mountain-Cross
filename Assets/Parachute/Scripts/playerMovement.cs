@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using System.Globalization;
 
 public class playerMovement : MonoBehaviour {
     private float speed = 10;
     private int score = 0;
+
+    public Animator animator;
 
     public GameObject player;
     public GameObject hitEffect;
@@ -22,9 +25,13 @@ public class playerMovement : MonoBehaviour {
     private Vector3 pos;
     private float startTime = 0f;
 
+    public bool firstHit = true;
+
     // Use this for initialization
     void Start () {
         startTime = Time.time;
+
+        animator = GetComponent<Animator>();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -37,9 +44,11 @@ public class playerMovement : MonoBehaviour {
         float ay = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(ax, ay) * Time.deltaTime * 0.1f);
 
-        moveUpdate();
-        updateScore();
-        // flyUp();
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlyAnimation")) {
+            moveUpdate();
+            updateScore();
+            // flyUp();
+        }
     }
 
     private void updateScore()
@@ -72,7 +81,7 @@ public class playerMovement : MonoBehaviour {
             // touchPosition.y = player.transform.position.y;
             player.transform.position = Vector3.MoveTowards(player.transform.position, touchPosition, Time.deltaTime * speed);
         }
-    
+
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
             pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 1));
@@ -86,34 +95,53 @@ public class playerMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "box"){
-            Instantiate(hitEffect, col.transform.position, Quaternion.identity);
-            Instantiate(deadPlayer, player.transform.position, Quaternion.identity);
-            Destroy(player);
-            // player.SetActive(false);
-            // Destroy(boxGenerator);
-            // Destroy(cloudGenerator);
+        if (col.gameObject.tag == "box") {
+            // destroy the hitted box
             Destroy(col.gameObject);
-            
-            // Time.timeScale = 0;
 
-            // Debug.Log("collision happened");
-            TotalPoint.text = "Earned " + scoreText.text + " in total";
-            GameoverText.gameObject.SetActive(true);
-            TotalPoint.gameObject.SetActive(true);
+            // no longer generate new boxes
+            Destroy(boxGenerator);
 
-            // Set global score
-            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+            if (firstHit == true) {
+                animator.SetTrigger("Dead");
+                Instantiate(hitEffect, col.transform.position, Quaternion.identity);
+                // Instantiate(deadPlayer, player.transform.position, Quaternion.identity);
+                
+                // Time.timeScale = 0;
 
-            CultureInfo provider = new CultureInfo("en-US");
-            NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+                // Debug.Log("collision happened");
+                TotalPoint.text = "Earned " + scoreText.text + " in total";
+                GameoverText.gameObject.SetActive(true);
+                TotalPoint.gameObject.SetActive(true);
 
-            decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
-            int addedScore = Decimal.ToInt32(pointNumber);
-            // Debug.Log(addedScore);
-            PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+                // Set global score
+                int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
+                CultureInfo provider = new CultureInfo("en-US");
+                NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+
+                decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
+                int addedScore = Decimal.ToInt32(pointNumber);
+                // Debug.Log(addedScore);
+                PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+            }
+
+            firstHit = false;
+                    
+            // End scene
             // SceneManager.LoadScene("BoardScene");
+            StartCoroutine(LoadEndScene());
+            // Invoke("LoadEndScene", 2f);
         }
+    }
+
+    // void LoadEndScene()
+    // {
+    //     SceneManager.LoadScene("BoardScene");
+    // }
+
+    IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("BoardScene");
     }
 }

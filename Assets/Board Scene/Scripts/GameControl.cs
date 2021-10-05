@@ -36,14 +36,19 @@ public class GameControl : MonoBehaviour {
         // Screen.orientation = ScreenOrientation.LandscapeLeft;
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        if (Screen.width / Screen.height > 1.4f) {
-            if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-                landscapeCanvas.gameObject.SetActive(true);
-                portraitCanvas.gameObject.SetActive(false);
-            }
+        if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
+            landscapeCanvas.gameObject.SetActive(true);
+            portraitCanvas.gameObject.SetActive(false);
         } else {
-            landscapeCanvas.gameObject.SetActive(false);
-            portraitCanvas.gameObject.SetActive(true);
+            if (Screen.width / Screen.height > 1.4f) {
+                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+                    landscapeCanvas.gameObject.SetActive(true);
+                    portraitCanvas.gameObject.SetActive(false);
+                }
+            } else {
+                landscapeCanvas.gameObject.SetActive(false);
+                portraitCanvas.gameObject.SetActive(true);
+            }
         }
         // ScreenRotate();
 
@@ -74,14 +79,19 @@ public class GameControl : MonoBehaviour {
     void Update() {
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        if (Screen.width / Screen.height > 1.4f) {
-            if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-                landscapeCanvas.gameObject.SetActive(true);
-                portraitCanvas.gameObject.SetActive(false);
-            }
+        if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
+            landscapeCanvas.gameObject.SetActive(true);
+            portraitCanvas.gameObject.SetActive(false);
         } else {
-            landscapeCanvas.gameObject.SetActive(false);
-            portraitCanvas.gameObject.SetActive(true);
+            if (Screen.width / Screen.height > 1.4f) {
+                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+                    landscapeCanvas.gameObject.SetActive(true);
+                    portraitCanvas.gameObject.SetActive(false);
+                }
+            } else {
+                landscapeCanvas.gameObject.SetActive(false);
+                portraitCanvas.gameObject.SetActive(true);
+            }
         }
         // ScreenRotate();
 

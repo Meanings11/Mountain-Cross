@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour
 
     // Parameters
     public float gameTime = 60;
-    public float respawnTime = 2;
     public float scrollSpeed = 1.5f;
+    public bool isStart = false;
     public bool isGamePaused = false;
     public bool isGameOver = false;
     private int score = 0;
+    private float leftTime;
+    private float speedTimer;
 
     void Awake() {
         if (instance == null) {
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this) {
             Destroy(gameObject);
         }
+        leftTime = gameTime;
     }
 
     // Start is called before the first frame update
@@ -42,33 +45,27 @@ public class GameManager : MonoBehaviour
         gameOverImage.gameObject.SetActive(false);
         Time.timeScale = 0;
 
-        flySound = GetComponent<AudioSource> ();
+        // flySound = GetComponent<AudioSource> ();
     }
 
     private void Update()
     {
         
-        if (gameTime <= 0) 
+        if (leftTime <= 0) 
         {
             GameOver();
-            // enabled = false;
-        } else {
-            if( isGamePaused)
-            {
-                respawnTimerText.gameObject.SetActive(true);
-                respawnTime -= Time.unscaledDeltaTime;
+        } else if (isStart){
+            
+                leftTime -= Time.unscaledDeltaTime;
+                speedTimer += Time.unscaledDeltaTime;
+                
+                gameTimerText.text = leftTime.ToString("0");
 
-                respawnTimerText.text = "Restarting in " + (respawnTime).ToString("0");
-
-                if(respawnTime < 0)
-                {
-                    RestartGame();
+                // speed up based on the gaming time
+                if (speedTimer > 5.0) {
+                    scrollSpeed +=  speedTimer * (float)0.05;
+                    speedTimer = 0;
                 }
-
-            } else {
-                gameTime -= Time.unscaledDeltaTime;
-                gameTimerText.text = gameTime.ToString("0");
-            }
         }
 
 
@@ -76,10 +73,10 @@ public class GameManager : MonoBehaviour
 
 
     // Score
-    public void BirdScored() {
+    public void BirdScored(int newScore) {
         if (isGamePaused) return;
 
-        score++;
+        score += newScore;
         scoreText.text = "Score: " + score.ToString();
     }
 
@@ -88,16 +85,20 @@ public class GameManager : MonoBehaviour
     {
         startButton.SetActive(false);
         Time.timeScale = 1;
+        isStart = true;
 
-        flySound.Play();
+        // flySound.Play();
     }
 
     public void GamePause()
     {
-        Time.timeScale = 0;
-        isGamePaused = true;
+        // Time.timeScale = 0;
+        // isGamePaused = true;
 
-        flySound.Stop();
+        // flySound.Stop();
+        Time.timeScale = 0;
+        SceneManager.LoadScene("PauseMenu");
+        Time.timeScale = 1;
     }
 
     public void GameOver()
@@ -106,11 +107,11 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverImage.gameObject.SetActive(true);
 
-        flySound.Stop();
+        // flySound.Stop();
 
         // Set score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
 
         // jump back to main board
         // SceneManager.LoadScene("BoardScene");

@@ -6,7 +6,8 @@ public class tokenGenerator : MonoBehaviour
 {
 	public float queueTime = 1.5f;
 	private float time = 0;
-	public GameObject token;
+	public GameObject mos;
+	public GameObject big_mos;
 
 	public float height;
 
@@ -17,11 +18,15 @@ public class tokenGenerator : MonoBehaviour
     {
         if(time > queueTime)
         {
-        	GameObject go = Instantiate(token);
-        	go.transform.position = transform.position + new Vector3(0, Random.Range(-height, height),0);
-
+            GameObject go;
+            if (Random.Range(0,1f) > 0.7f) {
+        	    go = Instantiate(big_mos);
+            } else {
+        	    go = Instantiate(mos);
+            }
+        	
+            go.transform.position = transform.position + new Vector3(0, Random.Range(-height, height),0);
         	time = 0;
-
         	Destroy(go, 10);
         }
 

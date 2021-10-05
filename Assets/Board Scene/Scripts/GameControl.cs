@@ -36,7 +36,7 @@ public class GameControl : MonoBehaviour {
         // Screen.orientation = ScreenOrientation.LandscapeLeft;
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
+        /*if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
         } else {
@@ -49,8 +49,8 @@ public class GameControl : MonoBehaviour {
                 landscapeCanvas.gameObject.SetActive(false);
                 portraitCanvas.gameObject.SetActive(true);
             }
-        }
-        // ScreenRotate();
+        }*/
+        ScreenRotate();
 
         minigamesIndexes.Add(4);
         minigamesIndexes.Add(5);
@@ -79,7 +79,7 @@ public class GameControl : MonoBehaviour {
     void Update() {
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
+        /*if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
         } else {
@@ -92,8 +92,8 @@ public class GameControl : MonoBehaviour {
                 landscapeCanvas.gameObject.SetActive(false);
                 portraitCanvas.gameObject.SetActive(true);
             }
-        }
-        // ScreenRotate();
+        }*/
+        ScreenRotate();
 
         // Check if the player finish the movement this round
         if (player.GetComponent<PlayerMovement>().moveFinished) {
@@ -128,7 +128,7 @@ public class GameControl : MonoBehaviour {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
         } else {
-            if (Screen.height / Screen.width > 1.99f || Screen.width / Screen.height > 1.99f) {
+            if ((Screen.height / Screen.width > 1.99f || Screen.width / Screen.height > 1.99f) && (Application.platform == RuntimePlatform.Android)) {
                 landscapeCanvas.gameObject.SetActive(true);
                 portraitCanvas.gameObject.SetActive(false);
                 if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown

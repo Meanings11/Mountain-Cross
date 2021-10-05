@@ -221,25 +221,25 @@ public class GameControl : MonoBehaviour {
                     int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
                     PlayerPrefs.SetInt("totalGameScore", newGameScore);
                 } else if (minigamesIndexes.Contains(currentIndex)) { // Load mini game if no reward and is in minigamesIndexes
-                // Show reward
-                playerMoveCount.gameObject.SetActive(true);
-                playerMoveCount.GetComponent<Text>().text = "Game Time!";
+                    // Show reward
+                    playerMoveCount.gameObject.SetActive(true);
+                    playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
-                // Go to mini-game
-                int randomIndex = UnityEngine.Random.Range(0, 3); // random decide for now
-                // if (randomIndex == 0) {
-                //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-                // } else {
-                //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
-                // }
+                    // Go to mini-game
+                    int randomIndex = UnityEngine.Random.Range(0, 3); // random decide for now
+                    // if (randomIndex == 0) {
+                    //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                    // } else {
+                    //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                    // }
 
-                switch (randomIndex)
-                {
-                    case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
-                    case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
-                    case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
+                    switch (randomIndex)
+                    {
+                        case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
+                        case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
+                        case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
+                    }
                 }
-            }
             }
             
             return;

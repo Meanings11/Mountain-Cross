@@ -19,16 +19,14 @@ public class tokenGenerator : MonoBehaviour
         if(time > queueTime)
         {
             GameObject go;
-            if (Random.Range(0,1f) > 0.8) {
+            if (Random.Range(0,1f) > 0.7f) {
         	    go = Instantiate(big_mos);
             } else {
         	    go = Instantiate(mos);
             }
-
-        	go.transform.position = transform.position + new Vector3(0, Random.Range(-height, height),0);
-
+        	
+            go.transform.position = transform.position + new Vector3(0, Random.Range(-height, height),0);
         	time = 0;
-
         	Destroy(go, 10);
         }
 

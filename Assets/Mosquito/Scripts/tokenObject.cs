@@ -7,6 +7,7 @@ public class tokenObject : MonoBehaviour
     public float speed;
     public AudioSource eat;
 
+    public int type = 0; //normal mos
 
     private Animator _animator;
     private bool isDead = false;
@@ -24,8 +25,10 @@ public class tokenObject : MonoBehaviour
 
     void Update()
     {
-    //    if (!isDead) 
-       transform.position += ((Vector3.left * speed) * Time.deltaTime);
+       if (type == 0) transform.position += ((Vector3.left * speed) * Time.deltaTime);
+       else {
+           transform.Translate(new Vector3(-1f, 0.5f*Mathf.Sin(Time.time),0) * speed * Time.deltaTime);
+       }
     }
 
     private void OnTriggerEnter2D (Collider2D other) {
@@ -33,10 +36,12 @@ public class tokenObject : MonoBehaviour
             if (other.GetComponent<Player>() != null) {
                 mosCollider.enabled = false;
                 eat.Play();
-                GameManager.instance.BirdScored ();
+                
+                if (type == 0) GameManager.instance.BirdScored (1);
+                else GameManager.instance.BirdScored (3);
 
                 _animator.SetTrigger("mosDie");
-                Destroy(gameObject,0.8f);
+                Destroy(gameObject,1f);
                 isDead = true;
 
             }

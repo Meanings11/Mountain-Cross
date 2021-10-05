@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour
 
 
     // Score
-    public void BirdScored() {
+    public void BirdScored(int newScore) {
         if (isGamePaused) return;
 
-        score++;
+        score += newScore;
         scoreText.text = "Score: " + score.ToString();
     }
 
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
         // Set score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
 
         // jump back to main board
         // SceneManager.LoadScene("BoardScene");

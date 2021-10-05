@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   eat: {fileID: 0}
+  type: 1
 --- !u!82 &9126225879450594434
 AudioSource:
   m_ObjectHideFlags: 0

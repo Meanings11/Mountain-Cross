@@ -113,7 +113,7 @@ public class playerMovement : MonoBehaviour {
             pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         }
 
-        transform.position = new Vector3(pos.x + 1, pos.y + 1, pos.z);
+        transform.position = new Vector3(pos.x, pos.y + 1, pos.z);
     }
 
     void OnCollisionEnter2D(Collision2D col) {

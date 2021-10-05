@@ -10,7 +10,7 @@ public class tokenObject : MonoBehaviour
     public int type = 0; //normal mos
 
     private Animator _animator;
-    private bool isDead = false;
+    // private bool isDead = false;
     private BoxCollider2D mosCollider;
     
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class tokenObject : MonoBehaviour
 
                 _animator.SetTrigger("mosDie");
                 Destroy(gameObject,1f);
-                isDead = true;
+                // isDead = true;
 
             }
         }

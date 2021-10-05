@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public float velocity = 2.4f;
     public bool isDead = false;
     private Rigidbody2D rb;
-    AudioSource audio;
+    AudioSource playerAudio;
     public AudioClip fall;
     public AudioClip jump;
 
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audio = GetComponent<AudioSource>(); 
+        playerAudio = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -24,14 +24,14 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (!GameManager.instance.isGameOver) rb.velocity = Vector2.up * velocity;
-            audio.PlayOneShot(jump);
+            playerAudio.PlayOneShot(jump);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isDead = true;
-        audio.PlayOneShot(fall);
+        playerAudio.PlayOneShot(fall);
         GameManager.instance.GameOver();
     }
 }

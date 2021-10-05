@@ -19,22 +19,20 @@ public class PalyerMovement : MonoBehaviour
     public AudioSource spinSource;
     public AudioClip eatSound;
     public AudioClip hitPlayer;
+    public AudioClip timesUp;
 
     public bool firstHit = true;
 
-    private float startTime = 0f;
-
     public float moveSpeed = 500f;
     
-    float movement = 0f;
+    private float movement = 0f;
+    private float timeRemaining = 30f;
 
     private SpriteRenderer playerRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.time;
-
         spinSource = GetComponent<AudioSource> ();
         playerRenderer = GetComponent<SpriteRenderer> ();
 
@@ -82,8 +80,15 @@ public class PalyerMovement : MonoBehaviour
         }
 
         // end the game after 30s
-        if (Time.time - startTime >= 30) {
+        if (timeRemaining > 0) {
+            timeRemaining -= Time.deltaTime;
+        } else {
             GameoverText.text = "Times Up!";
+            if (firstHit == true) {
+                spinSource.PlayOneShot(timesUp);
+            }
+            firstHit = false;
+
             EndGame();
         }
     }
@@ -101,7 +106,10 @@ public class PalyerMovement : MonoBehaviour
             if (other.gameObject.tag == "lightCircle") {
                 spinSource.PlayOneShot(hitPlayer);
                 if (healthBarScript.currentHealth <= 1) {
-                    EndGame();
+                    if (firstHit == true) {
+                        EndGame();
+                    }
+                    firstHit = false;
                 } else {
                     healthBarScript.currentHealth--;
                 }
@@ -122,25 +130,21 @@ public class PalyerMovement : MonoBehaviour
         bonePrefab.gameObject.SetActive(false);
         // CenterPlayer.gameObject.SetActive(false);
 
-        if (firstHit == true)
-        {
-            TotalPoint.text = "Earned " + pointText.text + " in total";
-            GameoverText.gameObject.SetActive(true);
-            TotalPoint.gameObject.SetActive(true);
+        // Get total score
+        TotalPoint.text = "Earned " + pointText.text + " in total";
+        GameoverText.gameObject.SetActive(true);
+        TotalPoint.gameObject.SetActive(true);
 
-            // Set global score
-            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+        // Set global score
+        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-            CultureInfo provider = new CultureInfo("en-US");
-            NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+        CultureInfo provider = new CultureInfo("en-US");
+        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
 
-            decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
-            int addedScore = Decimal.ToInt32(pointNumber);
-            // Debug.Log(addedScore);
-            PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
-        }
-        
-        firstHit = false;
+        decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
+        int addedScore = Decimal.ToInt32(pointNumber);
+        // Debug.Log(addedScore);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
         
         // End scene
         StartCoroutine(LoadEndScene());

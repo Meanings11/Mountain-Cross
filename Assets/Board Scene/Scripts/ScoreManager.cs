@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
     if (totalgamescore == 0 || totalgamescore == 00) {
       TotalGameScore.text = "$0";
     } else {
-      TotalGameScore.text = "$" + string.Format("{0:0,0}", Int16.Parse(totalgamescore.ToString()));
+      TotalGameScore.text = "$" + string.Format("{0:0,0}", Int32.Parse(totalgamescore.ToString()));
     }
   }
 
@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
     if (totalgamescore == 0 || totalgamescore == 00) {
       TotalGameScore.text = "$0";
     } else {
-      TotalGameScore.text = "$" + string.Format("{0:0,0}", Int16.Parse(totalgamescore.ToString()));
+      TotalGameScore.text = "$" + string.Format("{0:0,0}", Int32.Parse(totalgamescore.ToString()));
     }
   }
 }

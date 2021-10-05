@@ -17,21 +17,27 @@ public class playerMovement : MonoBehaviour {
     public GameObject boxGenerator;
     public GameObject cloudGenerator;
 
+    public AudioSource flySound;
+    public AudioClip timesUp;
+
     public Text GameoverText;
     public Text TotalPoint;
     public Text scoreText;
     public Text timer;
 
     private Vector3 pos;
-    private float startTime = 0f;
 
     public bool firstHit = true;
 
+    private float timeRemaining = 30f;
+
     // Use this for initialization
     void Start () {
-        startTime = Time.time;
-
+        // initialize animator
         animator = GetComponent<Animator>();
+
+        // initialize suound source
+        flySound = GetComponent<AudioSource> ();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -46,29 +52,34 @@ public class playerMovement : MonoBehaviour {
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlyAnimation")) {
             // end the game after 30s
-            if (Time.time - startTime < 30) {
-                timer.text = "00:00:" + (30 - Time.time).ToString("F0");
-                
+            
+            if (timeRemaining > 0) {
+                timeRemaining -= Time.deltaTime;
+                timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
                 moveUpdate();
                 updateScore();
                 // flyUp();
             } else {
                 timer.text = "00:00:00";
                 GameoverText.text = "Times Up!";
+
+                if (firstHit == true) {
+                    flySound.PlayOneShot(timesUp);
+                }
+                firstHit = false;
+                
                 EndGame();
             }
         }
-
-        
     }
 
     private void updateScore()
     {
-        score = Mathf.RoundToInt(Time.time - startTime) * 10;
+        score = Mathf.RoundToInt(Time.time) * 10;
         if (score == 0 || score == 00) {
             scoreText.text = "$0";
         } else {
-            scoreText.text = "$" + string.Format("{0:0,0}", Int16.Parse(score.ToString()));
+            scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
         }
     }
 
@@ -125,6 +136,7 @@ public class playerMovement : MonoBehaviour {
         // no longer generate new boxes
         Destroy(boxGenerator);
 
+        // Get total score
         TotalPoint.text = "Earned " + scoreText.text + " in total";
         GameoverText.gameObject.SetActive(true);
         TotalPoint.gameObject.SetActive(true);

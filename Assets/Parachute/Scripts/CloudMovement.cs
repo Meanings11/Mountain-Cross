@@ -7,7 +7,7 @@ public class CloudMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        tran.position = new Vector3(Random.Range(-2.0f,2.0f), Random.Range(3.6f, 5.0f), 0);
+        tran.position = new Vector3(Random.Range(-5.0f,5.0f), Random.Range(3.6f, 6.0f), 0);
 	}
 	
 	// Update is called once per frame

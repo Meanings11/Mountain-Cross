@@ -122,12 +122,15 @@ MonoBehaviour:
   animator: {fileID: 2452581094061573499}
   player: {fileID: 0}
   hitEffect: {fileID: 0}
-  deadPlayer: {fileID: 0}
   boxGenerator: {fileID: 0}
   cloudGenerator: {fileID: 0}
+  flySound: {fileID: 2452581094061573474}
+  timesUp: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
   GameoverText: {fileID: 0}
   TotalPoint: {fileID: 0}
   scoreText: {fileID: 0}
+  timer: {fileID: 0}
+  firstHit: 1
 --- !u!50 &2452581094061573472
 Rigidbody2D:
   serializedVersion: 4

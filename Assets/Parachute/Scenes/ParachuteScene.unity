@@ -1005,6 +1005,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1622738264}
     - target: {fileID: 2452581094061573503, guid: e8571148132e5d14d8f0f4bad882f2de, type: 3}
+      propertyPath: timesUp
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
+    - target: {fileID: 2452581094061573503, guid: e8571148132e5d14d8f0f4bad882f2de, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1622738270}

@@ -16,27 +16,27 @@ public class Spawner : MonoBehaviour
     private float spawnSpeed = 1.5f;
     private float nextTimeToSpawn = 0f;
     private float nextBoneTime = 0f;
-    private float startTime = 0f;
+    private float timeRemaining = 30f;
     private float radius = 1f;
 
     private void Start() {
-        startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime < 30) {
-            timer.text = "00:00:" + (30 - Time.time).ToString("F0");
+        if (timeRemaining > 0) {
+            timeRemaining -= Time.deltaTime;
+            timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
         } else {
             timer.text = "00:00:00";
         }
 
         if (Time.time >= nextTimeToSpawn)
         {
-            if (Time.time >= startTime + 4.55) {
+            if (Time.time >= 4.55) {
                 playerPoint += 10;
-                pointText.text = "$" + string.Format("{0:0,0}", Int16.Parse(playerPoint.ToString()));
+                pointText.text = "$" + string.Format("{0:0,0}", Int32.Parse(playerPoint.ToString()));
             }
             Instantiate(corgiPrefab);
             nextTimeToSpawn = Time.time + spawnSpeed;

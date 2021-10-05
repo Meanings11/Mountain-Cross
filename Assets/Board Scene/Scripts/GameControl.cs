@@ -34,16 +34,37 @@ public class GameControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // Screen.orientation = ScreenOrientation.LandscapeLeft;
-        Screen.orientation = ScreenOrientation.AutoRotation;
+        // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        // if (Screen.width / Screen.height > 1.25f) {
-        if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-            landscapeCanvas.gameObject.SetActive(true);
-            portraitCanvas.gameObject.SetActive(false);
-        // }
+        /*if (Screen.width / Screen.height > 1.24f) {
+            if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+                landscapeCanvas.gameObject.SetActive(true);
+                portraitCanvas.gameObject.SetActive(false);
+            }
         } else {
             landscapeCanvas.gameObject.SetActive(false);
             portraitCanvas.gameObject.SetActive(true);
+        }*/
+
+        if (Screen.height / Screen.width > 1.8f || Screen.width / Screen.height > 1.8f) {
+            landscapeCanvas.gameObject.SetActive(true);
+            portraitCanvas.gameObject.SetActive(false);
+            if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown) {
+                Screen.orientation = ScreenOrientation.LandscapeLeft;
+            }
+        } else {
+            if (Screen.width / Screen.height > 1.24f) {
+                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+                    landscapeCanvas.gameObject.SetActive(true);
+                    portraitCanvas.gameObject.SetActive(false);
+                } else {
+                    landscapeCanvas.gameObject.SetActive(false);
+                    portraitCanvas.gameObject.SetActive(true);
+                }
+            } else {
+                landscapeCanvas.gameObject.SetActive(false);
+                portraitCanvas.gameObject.SetActive(true);
+            }
         }
 
         minigamesIndexes.Add(4);
@@ -73,14 +94,25 @@ public class GameControl : MonoBehaviour {
     void Update() {
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
-        // if (Screen.width / Screen.height > 1.25f) {
-        if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+        if (Screen.height / Screen.width > 1.8f || Screen.width / Screen.height > 1.8f) {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
-        // }
+            if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown) {
+                Screen.orientation = ScreenOrientation.LandscapeLeft;
+            }
         } else {
-            landscapeCanvas.gameObject.SetActive(false);
-            portraitCanvas.gameObject.SetActive(true);
+            if (Screen.width / Screen.height > 1.24f) {
+                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+                    landscapeCanvas.gameObject.SetActive(true);
+                    portraitCanvas.gameObject.SetActive(false);
+                } else {
+                    landscapeCanvas.gameObject.SetActive(false);
+                    portraitCanvas.gameObject.SetActive(true);
+                }
+            } else {
+                landscapeCanvas.gameObject.SetActive(false);
+                portraitCanvas.gameObject.SetActive(true);
+            }
         }
 
         // Check if the player finish the movement this round

@@ -22,6 +22,8 @@ public class PalyerMovement : MonoBehaviour
 
     public bool firstHit = true;
 
+    private float startTime = 0f;
+
     public float moveSpeed = 500f;
     
     float movement = 0f;
@@ -31,13 +33,14 @@ public class PalyerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.time;
+
         spinSource = GetComponent<AudioSource> ();
         playerRenderer = GetComponent<SpriteRenderer> ();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
         TotalPoint.gameObject.SetActive(false);
-        
     }
 
     // Update is called once per frame
@@ -77,6 +80,12 @@ public class PalyerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) {
             movement = 0f;
         }
+
+        // end the game after 30s
+        if (Time.time - startTime >= 30) {
+            GameoverText.text = "Times Up!";
+            EndGame();
+        }
     }
 
     private void FixedUpdate()
@@ -92,36 +101,7 @@ public class PalyerMovement : MonoBehaviour
             if (other.gameObject.tag == "lightCircle") {
                 spinSource.PlayOneShot(hitPlayer);
                 if (healthBarScript.currentHealth <= 1) {
-                    // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                    // Debug.Log("collide");
-                    // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
-                    Canvas.gameObject.SetActive(false);
-                    bonePrefab.gameObject.SetActive(false);
-                    // CenterPlayer.gameObject.SetActive(false);
-
-                    if (firstHit == true)
-                    {
-                        TotalPoint.text = "Earned " + pointText.text + " in total";
-                        GameoverText.gameObject.SetActive(true);
-                        TotalPoint.gameObject.SetActive(true);
-
-                        // Set global score
-                        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-
-                        CultureInfo provider = new CultureInfo("en-US");
-                        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
-
-                        decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
-                        int addedScore = Decimal.ToInt32(pointNumber);
-                        // Debug.Log(addedScore);
-                        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
-                    }
-                    
-                    firstHit = false;
-                    
-                    // End scene
-                    StartCoroutine(LoadEndScene());
-                    // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
+                    EndGame();
                 } else {
                     healthBarScript.currentHealth--;
                 }
@@ -132,6 +112,39 @@ public class PalyerMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    void EndGame() {
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Debug.Log("collide");
+        // SceneManager.LoadScene("ReturnScene", LoadSceneMode.Additive);
+        Canvas.gameObject.SetActive(false);
+        bonePrefab.gameObject.SetActive(false);
+        // CenterPlayer.gameObject.SetActive(false);
+
+        if (firstHit == true)
+        {
+            TotalPoint.text = "Earned " + pointText.text + " in total";
+            GameoverText.gameObject.SetActive(true);
+            TotalPoint.gameObject.SetActive(true);
+
+            // Set global score
+            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+
+            CultureInfo provider = new CultureInfo("en-US");
+            NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+
+            decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
+            int addedScore = Decimal.ToInt32(pointNumber);
+            // Debug.Log(addedScore);
+            PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+        }
+        
+        firstHit = false;
+        
+        // End scene
+        StartCoroutine(LoadEndScene());
+        // SceneManager.LoadScene("BoardScene", LoadSceneMode.Single);
     }
 
     IEnumerator LoadEndScene() {

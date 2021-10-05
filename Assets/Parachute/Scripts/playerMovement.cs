@@ -14,13 +14,13 @@ public class playerMovement : MonoBehaviour {
 
     public GameObject player;
     public GameObject hitEffect;
-    public GameObject deadPlayer;
     public GameObject boxGenerator;
     public GameObject cloudGenerator;
 
     public Text GameoverText;
     public Text TotalPoint;
     public Text scoreText;
+    public Text timer;
 
     private Vector3 pos;
     private float startTime = 0f;
@@ -45,10 +45,21 @@ public class playerMovement : MonoBehaviour {
         transform.Translate(new Vector3(ax, ay) * Time.deltaTime * 0.1f);
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerFlyAnimation")) {
-            moveUpdate();
-            updateScore();
-            // flyUp();
+            // end the game after 30s
+            if (Time.time - startTime < 30) {
+                timer.text = "00:00:" + (30 - Time.time).ToString("F0");
+                
+                moveUpdate();
+                updateScore();
+                // flyUp();
+            } else {
+                timer.text = "00:00:00";
+                GameoverText.text = "Times Up!";
+                EndGame();
+            }
         }
+
+        
     }
 
     private void updateScore()
@@ -99,40 +110,40 @@ public class playerMovement : MonoBehaviour {
             // destroy the hitted box
             Destroy(col.gameObject);
 
-            // no longer generate new boxes
-            Destroy(boxGenerator);
-
             if (firstHit == true) {
                 animator.SetTrigger("Dead");
                 Instantiate(hitEffect, col.transform.position, Quaternion.identity);
-                // Instantiate(deadPlayer, player.transform.position, Quaternion.identity);
-                
-                // Time.timeScale = 0;
 
-                // Debug.Log("collision happened");
-                TotalPoint.text = "Earned " + scoreText.text + " in total";
-                GameoverText.gameObject.SetActive(true);
-                TotalPoint.gameObject.SetActive(true);
-
-                // Set global score
-                int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-
-                CultureInfo provider = new CultureInfo("en-US");
-                NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
-
-                decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
-                int addedScore = Decimal.ToInt32(pointNumber);
-                // Debug.Log(addedScore);
-                PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+                EndGame();
             }
 
             firstHit = false;
-                    
-            // End scene
-            // SceneManager.LoadScene("BoardScene");
-            StartCoroutine(LoadEndScene());
-            // Invoke("LoadEndScene", 2f);
         }
+    }
+
+    void EndGame() {
+        // no longer generate new boxes
+        Destroy(boxGenerator);
+
+        TotalPoint.text = "Earned " + scoreText.text + " in total";
+        GameoverText.gameObject.SetActive(true);
+        TotalPoint.gameObject.SetActive(true);
+
+        // Set global score
+        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+
+        CultureInfo provider = new CultureInfo("en-US");
+        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+
+        decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
+        int addedScore = Decimal.ToInt32(pointNumber);
+        // Debug.Log(addedScore);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+                
+        // End scene
+        // SceneManager.LoadScene("BoardScene");
+        StartCoroutine(LoadEndScene());
+        // Invoke("LoadEndScene", 2f);
     }
 
     // void LoadEndScene()

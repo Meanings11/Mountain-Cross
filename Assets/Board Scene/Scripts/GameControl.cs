@@ -5,8 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameControl : MonoBehaviour {
+    public GameObject landscapeCanvas;
+    public GameObject portraitCanvas;
 
-    private static GameObject winsTextShadow, playerMoveCount;
+    // private static GameObject winsTextShadow;
+    private static GameObject playerMoveCount;
 
     private static GameObject player;
 
@@ -19,7 +22,7 @@ public class GameControl : MonoBehaviour {
     public static bool hasFinishedReward = true;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
-    private int[] waypoints_reward = {0, 0, 0, 0, 0, 0, 0,
+    private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
                                       0, 0, 0, -10, 0, 0,
                                       0, 0, 0, 0, 0, -2,
                                       0, 0, 0, 0, 0, 0};
@@ -30,8 +33,18 @@ public class GameControl : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        // Only play the board with landscape mode
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        // Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+
+        // if (Screen.width / Screen.height > 1.25f) {
+        if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+            landscapeCanvas.gameObject.SetActive(true);
+            portraitCanvas.gameObject.SetActive(false);
+        // }
+        } else {
+            landscapeCanvas.gameObject.SetActive(false);
+            portraitCanvas.gameObject.SetActive(true);
+        }
 
         minigamesIndexes.Add(4);
         minigamesIndexes.Add(5);
@@ -45,21 +58,30 @@ public class GameControl : MonoBehaviour {
         minigamesIndexes.Add(21);
         minigamesIndexes.Add(23);
 
-        winsTextShadow = GameObject.Find("WinsText");
+        // winsTextShadow = GameObject.Find("WinsText");
         playerMoveCount = GameObject.Find("PlayerMoveCount");
         player = GameObject.Find("Player");
         sceneManager = GameObject.Find("SceneManager");
 
         player.GetComponent<PlayerMovement>().moveAllowed = false;
 
-        winsTextShadow.gameObject.SetActive(false);
+        // winsTextShadow.gameObject.SetActive(false);
         playerMoveCount.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update() {
-        // Only play the board with landscape mode
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        // Screen.orientation = ScreenOrientation.AutoRotation;
+
+        // if (Screen.width / Screen.height > 1.25f) {
+        if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
+            landscapeCanvas.gameObject.SetActive(true);
+            portraitCanvas.gameObject.SetActive(false);
+        // }
+        } else {
+            landscapeCanvas.gameObject.SetActive(false);
+            portraitCanvas.gameObject.SetActive(true);
+        }
 
         // Check if the player finish the movement this round
         if (player.GetComponent<PlayerMovement>().moveFinished) {
@@ -173,7 +195,7 @@ public class GameControl : MonoBehaviour {
                 switch (randomIndex)
                 {
                     case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
-                    case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene"); break;
+                    case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
                     case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
                 }
             }

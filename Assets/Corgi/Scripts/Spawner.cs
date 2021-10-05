@@ -6,10 +6,11 @@ using System;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject hexagonPrefab;
+    public GameObject corgiPrefab;
     public GameObject bonePrefab;
     private Text point;
     public Text pointText;
+    public Text timer;
 
     private int playerPoint = 0;
     private float spawnSpeed = 1.5f;
@@ -25,13 +26,19 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.time - startTime < 30) {
+            timer.text = "00:00:" + (30 - Time.time).ToString("F0");
+        } else {
+            timer.text = "00:00:00";
+        }
+
         if (Time.time >= nextTimeToSpawn)
         {
             if (Time.time >= startTime + 4.55) {
                 playerPoint += 10;
                 pointText.text = "$" + string.Format("{0:0,0}", Int16.Parse(playerPoint.ToString()));
             }
-            Instantiate(hexagonPrefab);
+            Instantiate(corgiPrefab);
             nextTimeToSpawn = Time.time + spawnSpeed;
         }
 

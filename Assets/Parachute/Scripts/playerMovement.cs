@@ -104,7 +104,7 @@ public class playerMovement : MonoBehaviour {
             player.transform.position = Vector3.MoveTowards(player.transform.position, touchPosition, Time.deltaTime * speed);
         }
 
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
             pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 1));
         }

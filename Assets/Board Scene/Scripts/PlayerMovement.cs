@@ -29,14 +29,15 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	private void Update () {
+        // Debug.Log(currentWaypointIndex);
         if (moveAllowed)
             moveToDestination();
 	}
 
-    void OnDestroy() {
-        // Before we get destroyed, we save data to our save file.
-        PlayerPrefs.SetInt("lastWaypointIndex", destinationWaypointIndex);
-    }
+    // void OnDestroy() {
+    //     // Before we get destroyed, we save data to our save file.
+    //     PlayerPrefs.SetInt("lastWaypointIndex", destinationWaypointIndex);
+    // }
 
     private void moveToDestination() {
         if (currentWaypointIndex == waypoints.Length) {
@@ -64,13 +65,13 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (transform.position == waypoints[currentWaypointIndex].transform.position) {
                     moveFinished = true;
+                    // PlayerPrefs.SetInt("lastWaypointIndex", destinationWaypointIndex);
                 } else {
                     moveFinished = false;
                 }
             }
         } else {
-            if (currentWaypointIndex > destinationWaypointIndex && currentWaypointIndex >= 0)
-            {
+            if (currentWaypointIndex > destinationWaypointIndex && currentWaypointIndex >= 0) {
                 transform.position = Vector2.MoveTowards(transform.position,
                 waypoints[currentWaypointIndex].transform.position,
                 moveSpeed * Time.deltaTime);
@@ -88,6 +89,7 @@ public class PlayerMovement : MonoBehaviour {
 
                 if (transform.position == waypoints[currentWaypointIndex].transform.position) {
                     moveFinished = true;
+                    // PlayerPrefs.SetInt("lastWaypointIndex", destinationWaypointIndex);
                 } else {
                     moveFinished = false;
                 }

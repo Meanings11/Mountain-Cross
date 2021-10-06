@@ -77,6 +77,7 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        // Debug.Log(PlayerPrefs.GetInt("lastWaypointIndex", 0));
         // Screen.orientation = ScreenOrientation.AutoRotation;
 
         /*if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
@@ -99,6 +100,7 @@ public class GameControl : MonoBehaviour {
         if (player.GetComponent<PlayerMovement>().moveFinished) {
             player.GetComponent<PlayerMovement>().moveAllowed = false;
             player.GetComponent<PlayerMovement>().currentWaypointIndex = player.GetComponent<PlayerMovement>().destinationWaypointIndex;
+            PlayerPrefs.SetInt("lastWaypointIndex", player.GetComponent<PlayerMovement>().currentWaypointIndex);
 
             // Check for rewarded steps
             if (!hasFinishedReward) {
@@ -124,6 +126,11 @@ public class GameControl : MonoBehaviour {
     }
 
     public void ScreenRotate() {
+        if (landscapeCanvas.gameObject.activeSelf) {
+            portraitCanvas.gameObject.SetActive(false);
+        } else if (portraitCanvas.gameObject.activeSelf) {
+            landscapeCanvas.gameObject.SetActive(false);
+        }
         if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
@@ -176,7 +183,6 @@ public class GameControl : MonoBehaviour {
 
         // Set reward finish if no reward
         if (rewardedSteps == 0) {
-            hasFinishedReward = true;
             int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
             // Adjust gamescore if it is scroe rewad
@@ -194,55 +200,76 @@ public class GameControl : MonoBehaviour {
                         playerMoveCount.GetComponent<Text>().text = "Lose $" + Mathf.Abs(score_rewad[currentIndex]);
                     }
                 }
-                
+
                 // Adjust score
                 int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
                 PlayerPrefs.SetInt("totalGameScore", newGameScore);
+
+                hasFinishedReward = true;
             } else {
-                if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
-                    playerMoveCount.GetComponent<Text>().text = "Skip";
-                } else if (currentIndex == 14) {
-                    int newGameScore = currentGameScore * 2;
-                    playerMoveCount.GetComponent<Text>().text = "Double your money!";
-                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
-                } else if (currentIndex == 3 || currentIndex == 16) {
-                    int randomReward = UnityEngine.Random.Range(-100, 101);
-                    int adjustedReward = randomReward * 10;
-                    if (adjustedReward > 0) {
-                        playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
-                    } else {
-                        if (currentGameScore + adjustedReward <= 0) {
-                            playerMoveCount.GetComponent<Text>().text = "Surprise! You lose all your money...";
-                        } else {
-                            playerMoveCount.GetComponent<Text>().text = "Surprise! You lose $" + Mathf.Abs(adjustedReward);
-                        }
-                    }
-                    // Adjust score
-                    int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
-                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
-                } else if (minigamesIndexes.Contains(currentIndex)) { // Load mini game if no reward and is in minigamesIndexes
+                if (minigamesIndexes.Contains(currentIndex)) { // Load mini game if no reward and is in minigamesIndexes
                     // Show reward
                     playerMoveCount.gameObject.SetActive(true);
                     playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                     // Go to mini-game
-                    int randomIndex = UnityEngine.Random.Range(0, 3); // random decide for now
-                    // if (randomIndex == 0) {
-                    //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-                    // } else {
-                    //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
-                    // }
+                    if (currentIndex == 5) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene");
+                    } else if (currentIndex == 6) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene");
+                    } else if (currentIndex == 21) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                    } else {
+                        // random go to unassigned games
+                        int randomIndex = UnityEngine.Random.Range(0, 3); // random decide for now
+                        // if (randomIndex == 0) {
+                        //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
+                        // } else {
+                        //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
+                        // }
 
-                    switch (randomIndex)
-                    {
-                        case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
-                        case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
-                        case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
+                        switch (randomIndex)
+                        {
+                            case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
+                            case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
+                            case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
+                        }
                     }
+
+                    StartCoroutine(disableDice());
+                } else {
+                    if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
+                        playerMoveCount.GetComponent<Text>().text = "Skip";
+                    } else if (currentIndex == 14) {
+                        int newGameScore = currentGameScore * 2;
+                        playerMoveCount.GetComponent<Text>().text = "Double your money!";
+                        PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                    } else if (currentIndex == 3 || currentIndex == 16) {
+                        int randomReward = UnityEngine.Random.Range(-100, 101);
+                        int adjustedReward = randomReward * 10;
+                        if (adjustedReward > 0) {
+                            playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
+                        } else {
+                            if (currentGameScore + adjustedReward <= 0) {
+                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose all your money...";
+                            } else {
+                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose $" + Mathf.Abs(adjustedReward);
+                            }
+                        }
+                        // Adjust score
+                        int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
+                        PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                    }
+                    hasFinishedReward = true;
                 }
             }
             
             return;
+        }
+
+        IEnumerator disableDice() {
+            yield return new WaitForSeconds(1.5f);
+            hasFinishedReward = true;
         }
 
         // Setup UI

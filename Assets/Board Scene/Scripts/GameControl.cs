@@ -147,9 +147,15 @@ public class GameControl : MonoBehaviour {
                     if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
                         landscapeCanvas.gameObject.SetActive(true);
                         portraitCanvas.gameObject.SetActive(false);
-                    } else {
+                    } else if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown) {
                         landscapeCanvas.gameObject.SetActive(false);
                         portraitCanvas.gameObject.SetActive(true);
+                    } else {
+                        if (landscapeCanvas.gameObject.activeSelf) {
+                            portraitCanvas.gameObject.SetActive(false);
+                        } else if (portraitCanvas.gameObject.activeSelf) {
+                            landscapeCanvas.gameObject.SetActive(false);
+                        }
                     }
                 } else {
                     landscapeCanvas.gameObject.SetActive(false);

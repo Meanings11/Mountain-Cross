@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             if (!GameManager.instance.isGameOver) rb.velocity = Vector2.up * velocity;
             playerAudio.PlayOneShot(jump);

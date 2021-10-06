@@ -27,7 +27,7 @@ public class GameControl : MonoBehaviour {
                                       0, 0, 0, 0, 0, -2,
                                       0, 0, 0, 0, 0, 0};
     private int[] score_rewad = {0, 0, 0, 0, 0, 0, 0,
-                                -100000, -200, 0, 0, 0, 0,
+                                0, -200, 0, 0, 0, 0,
                                 0, 0, 0, 0, 340, 0,
                                 0, -120, 0, 0, 0, 0};
     
@@ -197,8 +197,6 @@ public class GameControl : MonoBehaviour {
                 playerMoveCount.gameObject.SetActive(true);
                 if (score_rewad[currentIndex] > 0) {
                     playerMoveCount.GetComponent<Text>().text = "Rewarded with $" + score_rewad[currentIndex];
-                } else if (score_rewad[currentIndex] == -100000) {
-                    playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
                 } else {
                     if (currentGameScore + score_rewad[currentIndex] <= 0) {
                         playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
@@ -246,6 +244,10 @@ public class GameControl : MonoBehaviour {
                 } else {
                     if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
+                    } else if (currentIndex == 7) {
+                        int newGameScore = 0;
+                        playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
+                        PlayerPrefs.SetInt("totalGameScore", newGameScore);
                     } else if (currentIndex == 14) {
                         int newGameScore = currentGameScore * 2;
                         playerMoveCount.GetComponent<Text>().text = "Double your money!";

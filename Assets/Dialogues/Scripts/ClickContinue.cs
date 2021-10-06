@@ -1,3 +1,4 @@
+// using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,11 @@ public class ClickContinue : MonoBehaviour
     public Text dialogueText;
     public Image character;
     public AudioSource typeSound;
-	private Queue<Dialogue> dialogues = new Queue<Dialogue>();
+    public AudioClip changeScene;
+
+    private Queue<Dialogue> dialogues = new Queue<Dialogue>();
+
+    private bool firstChangeClick = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +26,16 @@ public class ClickContinue : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
 
         // read dialogues
-        string[] lines = System.IO.File.ReadAllLines("Assets/Dialogues/Resources/Test_Dialogue.txt");
+        // string[] lines = System.IO.File.ReadAllLines("Assets/Dialogues/Resources/Test_Dialogue.txt");
+        
+        // StreamReader reader = new StreamReader("Assets/Dialogues/Resources/Test_Dialogue.txt");
+        // string lines = reader.ReadLine();
+        // reader.Close();
+
+        string[] lines = {"Groom:I can give you whatever you want.\nPlease let her go!",
+        "Bride:Help T~~~T", "Kidnapper:Play the board game and earn $5,000,\nthen I'll consider ≖ ◡ ≖"};
+        // better to use json
+
         foreach (string line in lines)
         {
             Dialogue currentDialogue = new Dialogue();
@@ -42,19 +56,27 @@ public class ClickContinue : MonoBehaviour
     // Update is called once per frame
     private void TaskOnClick()
     {
-        // DialogueManager.TriggerDialogue();
-        typeSound.Play();
         if (dialogues.Count == 0) {
-            typeSound.Stop();
-            SceneManager.LoadScene("BoardScene");
-            return;
+            if (firstChangeClick) {
+                typeSound.PlayOneShot(changeScene);
+            }
+            firstChangeClick = false;
+
+            // change scene to main board
+            StartCoroutine(LoadEndScene());
+        } else {
+            typeSound.Play();
+            Dialogue currentDialogue = new Dialogue();
+            currentDialogue = dialogues.Dequeue();
+            
+            nameText.text = currentDialogue.name;
+            character.sprite = currentDialogue.sprite;
+            dialogueText.text = currentDialogue.sentence.Replace("\\n", "\n");
         }
-        Debug.Log(nameText);
-        Dialogue currentDialogue = new Dialogue();
-        currentDialogue = dialogues.Dequeue();
-        
-        nameText.text = currentDialogue.name;
-        character.sprite = currentDialogue.sprite;
-        dialogueText.text = currentDialogue.sentence.Replace("\\n", "\n");
+    }
+
+    IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("BoardScene");
     }
 }

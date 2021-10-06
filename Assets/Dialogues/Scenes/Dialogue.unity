@@ -605,6 +605,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1551193097}
   character: {fileID: 165874707}
   typeSound: {fileID: 967754259}
+  changeScene: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
 --- !u!82 &967754259
 AudioSource:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class playerMovement : MonoBehaviour {
 
     private Vector3 pos;
 
-    public bool firstHit = true;
+    private bool firstHit = true;
 
     private float timeRemaining = 30f;
 

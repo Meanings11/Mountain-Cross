@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Image gameOverImage;
 
     // Sound
-    public AudioSource flySound;
+    // public AudioSource flySound;
 
     // Parameters
     public float gameTime = 60;

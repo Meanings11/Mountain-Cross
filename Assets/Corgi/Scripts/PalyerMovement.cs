@@ -21,9 +21,9 @@ public class PalyerMovement : MonoBehaviour
     public AudioClip hitPlayer;
     public AudioClip timesUp;
 
-    public bool firstHit = true;
+    private bool firstHit = true;
 
-    public float moveSpeed = 500f;
+    private float moveSpeed = 500f;
     
     private float movement = 0f;
     private float timeRemaining = 30f;

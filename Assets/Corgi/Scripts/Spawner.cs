@@ -28,31 +28,34 @@ public class Spawner : MonoBehaviour
         if (timeRemaining > 0) {
             timeRemaining -= Time.deltaTime;
             timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
+
+            if (Time.time >= nextTimeToSpawn)
+            {
+                if (Time.time >= 4.55)
+                {
+                    playerPoint += 10;
+                    pointText.text = "$" + string.Format("{0:0,0}", Int32.Parse(playerPoint.ToString()));
+                }
+                Instantiate(corgiPrefab);
+                nextTimeToSpawn = Time.time + spawnSpeed;
+            }
+
+            if (Time.time >= nextBoneTime)
+            {
+                if (!bonePrefab.gameObject.activeSelf)
+                {
+                    // change bone to new position
+                    float angle = UnityEngine.Random.Range(0, Mathf.PI * 2);
+                    Vector2 pos2d = new Vector2(Mathf.Sin(angle) * radius, Mathf.Cos(angle) * radius);
+                    bonePrefab.gameObject.transform.position = new Vector3(pos2d.x, pos2d.y, 0);
+
+                    // show new bone
+                    bonePrefab.gameObject.SetActive(true);
+                }
+                nextBoneTime = Time.time + 5f;
+            }
         } else {
             timer.text = "00:00:00";
-        }
-
-        if (Time.time >= nextTimeToSpawn)
-        {
-            if (Time.time >= 4.55) {
-                playerPoint += 10;
-                pointText.text = "$" + string.Format("{0:0,0}", Int32.Parse(playerPoint.ToString()));
-            }
-            Instantiate(corgiPrefab);
-            nextTimeToSpawn = Time.time + spawnSpeed;
-        }
-
-        if (Time.time >= nextBoneTime) {
-            if (!bonePrefab.gameObject.activeSelf) {
-                // change bone to new position
-                float angle = UnityEngine.Random.Range(0, Mathf.PI*2);
-                Vector2 pos2d = new Vector2(Mathf.Sin(angle)*radius,Mathf.Cos(angle)*radius);
-                bonePrefab.gameObject.transform.position = new Vector3(pos2d.x,pos2d.y,0);
-
-                // show new bone
-                bonePrefab.gameObject.SetActive(true);
-            }
-            nextBoneTime = Time.time + 5f;
         }
     }
 }

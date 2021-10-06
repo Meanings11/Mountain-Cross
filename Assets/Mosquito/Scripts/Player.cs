@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     AudioSource playerAudio;
     public AudioClip fall;
     public AudioClip jump;
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isDead = true;
+        var effect = Instantiate(hitEffect,transform.position, Quaternion.identity);
         playerAudio.PlayOneShot(fall);
+        Destroy(effect,1f);
         GameManager.instance.GameOver();
     }
 }

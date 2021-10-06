@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class ResetGame : MonoBehaviour
 {
     public Button resetButton;
-    private static GameObject player;
+    public GameObject player;
+    // private static GameObject player;
     
     void Start()
     {
-        player = GameObject.Find("Player");
+        // player = GameObject.Find("Player");
 
         Button btn = resetButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);

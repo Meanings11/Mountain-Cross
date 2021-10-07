@@ -7,11 +7,11 @@ public class ResetGame : MonoBehaviour
 {
     public Button resetButton;
     public GameObject player;
-    // private static GameObject player;
+    private PlayerMovement playerMovement;
     
     void Start()
     {
-        // player = GameObject.Find("Player");
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
         Button btn = resetButton.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
@@ -22,11 +22,7 @@ public class ResetGame : MonoBehaviour
         // Delete all of the PlayerPrefs settings by pressing this Button
         PlayerPrefs.DeleteAll();
 
-        // Setup player movement
-        // player.transform.position = new Vector2(player.GetComponent<PlayerMovement>().waypoints[0].transform.position.x,
-        //     player.GetComponent<PlayerMovement>().waypoints[0].transform.position.y);
-        player.GetComponent<PlayerMovement>().destinationWaypointIndex = 0;
-        player.GetComponent<PlayerMovement>().moveForward = false;
-        player.GetComponent<PlayerMovement>().moveAllowed = true;
+        // Reset player place back to origin
+        player.transform.position = playerMovement.waypoints[0].transform.position;
     }
 }

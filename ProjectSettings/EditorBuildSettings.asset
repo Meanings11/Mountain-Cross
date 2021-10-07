@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Parachute/Scenes/ParachuteScene.unity
     guid: 5989b8ebea5460442a2d1e6a12a742a1
+  - enabled: 1
+    path: Assets/Whack-A-Mole/Scenes/Whack-A-Mole.unity
+    guid: 556c0e05d50c41744942d0d4c42fed87
   m_configObjects: {}

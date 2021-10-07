@@ -218,8 +218,10 @@ public class GameControl : MonoBehaviour {
 
                     // Go to mini-game
                     if (currentIndex == 5) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
+                    } else if (currentIndex == 12) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene");
-                    } else if (currentIndex == 6) {
+                    } else if (currentIndex == 19   ) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene");
                     } else if (currentIndex == 21) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");

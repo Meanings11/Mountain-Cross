@@ -282,6 +282,8 @@ MonoBehaviour:
   isDead: 0
   fall: {fileID: 8300000, guid: a1f23edc29534489fb22244ec7f299b1, type: 3}
   jump: {fileID: 8300000, guid: d9d88089ad7524578b2ea096abedc7c8, type: 3}
+  hitEffect: {fileID: 1477276062776647844, guid: d68ae32efbf4d82478e266d7372b9f66, type: 3}
+  startButton: {fileID: 1032391708}
 --- !u!82 &94147710
 AudioSource:
   m_ObjectHideFlags: 0
@@ -705,7 +707,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e8ce75ce368134a17a0d215216232a7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1367,7 +1369,6 @@ MonoBehaviour:
   respawnTimerText: {fileID: 1857989232}
   scoreText: {fileID: 1281016218}
   gameOverImage: {fileID: 864219818}
-  flySound: {fileID: 1337222648}
   gameTime: 30
   scrollSpeed: 1.5
   isStart: 0

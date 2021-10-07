@@ -9,12 +9,15 @@ using System.Globalization;
 public class HammerController : MonoBehaviour
 {
     public GameObject hammer;
-    public AudioSource hitAudio;
+    AudioSource audioSource;
+    public AudioClip hitAudio;
     public AudioClip timerAudio;
     public Text timer;
     public Text scoreText;
     public Text TotalPoint;
     public Text GameoverText;
+
+    public Animator animator;
 
     public float timeRemaining = 30f;
 
@@ -22,13 +25,18 @@ public class HammerController : MonoBehaviour
     private float speed = 10;
     private bool firstHit = true;
     private Vector3 pos;
-    private MoleGenerator ms;
+
+    private GameObject moleGenerator;
+    private MoleGenerator moleGt;
 
     // Start is called before the first frame update
     void Start()
     {
-        ms = GetComponent<MoleGenerator>();
-        hitAudio = GetComponent<AudioSource>();
+        moleGenerator = GameObject.Find("MoleGenerator");
+        moleGt = moleGenerator.GetComponent<MoleGenerator>();
+
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -39,31 +47,19 @@ public class HammerController : MonoBehaviour
     void Update()
     {
         if (timeRemaining > 0) {
-            moveHammer();
             timeRemaining -= Time.deltaTime;
             timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
+            moveHammer();
         } else {
             timer.text = "00:00:00";
             GameoverText.text = "Times Up!";
             if (firstHit == true) {
-                hitAudio.PlayOneShot(timerAudio);
+                audioSource.PlayOneShot(timerAudio);
             }
             firstHit = false;
 
             EndGame();
         }
-        // if (Input.GetButtonDown("Fire1") && ms.timeRemaining > 0) {
-        //     Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //     Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-        //     RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-        //     if (hit.collider != null) {
-        //         hitAudio.Play();
-        //         Destroy(hit.transform.gameObject);
-        //         score += 10;
-        //         scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
-        //         ms.Spawn();
-        //     }
-        // }
     }
 
     void moveHammer()
@@ -87,25 +83,33 @@ public class HammerController : MonoBehaviour
         }
 
         transform.position = new Vector3(pos.x, pos.y, pos.z);
-    }
 
-    void OnCollisionEnter2D(Collision2D col) {
-        // if (Input.GetButtonDown("Fire1")) {
-            hitAudio.Play();
-            hammer.gameObject.SetActive(false);
+        if ((Input.touchCount > 0) || Input.GetMouseButtonDown(0)) {
+            Vector2 currPos2D = new Vector2(pos.x, pos.y);
+            RaycastHit2D hit = Physics2D.Raycast(currPos2D, Vector2.zero);
+            if (hit.collider != null) {
+                // play sound while hit the mole
+                audioSource.PlayOneShot(hitAudio);
 
-            // update score while hit the mole
-            score += 10;
-            scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
-            DestroyImmediate(ms.mole, true);
-            ms.Spawn();
-        // }
+                MoleHitted();
+                animator.SetTrigger("Hammer");
+                
+                // update score while hit the mole
+                score += 10;
+                scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
+
+                animator.SetTrigger("Unhammer");
+            }
+        }
     }
 
     void EndGame() {
         // Destroy the mole
-        // Destroy(moleObject);
-        ms.moleObject.gameObject.SetActive(false);
+        // moleGt.mole.gameObject.SetActive(false);
+        Destroy(moleGt.mole);
+        moleGt.emptyMoleList[moleGt.hiddenIndex].gameObject.SetActive(true);
+
+        animator.SetTrigger("Unhammer");
 
         // Get total score
         TotalPoint.text = "Earned " + scoreText.text + " in total";
@@ -125,6 +129,14 @@ public class HammerController : MonoBehaviour
         
         // End scene
         StartCoroutine(LoadEndScene());
+
+        // hammer.gameObject.SetActive(false);
+    }
+
+    IEnumerator MoleHitted() {
+        yield return new WaitForSeconds(0.01f);
+        moleGt.mole.gameObject.SetActive(false);
+        moleGt.emptyMoleList[moleGt.hiddenIndex].gameObject.SetActive(true);
     }
 
     IEnumerator LoadEndScene() {

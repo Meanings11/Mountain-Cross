@@ -123,7 +123,7 @@ public class Tempo : MonoBehaviour {
 		if (((pressLeft || pressRight) == true) && (youPressed == false) && (currentTime > .25f) && (currentTime < .35f) && (CatEntirelyCountdown.beatCountdown == 0) && (Mouse.isDead==false)) {
 			Mouse.isDead = true;
 			Debug.Log ("failnopress");
-			SceneManager.LoadScene("BoardScene");
+			// SceneManager.LoadScene("BoardScene");
 		}
 
 		if (Mouse.isDead == true){
@@ -147,10 +147,10 @@ public class Tempo : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true) && Mouse.isDead==false) {
 			if ((currentTime <= .25f || currentTime >= .75f)) {
-				//Debug.Log ("successright");
+				Debug.Log ("successright");
 				ScoreTrigger = true;
 				YouPressed ();
-				//pressRight = false;
+				pressRight = false;
 
 			} else { 
 				Debug.Log ("failRight");
@@ -162,10 +162,10 @@ public class Tempo : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true && Mouse.isDead==false) {
 			if ((currentTime <= .25f || currentTime >= .75f)) {
-				//Debug.Log ("successleft");
+				Debug.Log ("successleft");
 				ScoreTrigger = true;
 				YouPressed ();
-				//pressLeft = false;
+				pressLeft = false;
 			} else { 
 				Mouse.isDead = true;
 				Debug.Log ("failLeft");

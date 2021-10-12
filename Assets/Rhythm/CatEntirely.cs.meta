@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 39b926a65e993e8418c97c3a0475c56e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - MowClip: {fileID: 8300000, guid: 4395cd88d39a97440837420f36fccbd4, type: 3}
+  - CatPound: {fileID: 8300000, guid: 7bd0aec327e1d9749ba6b0a272499c6e, type: 3}
+  - CatSource: {instanceID: 0}
+  - PoundSource: {instanceID: 0}
+  - Beat: {instanceID: 0}
+  - rhythm: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

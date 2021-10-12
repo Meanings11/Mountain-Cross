@@ -8,7 +8,7 @@ public class CatEntirely : MonoBehaviour {
 
 	public int []AttackSelect;
 
-	public AudioClip MowClip;
+	// public AudioClip MowClip;
 	public AudioClip CatPound;
 
 	public AudioSource CatSource;
@@ -53,7 +53,7 @@ public class CatEntirely : MonoBehaviour {
 		currentPlaceInList = 0;
 		beatCountdown = 2;
 		useList = true;
-		CatSource.clip = MowClip;
+		// CatSource.clip = MowClip;
 		PoundSource.clip = CatPound;
 
 
@@ -141,7 +141,7 @@ public class CatEntirely : MonoBehaviour {
 	public void RaiseLeft(){
 
 		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 1) {
-			CatSource.PlayOneShot (MowClip, 0.25f);
+			// CatSource.PlayOneShot (MowClip, 0.25f);
 			anim.SetBool ("L_Smash", false);
 			anim.SetBool ("R_Smash", false);
 			anim.SetBool ("LRaise", true);
@@ -172,7 +172,7 @@ public class CatEntirely : MonoBehaviour {
 		
 		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 2) {
 			//Debug.Log ("RightRaise");
-			CatSource.PlayOneShot (MowClip, 0.25f);
+			// CatSource.PlayOneShot (MowClip, 0.25f);
 			anim.SetBool ("R_Smash", false);
 			anim.SetBool ("L_Smash", false);	
 			anim.SetBool ("R_Raise", true);

@@ -15,7 +15,12 @@ public class GameControl : MonoBehaviour {
 
     private static GameObject sceneManager;
 
+    AudioSource sceneAudio;
+    public AudioClip changeSceneSound;
+
     public static int diceSideThrown = 0;
+
+    private int totalgamescore = 0;
 
     public static bool gameOver = false;
 
@@ -68,6 +73,7 @@ public class GameControl : MonoBehaviour {
         playerMoveCount = GameObject.Find("PlayerMoveCount");
         player = GameObject.Find("Player");
         sceneManager = GameObject.Find("SceneManager");
+        sceneAudio = GetComponent<AudioSource>();
 
         player.GetComponent<PlayerMovement>().moveAllowed = false;
 
@@ -123,6 +129,9 @@ public class GameControl : MonoBehaviour {
         //     // winsTextShadow.GetComponent<Text>().text = "Your first round finished, HERE IS THE REWARD OPTIONS...";
         //     // gameOver = true; The gameover will be used when the user finished the game
         // }
+
+        // check if need to go to the ending scene
+        GoToEndScene();
     }
 
     public void ScreenRotate() {
@@ -181,6 +190,7 @@ public class GameControl : MonoBehaviour {
     }
 
     private void rewardPlayer() {
+        sceneAudio.PlayOneShot(changeSceneSound);
         // Current Index
         int currentIndex = player.GetComponent<PlayerMovement>().currentWaypointIndex;
 
@@ -191,7 +201,7 @@ public class GameControl : MonoBehaviour {
         if (rewardedSteps == 0) {
             int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-            // Adjust gamescore if it is scroe rewad
+            // Adjust gamescore if it is a rewarded score
             if (score_rewad[currentIndex] != 0) {
                 // Show reward
                 playerMoveCount.gameObject.SetActive(true);
@@ -226,7 +236,7 @@ public class GameControl : MonoBehaviour {
                     } else if (currentIndex == 21) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                     } else {
-                        // random go to unassigned games
+                        // randomly go to unassigned games
                         int randomIndex = UnityEngine.Random.Range(0, 4); // random decide for now
                         // if (randomIndex == 0) {
                         //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
@@ -302,5 +312,22 @@ public class GameControl : MonoBehaviour {
         player.GetComponent<PlayerMovement>().destinationWaypointIndex = Math.Max(player.GetComponent<PlayerMovement>().currentWaypointIndex + rewardedSteps, 0);
         player.GetComponent<PlayerMovement>().moveFinished = false;
         player.GetComponent<PlayerMovement>().moveAllowed = true;
+    }
+
+    public void GoToEndScene() {
+        totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
+
+        if (PlayerPrefs.GetInt("endlessMode", 0) != 1) {
+            if (totalgamescore > 10000) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
+            } else if (totalgamescore > 7500) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
+            } else if (totalgamescore > 5000) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
+            }
+        }
     }
 }

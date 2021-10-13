@@ -57,7 +57,7 @@ public class playerMovement : MonoBehaviour {
                 timeRemaining -= Time.deltaTime;
                 timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
                 moveUpdate();
-                updateScore();
+                updateScore(30 - timeRemaining);
                 // flyUp();
             } else {
                 timer.text = "00:00:00";
@@ -73,9 +73,10 @@ public class playerMovement : MonoBehaviour {
         }
     }
 
-    private void updateScore()
+    private void updateScore(float timeScore)
     {
-        score = Mathf.RoundToInt(Time.time / 2) * 10;
+        score = Mathf.RoundToInt(timeScore / 2) * 10;
+        Debug.Log(score);
         if (score == 0 || score == 00) {
             scoreText.text = "$0";
         } else {
@@ -144,13 +145,13 @@ public class playerMovement : MonoBehaviour {
         // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-        CultureInfo provider = new CultureInfo("en-US");
-        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+        // CultureInfo provider = new CultureInfo("en-US");
+        // NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
 
-        decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
-        int addedScore = Decimal.ToInt32(pointNumber);
-        // Debug.Log(addedScore);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+        // decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
+        // int addedScore = Decimal.ToInt32(pointNumber);
+        // Debug.Log(score);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
                 
         // End scene
         // SceneManager.LoadScene("BoardScene");

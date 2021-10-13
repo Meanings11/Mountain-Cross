@@ -55,10 +55,9 @@ public class HammerController : MonoBehaviour
             GameoverText.text = "Times Up!";
             if (firstHit == true) {
                 audioSource.PlayOneShot(timerAudio);
+                EndGame();
             }
             firstHit = false;
-
-            EndGame();
         }
     }
 
@@ -119,13 +118,13 @@ public class HammerController : MonoBehaviour
         // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-        CultureInfo provider = new CultureInfo("en-US");
-        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
+        // CultureInfo provider = new CultureInfo("en-US");
+        // NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
 
-        decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
-        int addedScore = Decimal.ToInt32(pointNumber);
-        // Debug.Log(addedScore);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+        // decimal pointNumber = Decimal.Parse(scoreText.text, style, provider);
+        // int addedScore = Decimal.ToInt32(pointNumber);
+        // Debug.Log(score);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
         
         // End scene
         StartCoroutine(LoadEndScene());

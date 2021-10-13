@@ -30,11 +30,17 @@ public class PalyerMovement : MonoBehaviour
 
     private SpriteRenderer playerRenderer;
 
+    private GameObject spawnerObj;
+    private Spawner spawner;
+
     // Start is called before the first frame update
     void Start()
     {
         spinSource = GetComponent<AudioSource> ();
         playerRenderer = GetComponent<SpriteRenderer> ();
+
+        spawnerObj = GameObject.Find("Spawner");
+        spawner = spawnerObj.GetComponent<Spawner>();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -138,13 +144,7 @@ public class PalyerMovement : MonoBehaviour
         // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-        CultureInfo provider = new CultureInfo("en-US");
-        NumberStyles style = NumberStyles.Number | NumberStyles.AllowCurrencySymbol;
-
-        decimal pointNumber = Decimal.Parse(pointText.text, style, provider);
-        int addedScore = Decimal.ToInt32(pointNumber);
-        // Debug.Log(addedScore);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore + addedScore);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + spawner.playerPoint);
         
         // End scene
         StartCoroutine(LoadEndScene());

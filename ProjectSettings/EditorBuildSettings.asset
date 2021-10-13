@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Dialogues/Scenes/Dialogue.unity
+    path: Assets/Dialogues/Scenes/BeginDialogue.unity
     guid: e0c47508de3837c479dd28551e4343e7
   - enabled: 1
     path: Assets/Scenes/BoardScene.unity
@@ -23,4 +23,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Whack-A-Mole/Scenes/Whack-A-Mole.unity
     guid: 556c0e05d50c41744942d0d4c42fed87
+  - enabled: 1
+    path: Assets/Dialogues/Scenes/EndingDialogue1.unity
+    guid: 922b3d634317a464089aeb5373b34b9f
+  - enabled: 1
+    path: Assets/Dialogues/Scenes/EndingDialogue2.unity
+    guid: 34bba8a1056425b46bc8c5ca39412a80
+  - enabled: 1
+    path: Assets/Dialogues/Scenes/EndingDialogue3.unity
+    guid: 2fed313d8f2adbe4793d33e6b40a9333
+  - enabled: 1
+    path: Assets/EndScene/Scenes/EndScene1.unity
+    guid: 679ad426e8dee76468acb93a667ab95b
+  - enabled: 1
+    path: Assets/EndScene/Scenes/EndScene2.unity
+    guid: b0a52757e65924f49b24d433f1c97872
+  - enabled: 1
+    path: Assets/EndScene/Scenes/EndScene3.unity
+    guid: 66a78901c8dd55d4f86e31e2ad3e12a0
   m_configObjects: {}

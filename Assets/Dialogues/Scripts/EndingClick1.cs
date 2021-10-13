@@ -1,12 +1,9 @@
-// using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
-public class ClickContinue : MonoBehaviour
+public class EndingClick1 : MonoBehaviour
 {
     // public Button continueBtn;
 
@@ -14,20 +11,28 @@ public class ClickContinue : MonoBehaviour
     public Text dialogueText;
     public Image character;
     public AudioSource typeSound;
-    // public AudioClip changeScene;
+
+    public GameObject choice1Btn;
+    public GameObject choice2Btn;
+
+    public GameObject continueBtn;
 
     private Queue<Dialogue> dialogues = new Queue<Dialogue>();
-
-    // private bool firstChangeClick = true;
+    
+    private int dialoguesCounter = 0;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         // Button btn = continueBtn.GetComponent<Button>();
-		// btn.onClick.AddListener(TaskOnClick);
+        // btn.onClick.AddListener(TaskOnClick);
+
+        // set choice buttons to invisible
+        choice1Btn.SetActive(false);
+        choice2Btn.SetActive(false);
 
         // dialogues
-        string[] lines = {"Groom:I can give you whatever you want.\nPlease let her go!",
-            "Bride:Help T~~~T", "Kidnapper:Play the board game and earn $5,000,\nthen I'll consider ≖ ◡ ≖"};
+        string[] lines = {"Kidnapper:Do you want to trade yourself with\nyour bride to rescue her now, or\nkeep playing so that I can give you\nsome other options?", "Groom:I wanna..."};
         /* better to use json */
 
         foreach (string line in lines) {
@@ -40,35 +45,31 @@ public class ClickContinue : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0) {
             TaskOnClick();
         }
     }
 
     // Update is called once per frame
-    private void TaskOnClick() {
-        if (dialogues.Count == 0) {
-            // if (firstChangeClick) {
-            //     typeSound.PlayOneShot(changeScene);
-            // }
-            // firstChangeClick = false;
-
-            // change scene to main board
-            StartCoroutine(LoadEndScene());
-        } else {
+    private void TaskOnClick()
+    {
+        if (dialogues.Count != 0) {
             typeSound.Play();
             Dialogue currentDialogue = new Dialogue();
             currentDialogue = dialogues.Dequeue();
-            
+            dialoguesCounter++;
+
             nameText.text = currentDialogue.name;
             character.sprite = currentDialogue.sprite;
             dialogueText.text = currentDialogue.sentence.Replace("\\n", "\n");
-        }
-    }
 
-    IEnumerator LoadEndScene() {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("BoardScene");
+            if (dialoguesCounter == 2) {
+                choice1Btn.SetActive(true);
+                choice2Btn.SetActive(true);
+                continueBtn.SetActive(false);
+            }
+        }
     }
 }

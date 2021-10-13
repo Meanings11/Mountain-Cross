@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
     public Text pointText;
     public Text timer;
 
-    private int playerPoint = 0;
+    public int playerPoint = 0;
     private float spawnSpeed = 1.5f;
     private float nextTimeToSpawn = 0f;
     private float nextBoneTime = 0f;
@@ -30,6 +30,10 @@ public class Spawner : MonoBehaviour
             timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
 
             if (Time.time >= nextBoneTime) {
+                if (Time.time >= 2.55) {
+                    playerPoint += 10;
+                    pointText.text = "$" + string.Format("{0:0,0}", Int32.Parse(playerPoint.ToString()));
+                }
                 if (!bonePrefab.gameObject.activeSelf) {
                     // change bone to new position
                     float angle = UnityEngine.Random.Range(0, Mathf.PI*2);
@@ -46,10 +50,6 @@ public class Spawner : MonoBehaviour
         }
 
         if (Time.time >= nextTimeToSpawn) {
-            if (Time.time >= 4.55) {
-                playerPoint += 10;
-                pointText.text = "$" + string.Format("{0:0,0}", Int32.Parse(playerPoint.ToString()));
-            }
             Instantiate(corgiPrefab);
             nextTimeToSpawn = Time.time + spawnSpeed;
         }

@@ -34,8 +34,9 @@ public class Tempo : MonoBehaviour {
 	public GameObject Background;
 	public BackgroundFlash BackgroundColor;
 	public GameObject Kidnapper;
-
-
+	public GameObject leftArrow;
+	public GameObject rightArrow;
+	
 	public AudioClip EricSong;
 	public AudioClip HitAudio;
 
@@ -218,7 +219,10 @@ public class Tempo : MonoBehaviour {
 	void GameOver() {
         EricSource.volume = 0f; 
 		isGameOver = true;
-		EricSource.volume = 0f; 
+
+		// disable Arrow
+		leftArrow.SetActive(false);
+		rightArrow.SetActive(false);
 
 		// End Game Anim
 		Vector2 currentPos = Kidnapper.transform.position;

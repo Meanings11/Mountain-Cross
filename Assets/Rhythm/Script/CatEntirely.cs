@@ -136,10 +136,6 @@ public class CatEntirely : MonoBehaviour {
 		RaiseLeft ();
 		RaiseRight ();
 
-		if (rhythm.isGameOver) {
-			ShowLArrow = false;
-			ShowLArrow = false;
-		}
 	}
 		
 

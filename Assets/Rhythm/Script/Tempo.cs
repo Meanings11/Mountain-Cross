@@ -33,6 +33,8 @@ public class Tempo : MonoBehaviour {
 	public KnightControls Mouse;
 	public GameObject Background;
 	public BackgroundFlash BackgroundColor;
+	public GameObject Kidnapper;
+
 
 	public AudioClip EricSong;
 	public AudioClip HitAudio;
@@ -40,6 +42,7 @@ public class Tempo : MonoBehaviour {
 	public AudioSource EricSource;
 	public AudioSource HitSource;
 
+	//UI 
 	// Timer
 	public float gameTime = 30;
 	public Text gameTimerText;
@@ -48,6 +51,9 @@ public class Tempo : MonoBehaviour {
 	// Score Manage
 	public Text scoreText;
 	private int score;
+
+	// Prompt
+	public Text gameOverText;
 
 
 	// Use this for initialization
@@ -201,17 +207,24 @@ public class Tempo : MonoBehaviour {
 	}
 
 	void GameOver() {
-		//  Time.timeScale = 0;
         EricSource.volume = 0f; 
 		isGameOver = true;
 		EricSource.volume = 0f; 
+
+		// End Game Anim
+		Vector2 currentPos = Kidnapper.transform.position;
+		Vector2 endPos = new Vector2 (currentPos.x, -30f);
+		Kidnapper.transform.position = Vector2.Lerp (currentPos, endPos, Time.deltaTime * 2);
+
+		// End Game Prompt
+		gameOverText.gameObject.SetActive(true);
+		gameOverText.text = (score >= 100) ? "Nice Dance!" : "Do Better!";
 
         // Set score
        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
         PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
 
         // jump back to main board
-        // Time.timeScale = 1;
         StartCoroutine(LoadEndScene());
     }
 	

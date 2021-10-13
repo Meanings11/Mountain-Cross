@@ -140,7 +140,7 @@ public class CatEntirely : MonoBehaviour {
 
 	public void RaiseLeft(){
 
-		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 1) {
+		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 1 && !rhythm.isGameOver) {
 			// CatSource.PlayOneShot (MowClip, 0.25f);
 			anim.SetBool ("L_Smash", false);
 			anim.SetBool ("R_Smash", false);
@@ -170,7 +170,7 @@ public class CatEntirely : MonoBehaviour {
 
 	public void RaiseRight(){
 		
-		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 2) {
+		if ((beatCountdown == 0) && (currentlyattacking == false) &&  armSelect == 2 && !rhythm.isGameOver) {
 			//Debug.Log ("RightRaise");
 			// CatSource.PlayOneShot (MowClip, 0.25f);
 			anim.SetBool ("R_Smash", false);

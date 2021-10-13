@@ -876,7 +876,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &909207998
@@ -1473,7 +1473,8 @@ MonoBehaviour:
   currentTime: 0
   StartTempo: 1
   BeatTrigger: 0
-  ScoreTrigger: 0
+  ScoreUp: 0
+  ScoreDown: 0
   SongStartupAgain: 0
   SongStartupAgainTimer: 480
   stopVolume: 0
@@ -1484,9 +1485,9 @@ MonoBehaviour:
   Background: {fileID: 909207995}
   BackgroundColor: {fileID: 909207996}
   EricSong: {fileID: 8300000, guid: 99ca40e744a8c4a62ac3bd0ae03fd8df, type: 3}
-  FailSong: {fileID: 8300000, guid: af59db8857db7e845a3a563246edb0fc, type: 3}
+  HitAudio: {fileID: 8300000, guid: 7bd0aec327e1d9749ba6b0a272499c6e, type: 3}
   EricSource: {fileID: 1839502293}
-  FailSource: {fileID: 1839502293}
+  HitSource: {fileID: 0}
 --- !u!82 &1839502293
 AudioSource:
   m_ObjectHideFlags: 0

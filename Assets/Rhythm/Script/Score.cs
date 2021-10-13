@@ -22,11 +22,16 @@ public class Score : MonoBehaviour {
 
 
   private void Update() {
-    score.text = scorecount.ToString ();
-    if (rhythm.ScoreTrigger == true){
+    if (rhythm.ScoreUp == true){
       scorecount = scorecount + 10;
-      //Debug.Log ("score");
-      rhythm.ScoreTrigger = false;
+      rhythm.ScoreUp = false;
+    } else if (rhythm.ScoreDown == true){    
+      scorecount = scorecount - 5;
+      rhythm.ScoreDown = false;
     }
+
+    scorecount = scorecount < 0 ? 0 : scorecount;
+    score.text = scorecount.ToString ();
 }
+
 }

@@ -159,7 +159,7 @@ public class CatEntirely : MonoBehaviour {
 			currentlyattacking = false;
 			LSmash = false;
 			RSmash = false;
-			CatSource.PlayOneShot (CatPound, 0.75f);
+			// CatSource.PlayOneShot (CatPound, 0.75f);
 		}
 		if (beatCountdown == 2 && LSmash == false ){
 			//transform.position = Vector2.Lerp (transform.position, startPosition, Time.deltaTime * 4);
@@ -192,7 +192,7 @@ public class CatEntirely : MonoBehaviour {
 			currentlyattacking = false;
 			LSmash = false;
 			RSmash = false;
-			CatSource.PlayOneShot (CatPound, 0.75f);
+			// CatSource.PlayOneShot (CatPound, 0.75f);
 		}
 		if (beatCountdown == 2 && RSmash == false ){
 			//transform.position = Vector2.Lerp (transform.position, startPosition, Time.deltaTime * 4);
@@ -200,11 +200,11 @@ public class CatEntirely : MonoBehaviour {
 			//anim.SetBool ("R_Smash", false);
 		}
 
-		if (Mouse.isDead == true) {
+		// if (Mouse.isDead == true) {
 
-			CatSource.volume = 0f;
+		// 	CatSource.volume = 0f;
 
-		}
+		// }
 
 	}
 		

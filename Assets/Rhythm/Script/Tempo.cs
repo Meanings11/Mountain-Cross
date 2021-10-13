@@ -22,7 +22,11 @@ public class Tempo : MonoBehaviour {
 	float bpm = 120f;
 	float bpmDivide;
 
-	public bool ScoreTrigger = false;
+	// Score Manage
+
+	public bool ScoreUp = false;
+	
+	public bool ScoreDown = false;
 
 	public bool SongStartupAgain = false;
 	public int SongStartupAgainTimer;
@@ -36,10 +40,10 @@ public class Tempo : MonoBehaviour {
 	public BackgroundFlash BackgroundColor;
 
 	public AudioClip EricSong;
-	public AudioClip FailSong;
+	public AudioClip HitAudio;
 
 	public AudioSource EricSource;
-	public AudioSource FailSource;
+	public AudioSource HitSource;
 
 
 	// Use this for initialization
@@ -48,7 +52,7 @@ public class Tempo : MonoBehaviour {
 		youPressed = false;
 
 		EricSource.clip = EricSong;
-		FailSource.clip = FailSong;
+		HitSource.clip = HitAudio;
 
 		SongStartupAgainTimer = 200;
 
@@ -102,7 +106,9 @@ public class Tempo : MonoBehaviour {
 
 		}
 
-		if ((currentTime > .7f) && unpress==false && (CatEntirelyCountdown.beatCountdown == 0) && (Mouse.isDead == false)) {
+		// if ((currentTime > .7f) && unpress==false && (CatEntirelyCountdown.beatCountdown == 0) && (Mouse.isDead == false)) {
+		if ((currentTime > .7f) && unpress==false && (CatEntirelyCountdown.beatCountdown == 0)) {
+		
 			Debug.Log ("unpress");
 			youPressed = false;
 			unpress = true;
@@ -111,24 +117,24 @@ public class Tempo : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.RightArrow) && pressLeft == true) {
 				Debug.Log ("failWrongRight");
 				Mouse.isDead = true;
-			SceneManager.LoadScene("BoardScene");
+
 			}
 
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && pressRight == true) {
+		else if (Input.GetKeyDown (KeyCode.LeftArrow) && pressRight == true) {
 			Mouse.isDead = true;
 			Debug.Log ("failWrongLeft");
-			SceneManager.LoadScene("BoardScene");
 			}
 
-		if (((pressLeft || pressRight) == true) && (youPressed == false) && (currentTime > .25f) && (currentTime < .35f) && (CatEntirelyCountdown.beatCountdown == 0) && (Mouse.isDead==false)) {
+		//if (((pressLeft || pressRight) == true) && (youPressed == false) && (currentTime > .25f) && (currentTime < .35f) && (CatEntirelyCountdown.beatCountdown == 0) && (Mouse.isDead==false)) {
+		else if (((pressLeft || pressRight) == true) && (youPressed == false) && (currentTime > .25f) && (currentTime < .35f) && (CatEntirelyCountdown.beatCountdown == 0)) {
+		
 			Mouse.isDead = true;
 			Debug.Log ("failnopress");
-			// SceneManager.LoadScene("BoardScene");
 		}
 
-		if (Mouse.isDead == true){
-			EricSource.volume = 0f; 
-		}
+		// if (Mouse.isDead == true){
+		// 	EricSource.volume = 0f; 
+		// }
 		if (SongStartupAgain == true && stopVolume == false) {
 			SongStartupAgainTimer -= 1;
 			if (SongStartupAgainTimer <= 0){
@@ -145,32 +151,36 @@ public class Tempo : MonoBehaviour {
 
 	void MouseControls (){
 
-		if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true) && Mouse.isDead==false) {
+		// if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true) && Mouse.isDead==false) {
+		if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true)) {
+		
 			if ((currentTime <= .25f || currentTime >= .75f)) {
 				Debug.Log ("successright");
-				ScoreTrigger = true;
+				ScoreUp = true;
 				YouPressed ();
 				pressRight = false;
+				HitSource.PlayOneShot (HitAudio, 0.75f);
 
 			} else { 
 				Debug.Log ("failRight");
+				ScoreDown = true;
 				Mouse.isDead = true;
-				//SceneManager.LoadScene(0);
-				
-			SceneManager.LoadScene("BoardScene");
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true && Mouse.isDead==false) {
+		// if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true && Mouse.isDead==false) {
+		if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true) {
+		
 			if ((currentTime <= .25f || currentTime >= .75f)) {
 				Debug.Log ("successleft");
-				ScoreTrigger = true;
+				ScoreUp = true;
 				YouPressed ();
 				pressLeft = false;
+				HitSource.PlayOneShot (HitAudio, 0.75f);
 			} else { 
 				Mouse.isDead = true;
+				ScoreDown = true;
 				Debug.Log ("failLeft");
-				//SceneManager.LoadScene(0);
-			SceneManager.LoadScene("BoardScene");
+
 			}
 		}
 	}

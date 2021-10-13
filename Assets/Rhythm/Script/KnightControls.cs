@@ -50,7 +50,9 @@ public class KnightControls : MonoBehaviour {
 		Return ();
 		var currentPos = transform.position;
 
-		if (Input.GetKeyDown (KeyCode.RightArrow) && (GoingBackCooldown <= 0f) && isDead == false) {
+		// if (Input.GetKeyDown (KeyCode.RightArrow) && (GoingBackCooldown <= 0f) && isDead == false) {
+		if (Input.GetKeyDown (KeyCode.RightArrow) && (GoingBackCooldown <= 0f) ) {
+		
 			anim.SetBool ("Dodge_Right", true);
 			Debug.LogFormat("currentTime = {0}", rhythm.currentTime);
 			GoingBackCooldown = GoingBackCooldownSet;
@@ -58,7 +60,9 @@ public class KnightControls : MonoBehaviour {
 			MouseSource.PlayOneShot (DodgeClip, 1f);
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && (GoingBackCooldown <= 0f) && isDead == false) {
+		// if (Input.GetKeyDown (KeyCode.LeftArrow) && (GoingBackCooldown <= 0f) && isDead == false) {
+		if (Input.GetKeyDown (KeyCode.LeftArrow) && (GoingBackCooldown <= 0f) ) {
+		
 			Debug.LogFormat("currentTime = {0}", rhythm.currentTime);
 			anim.SetBool ("Dodge_Left", true);
 			GoingBackCooldown = GoingBackCooldownSet;
@@ -70,8 +74,8 @@ public class KnightControls : MonoBehaviour {
 		if (isDead == true) {
 
 			//anim.SetBool ("L_Smash", false);
-			anim.SetBool ("Dead", true);
-			gameObject.GetComponent<SpriteRenderer>().sortingOrder = -100;
+			// anim.SetBool ("Dead", true);
+			//gameObject.GetComponent<SpriteRenderer>().sortingOrder = -100;
 			//transform.position = new Vector2 (0f, -4f);
 			//transform.localScale = new Vector2 (.6f, .1f);
 

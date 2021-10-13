@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/BeginScene/Scenes/BeginScene.unity
+    guid: eba43f7468ab5554aa3948105536082d
+  - enabled: 1
     path: Assets/Dialogues/Scenes/BeginDialogue.unity
     guid: e0c47508de3837c479dd28551e4343e7
   - enabled: 1

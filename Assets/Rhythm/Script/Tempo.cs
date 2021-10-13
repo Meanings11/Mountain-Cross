@@ -55,6 +55,9 @@ public class Tempo : MonoBehaviour {
 	// Prompt
 	public Text gameOverText;
 
+	// Good Hit Effect
+	public GameObject hitEffect;
+
 
 	// Use this for initialization
 	void Start () {
@@ -175,7 +178,10 @@ public class Tempo : MonoBehaviour {
 				scoreUp();
 				YouPressed ();
 				pressRight = false;
+
+				// Hit effect
 				HitSource.PlayOneShot (HitAudio, 0.75f);
+				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
 
 			} else { 
 				Debug.Log ("failRight");
@@ -190,7 +196,10 @@ public class Tempo : MonoBehaviour {
 				scoreUp();
 				YouPressed ();
 				pressLeft = false;
+
+				// Hit effect
 				HitSource.PlayOneShot (HitAudio, 0.75f);
+				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
 			} else { 
 				Mouse.isDead = true;
 				Debug.Log ("failLeft");

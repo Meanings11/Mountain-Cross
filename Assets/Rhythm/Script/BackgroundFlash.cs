@@ -29,7 +29,7 @@ public class BackgroundFlash : MonoBehaviour {
 		flashcountdown -= 1;
 
 		if (flashcountdown == 0) {
-			//Debug.Log ("BackgroundFlash");
+			Debug.Log ("BackgroundFlash");
 			rend.material.color = lerpedColor;
 			flashcountdown = 2;
 		}

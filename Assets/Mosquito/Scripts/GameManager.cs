@@ -104,18 +104,26 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Time.timeScale = 0;
+
+        // Set score
+        if (!isGameOver) {
+            int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+            Debug.Log("playerscore = " + currentGameScore);
+            PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
+            Debug.Log("totalscore = " + score*10);
+        } 
+
         isGameOver = true;
         gameOverImage.gameObject.SetActive(true);
 
         // flySound.Stop();
 
-        // Set score
-        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
+        Time.timeScale = 1;
+
+        
 
         // jump back to main board
         // SceneManager.LoadScene("BoardScene");
-        Time.timeScale = 1;
         StartCoroutine(LoadEndScene());
     }
 

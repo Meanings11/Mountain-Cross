@@ -25,6 +25,7 @@ public class Choice2Two : MonoBehaviour
 
     private void TaskOnClick() {
         changeSceneSound.Play();
+        PlayerPrefs.SetInt("endlessMode", 2);
         // change scene to main board
         StartCoroutine(LoadEndScene());
     }

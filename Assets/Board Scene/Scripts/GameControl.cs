@@ -319,23 +319,17 @@ public class GameControl : MonoBehaviour {
 
     public void GoToEndScene() {
         totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
-
         int endingMode = PlayerPrefs.GetInt("endlessMode", 0);
-            if (totalgamescore >= 10000 && endingMode != 3) 
-            {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
-            } 
-            else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) 
-            {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
-            } 
-            else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) 
-            {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
-            }
-        
+
+        if (totalgamescore >= 10000 && endingMode != 3) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
+        } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
+        } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
+        }
     }
 }

@@ -82,12 +82,8 @@ public class Tempo : MonoBehaviour {
 
 		EricSource.PlayOneShot (EricSong, 0.697f);
 
-		if (sceneName == "Scene1") {
-			bpm = 120f;
-			bpmDivide = 40;
-		}
 			
-		if (sceneName == "EasyMode") {
+		if (sceneName == "RhythmScene") {
 			bpm = 120f;
 			bpmDivide = 60;
 		}

@@ -172,39 +172,41 @@ public class Tempo : MonoBehaviour {
 	void MouseControls (){
 
 		// if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true) && Mouse.isDead==false) {
-		if (Input.GetKeyDown (KeyCode.RightArrow) && (pressRight == true)) {
-		
-			if ((currentTime <= .25f || currentTime >= .75f)) {
-				Debug.Log ("successright");
-				scoreUp();
-				YouPressed ();
-				pressRight = false;
+		if(Input.GetMouseButtonDown(0)) {
+			if (Input.mousePosition.x >= Screen.width/2 && (pressRight == true)) {
+			
+				if ((currentTime <= .25f || currentTime >= .75f)) {
+					Debug.Log ("successright");
+					scoreUp();
+					YouPressed ();
+					pressRight = false;
 
-				// Hit effect
-				HitSource.PlayOneShot (HitAudio, 0.75f);
-				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
+					// Hit effect
+					HitSource.PlayOneShot (HitAudio, 0.75f);
+					Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
 
-			} else { 
-				Debug.Log ("failRight");
-				Mouse.isDead = true;
+				} else { 
+					Debug.Log ("failRight");
+					Mouse.isDead = true;
+				}
 			}
-		}
-		// if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true && Mouse.isDead==false) {
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && pressLeft == true) {
-		
-			if ((currentTime <= .25f || currentTime >= .75f)) {
-				Debug.Log ("successleft");
-				scoreUp();
-				YouPressed ();
-				pressLeft = false;
+			
+			if (Input.mousePosition.x <= Screen.width/2 && pressLeft == true) {
+			
+				if ((currentTime <= .25f || currentTime >= .75f)) {
+					Debug.Log ("successleft");
+					scoreUp();
+					YouPressed ();
+					pressLeft = false;
 
-				// Hit effect
-				HitSource.PlayOneShot (HitAudio, 0.75f);
-				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
-			} else { 
-				Mouse.isDead = true;
-				Debug.Log ("failLeft");
+					// Hit effect
+					HitSource.PlayOneShot (HitAudio, 0.75f);
+					Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
+				} else { 
+					Mouse.isDead = true;
+					Debug.Log ("failLeft");
 
+				}
 			}
 		}
 	}

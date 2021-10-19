@@ -98,6 +98,9 @@ public class HammerController : MonoBehaviour
                 scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
 
                 animator.SetTrigger("Unhammer");
+
+                //disable collider
+                hit.collider.enabled = false;
             }
         }
     }

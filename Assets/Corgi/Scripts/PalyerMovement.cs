@@ -92,10 +92,10 @@ public class PalyerMovement : MonoBehaviour
             GameoverText.text = "Times Up!";
             if (firstHit == true) {
                 spinSource.PlayOneShot(timesUp);
+                EndGame();
             }
             firstHit = false;
 
-            EndGame();
         }
     }
 

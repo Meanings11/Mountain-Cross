@@ -274,11 +274,13 @@ public class GameControl : MonoBehaviour {
                         int adjustedReward = randomReward * 10;
                         if (adjustedReward > 0) {
                             playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
+                        } else if (adjustedReward == 0) {
+                            playerMoveCount.GetComponent<Text>().text = "Hmm... Nothing changes";
                         } else {
                             if (currentGameScore + adjustedReward <= 0) {
-                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose all your money...";
+                                playerMoveCount.GetComponent<Text>().text = "Oops! You lose all your money...";
                             } else {
-                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose $" + Mathf.Abs(adjustedReward);
+                                playerMoveCount.GetComponent<Text>().text = "Oops! You lose $" + Mathf.Abs(adjustedReward);
                             }
                         }
                         // Adjust score

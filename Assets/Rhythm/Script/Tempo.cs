@@ -190,7 +190,7 @@ public class Tempo : MonoBehaviour {
 					Mouse.isDead = true;
 				}
 			}
-			
+
 			if (Input.mousePosition.x <= Screen.width/2 && pressLeft == true) {
 			
 				if ((currentTime <= .25f || currentTime >= .75f)) {
@@ -220,6 +220,13 @@ public class Tempo : MonoBehaviour {
 
 	void GameOver() {
         EricSource.volume = 0f; 
+		
+        // Set score
+		if (!isGameOver) {
+			int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+			PlayerPrefs.SetInt("totalGameScore", currentGameScore+score);
+		}
+
 		isGameOver = true;
 
 		// disable Arrow
@@ -235,9 +242,6 @@ public class Tempo : MonoBehaviour {
 		gameOverText.gameObject.SetActive(true);
 		gameOverText.text = (score >= 100) ? "Nice Dance!" : "Do Better!";
 
-        // Set score
-       int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        PlayerPrefs.SetInt("totalGameScore", currentGameScore+score*10);
 
         // jump back to main board
         StartCoroutine(LoadEndScene());

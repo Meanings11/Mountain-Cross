@@ -65,10 +65,9 @@ public class playerMovement : MonoBehaviour {
 
                 if (firstHit == true) {
                     flySound.PlayOneShot(timesUp);
+                    EndGame();
                 }
                 firstHit = false;
-                
-                EndGame();
             }
         }
     }

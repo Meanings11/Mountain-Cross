@@ -205,6 +205,35 @@ public class Tempo : MonoBehaviour {
 				}
 			}
 		}
+
+		// keyboard movement
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && (pressLeft == true)) {
+			if ((currentTime <= .25f || currentTime >= .75f)) {
+				scoreUp();
+				YouPressed ();
+				pressLeft = false;
+
+				// Hit effect
+				HitSource.PlayOneShot (HitAudio, 0.75f);
+				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
+			} else { 
+				Mouse.isDead = true;
+			}
+        }
+
+        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && (pressRight == true)) {
+            if ((currentTime <= .25f || currentTime >= .75f)) {
+				scoreUp();
+				YouPressed ();
+				pressRight = false;
+
+				// Hit effect
+				HitSource.PlayOneShot (HitAudio, 0.75f);
+				Instantiate(hitEffect,  new Vector3(0.0f, -4.5f, 0), Quaternion.identity);
+			} else {
+				Mouse.isDead = true;
+			}
+        }
 	}
 
 	void YouPressed(){

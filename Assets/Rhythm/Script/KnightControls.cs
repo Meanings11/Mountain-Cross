@@ -52,9 +52,7 @@ public class KnightControls : MonoBehaviour {
 
 		// if (Input.GetKeyDown (KeyCode.LeftArrow) && (GoingBackCooldown <= 0f) && isDead == false) {
 		if(Input.GetMouseButtonDown(0) && GoingBackCooldown <= 0f) {
-
 			if (Input.mousePosition.x > Screen.width/2) {
-			
 				anim.SetBool ("Dodge_Right", true);
 				Debug.LogFormat("currentTime = {0}", rhythm.currentTime);
 				GoingBackCooldown = GoingBackCooldownSet;
@@ -62,7 +60,6 @@ public class KnightControls : MonoBehaviour {
 				MouseSource.PlayOneShot (DodgeClip, 1f);
 
 			} else {
-			
 				Debug.LogFormat("currentTime = {0}", rhythm.currentTime);
 				anim.SetBool ("Dodge_Left", true);
 				GoingBackCooldown = GoingBackCooldownSet;
@@ -70,6 +67,23 @@ public class KnightControls : MonoBehaviour {
 				MouseSource.PlayOneShot (DodgeClip, 1f);
 			}
 		}
+
+		// keyboard movement
+		if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
+            anim.SetBool ("Dodge_Right", true);
+			GoingBackCooldown = GoingBackCooldownSet;
+			GoingBack = true;
+			MouseSource.PlayOneShot (DodgeClip, 1f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+            anim.SetBool ("Dodge_Left", true);
+			GoingBackCooldown = GoingBackCooldownSet;
+			GoingBack = true;
+			MouseSource.PlayOneShot (DodgeClip, 1f);
+        }
+
+        
 
 		if (isDead == true) {
 

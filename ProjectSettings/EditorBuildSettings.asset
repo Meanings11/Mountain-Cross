@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Whack-A-Mole/Scenes/Whack-A-Mole.unity
     guid: 556c0e05d50c41744942d0d4c42fed87
   - enabled: 1
+    path: Assets/Fruit/Scenes/fruit.unity
+    guid: 656190d1785a4ae4f9bde614c29684da
+  - enabled: 1
     path: Assets/Dialogues/Scenes/EndingDialogue1.unity
     guid: 922b3d634317a464089aeb5373b34b9f
   - enabled: 1

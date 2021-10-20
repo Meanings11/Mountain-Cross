@@ -27,7 +27,7 @@ public class ClickContinue : MonoBehaviour
 
         // dialogues
         string[] lines = {"Groom:I can give you whatever you want.\nPlease let her go!",
-            "Bride:Help T~~~T", "Kidnapper:Play the board game and earn $5,000,\nthen I'll consider ≖ ◡ ≖"};
+            "Bride:Help T~~~T", "Kidnapper:Play the board game and earn $5,000,\nthen I'll consider~"};
         /* better to use json */
 
         foreach (string line in lines) {

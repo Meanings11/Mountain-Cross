@@ -1432,7 +1432,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9866e9b1243a4e7458c80f464c331cd1, type: 3}
-    m_FontSize: 100
+    m_FontSize: 90
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1667,6 +1667,10 @@ MonoBehaviour:
   - {fileID: 1718127237}
   moleAudio: {fileID: 1143735083}
   hiddenIndex: 0
+  isBride: 0
+  moleSprite: {fileID: 21300000, guid: 544cb1633f2afbe4db2904d1d54fcd1b, type: 3}
+  brideSprite: {fileID: 21300000, guid: a004cd9ed902ab4468fc7daf910885f8, type: 3}
+  spriteRender: {fileID: 0}
 --- !u!4 &1143735082
 Transform:
   m_ObjectHideFlags: 0

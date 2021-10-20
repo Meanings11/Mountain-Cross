@@ -7,8 +7,8 @@ using System.Collections.Generic;
 public class GameControl : MonoBehaviour {
     public GameObject landscapeCanvas;
     public GameObject portraitCanvas;
+    public GameObject shop;
 
-    // private static GameObject winsTextShadow;
     private static GameObject playerMoveCount;
 
     private static GameObject player;
@@ -67,9 +67,7 @@ public class GameControl : MonoBehaviour {
         minigamesIndexes.Add(15);
         minigamesIndexes.Add(19);
         minigamesIndexes.Add(21);
-        minigamesIndexes.Add(23);
 
-        // winsTextShadow = GameObject.Find("WinsText");
         playerMoveCount = GameObject.Find("PlayerMoveCount");
         player = GameObject.Find("Player");
         sceneManager = GameObject.Find("SceneManager");
@@ -77,8 +75,11 @@ public class GameControl : MonoBehaviour {
 
         player.GetComponent<PlayerMovement>().moveAllowed = false;
 
-        // winsTextShadow.gameObject.SetActive(false);
         playerMoveCount.gameObject.SetActive(false);
+        shop.gameObject.SetActive(false);
+
+        // set endless mode to 0
+        PlayerPrefs.SetInt("endlessMode", 0);
     }
 
     // Update is called once per frame
@@ -124,9 +125,7 @@ public class GameControl : MonoBehaviour {
         //    print(player.GetComponent<PlayerMovement>().destinationWaypointIndex);
 
         //     // TODO: Add dialog to show the reward when every round is finished.
-        //     // winsTextShadow.gameObject.SetActive(true);
         //     // playerMoveCount.gameObject.SetActive(false);
-        //     // winsTextShadow.GetComponent<Text>().text = "Your first round finished, HERE IS THE REWARD OPTIONS...";
         //     // gameOver = true; The gameover will be used when the user finished the game
         // }
 
@@ -231,13 +230,15 @@ public class GameControl : MonoBehaviour {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
                     } else if (currentIndex == 12) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene");
+                    } else if (currentIndex == 15) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene");
                     } else if (currentIndex == 19   ) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene");
                     } else if (currentIndex == 21) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                     } else {
                         // randomly go to unassigned games
-                        int randomIndex = UnityEngine.Random.Range(0, 4); // random decide for now
+                        int randomIndex = UnityEngine.Random.Range(0, 5); // random decide for now
                         // if (randomIndex == 0) {
                         //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                         // } else {
@@ -250,12 +251,15 @@ public class GameControl : MonoBehaviour {
                             case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
                             case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
                             case 3: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole"); break;
+                            case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
                         }
                     }
 
                     StartCoroutine(disableDice());
                 } else {
-                    if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
+                    if (currentIndex == 23) {
+                        shop.gameObject.SetActive(true); // go to shop
+                    } else if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {
                         int newGameScore = 0;
@@ -270,11 +274,13 @@ public class GameControl : MonoBehaviour {
                         int adjustedReward = randomReward * 10;
                         if (adjustedReward > 0) {
                             playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
+                        } else if (adjustedReward == 0) {
+                            playerMoveCount.GetComponent<Text>().text = "Hmm... Nothing changes";
                         } else {
                             if (currentGameScore + adjustedReward <= 0) {
-                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose all your money...";
+                                playerMoveCount.GetComponent<Text>().text = "Oops! You lose all your money...";
                             } else {
-                                playerMoveCount.GetComponent<Text>().text = "Surprise! You lose $" + Mathf.Abs(adjustedReward);
+                                playerMoveCount.GetComponent<Text>().text = "Oops! You lose $" + Mathf.Abs(adjustedReward);
                             }
                         }
                         // Adjust score
@@ -316,18 +322,17 @@ public class GameControl : MonoBehaviour {
 
     public void GoToEndScene() {
         totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
+        int endingMode = PlayerPrefs.GetInt("endlessMode", 0);
 
-        if (PlayerPrefs.GetInt("endlessMode", 0) != 1) {
-            if (totalgamescore > 10000) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
-            } else if (totalgamescore > 7500) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
-            } else if (totalgamescore > 5000) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
-            }
+        if (totalgamescore >= 10000 && endingMode != 3) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
+        } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
+        } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
         }
     }
 }

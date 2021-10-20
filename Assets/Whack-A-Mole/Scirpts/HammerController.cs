@@ -94,10 +94,17 @@ public class HammerController : MonoBehaviour
                 animator.SetTrigger("Hammer");
                 
                 // update score while hit the mole
-                score += 10;
+                if (moleGt.isBride) {
+                    score = 0;
+                } else {
+                    score += 10;
+                }
                 scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
 
                 animator.SetTrigger("Unhammer");
+
+                //disable collider
+                hit.collider.enabled = false;
             }
         }
     }

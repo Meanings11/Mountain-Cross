@@ -1,0 +1,618 @@
+fileFormatVersion: 2
+guid: 26552b03e67b1b747b96d673257bfa5a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Mouse_Idle
+  - first:
+      213: 21300002
+    second: MouseDodge_Right_4
+  - first:
+      213: 21300004
+    second: MouseMasterFileV2_2
+  - first:
+      213: 21300006
+    second: MouseMasterFileV2_3
+  - first:
+      213: 21300008
+    second: MouseMasterFileV2_4
+  - first:
+      213: 21300010
+    second: MouseMasterFileV2_5
+  - first:
+      213: 21300012
+    second: MouseMasterFileV2_6
+  - first:
+      213: 21300014
+    second: MouseMasterFileV2_7
+  - first:
+      213: 21300016
+    second: MouseMasterFileV2_8
+  - first:
+      213: 21300018
+    second: MouseMasterFileV2_9
+  - first:
+      213: 21300020
+    second: MouseMasterFileV2_10
+  - first:
+      213: 21300022
+    second: MouseMasterFileV2_11
+  - first:
+      213: 21300024
+    second: MouseMasterFileV2_12
+  - first:
+      213: 21300026
+    second: MouseDodge_Right_3
+  - first:
+      213: 21300028
+    second: MouseMasterFileV2_14
+  - first:
+      213: 21300030
+    second: MouseMasterFileV2_15
+  - first:
+      213: 21300032
+    second: MouseMasterFileV2_16
+  - first:
+      213: 21300034
+    second: MouseMasterFileV2_17
+  - first:
+      213: 21300036
+    second: MouseMasterFileV2_18
+  - first:
+      213: 21300038
+    second: MouseMasterFileV2_19
+  - first:
+      213: 21300040
+    second: MouseBounce_1
+  - first:
+      213: 21300042
+    second: MouseMasterFileV2_21
+  - first:
+      213: 21300044
+    second: MouseMasterFileV2_22
+  - first:
+      213: 21300046
+    second: MouseMasterFileV2_23
+  - first:
+      213: 21300048
+    second: MouseMasterFileV2_24
+  - first:
+      213: 21300050
+    second: Mouse_Return
+  - first:
+      213: 21300052
+    second: MouseMasterFileV2_26
+  - first:
+      213: 21300054
+    second: MouseMasterFileV2_27
+  - first:
+      213: 21300056
+    second: MouseMasterFileV2_28
+  - first:
+      213: 21300058
+    second: MouseMasterFileV2_29
+  - first:
+      213: 21300060
+    second: MouseMasterFileV2_30
+  - first:
+      213: 21300062
+    second: Mouse_Flattened
+  - first:
+      213: 21300064
+    second: MouseBounce_2
+  - first:
+      213: 21300066
+    second: MouseDodge_Left_1
+  - first:
+      213: 21300068
+    second: MouseMasterFileV2_34
+  - first:
+      213: 21300070
+    second: MouseDodge_Left_2
+  - first:
+      213: 21300072
+    second: MouseMasterFileV2_36
+  - first:
+      213: 21300074
+    second: MouseMasterFileV2_37
+  - first:
+      213: 21300076
+    second: MouseMasterFileV2_38
+  - first:
+      213: 21300078
+    second: MouseMasterFileV2_39
+  - first:
+      213: 21300080
+    second: MouseMasterFileV2_40
+  - first:
+      213: 21300082
+    second: MouseMasterFileV2_41
+  - first:
+      213: 21300084
+    second: MouseMasterFileV2_42
+  - first:
+      213: 21300086
+    second: MouseMasterFileV2_43
+  - first:
+      213: 21300088
+    second: MouseDodge_Left_4
+  - first:
+      213: 21300090
+    second: MouseMasterFileV2_45
+  - first:
+      213: 21300092
+    second: MouseMasterFileV2_46
+  - first:
+      213: 21300094
+    second: MouseDodge_Right_1
+  - first:
+      213: 21300096
+    second: MouseMasterFileV2_48
+  - first:
+      213: 21300098
+    second: MouseMasterFileV2_49
+  - first:
+      213: 21300100
+    second: MouseMasterFileV2_50
+  - first:
+      213: 21300102
+    second: MouseMasterFileV2_51
+  - first:
+      213: 21300104
+    second: MouseMasterFileV2_52
+  - first:
+      213: 21300106
+    second: MouseMasterFileV2_53
+  - first:
+      213: 21300108
+    second: MouseMasterFileV2_54
+  - first:
+      213: 21300110
+    second: MouseMasterFileV2_55
+  - first:
+      213: 21300112
+    second: MouseMasterFileV2_56
+  - first:
+      213: 21300114
+    second: MouseMasterFileV2_57
+  - first:
+      213: 21300116
+    second: MouseMasterFileV2_58
+  - first:
+      213: 21300118
+    second: MouseDodge_Right_2
+  - first:
+      213: 21300120
+    second: MouseMasterFileV2_60
+  - first:
+      213: 21300122
+    second: MouseMasterFileV2_61
+  - first:
+      213: 21300124
+    second: MouseMasterFileV2_62
+  - first:
+      213: 21300126
+    second: MouseMasterFileV2_63
+  - first:
+      213: 21300128
+    second: MouseMasterFileV2_64
+  - first:
+      213: 21300130
+    second: MouseMasterFileV2_65
+  - first:
+      213: 21300132
+    second: MouseMasterFileV2_66
+  - first:
+      213: 21300134
+    second: MouseMasterFileV2_67
+  - first:
+      213: 21300136
+    second: MouseMasterFileV2_68
+  - first:
+      213: 21300138
+    second: MouseMasterFileV2_69
+  - first:
+      213: 21300140
+    second: MouseMasterFileV2_70
+  - first:
+      213: 21300142
+    second: MouseMasterFileV2_71
+  - first:
+      213: 21300144
+    second: MouseDodge_Left_3
+  - first:
+      213: 21300146
+    second: MouseMasterFileV2_73
+  - first:
+      213: 21300148
+    second: MouseMasterFileV2_74
+  - first:
+      213: 21300150
+    second: MouseMasterFileV2_75
+  - first:
+      213: 21300152
+    second: MouseMasterFileV2_76
+  - first:
+      213: 21300154
+    second: MouseMasterFileV2_77
+  - first:
+      213: 21300156
+    second: MouseMasterFileV2_78
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mouse_Idle
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 803
+        width: 153
+        height: 179
+      alignment: 9
+      pivot: {x: 0.44437185, y: 0.0061983075}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Right_4
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 790
+        width: 161
+        height: 192
+      alignment: 9
+      pivot: {x: -0.99422705, y: 0.08818594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Right_3
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 800
+        width: 160
+        height: 178
+      alignment: 9
+      pivot: {x: -0.99862516, y: 0.02448127}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseBounce_1
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 605
+        width: 156
+        height: 172
+      alignment: 9
+      pivot: {x: 0.44822145, y: 0.0069008763}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mouse_Return
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 599
+        width: 152
+        height: 188
+      alignment: 9
+      pivot: {x: 0.37665918, y: 0.030572444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25305410000000000800000000000000
+      internalID: 21300050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mouse_Flattened
+      rect:
+        serializedVersion: 2
+        x: 1959
+        y: 607
+        width: 219
+        height: 125
+      alignment: 9
+      pivot: {x: 0.48993003, y: 0.03902002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5305410000000000800000000000000
+      internalID: 21300062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseBounce_2
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 404
+        width: 154
+        height: 180
+      alignment: 9
+      pivot: {x: 0.43542898, y: 0.022527738}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06305410000000000800000000000000
+      internalID: 21300064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Left_1
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 414
+        width: 259
+        height: 158
+      alignment: 9
+      pivot: {x: 0.9797462, y: 0.024265144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26305410000000000800000000000000
+      internalID: 21300066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Left_2
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 408
+        width: 273
+        height: 168
+      alignment: 9
+      pivot: {x: 1.2711146, y: 0.016694568}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66305410000000000800000000000000
+      internalID: 21300070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Left_4
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 209
+        width: 155
+        height: 179
+      alignment: 9
+      pivot: {x: 2.2335835, y: 0.011338644}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87305410000000000800000000000000
+      internalID: 21300088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Right_1
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 212
+        width: 263
+        height: 162
+      alignment: 9
+      pivot: {x: 0.027507477, y: 0.019425193}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7305410000000000800000000000000
+      internalID: 21300094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Right_2
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 9
+        width: 245
+        height: 179
+      alignment: 9
+      pivot: {x: -0.30512458, y: 0.043837905}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69305410000000000800000000000000
+      internalID: 21300118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MouseDodge_Left_3
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 5
+        width: 166
+        height: 179
+      alignment: 9
+      pivot: {x: 2.1382108, y: 0.03893181}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b305410000000000800000000000000
+      internalID: 21300144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

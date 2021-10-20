@@ -9,6 +9,7 @@ TagManager:
   - box
   - Cloud
   - Wall
+  - Cut
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Cloud
-  - 
+  - Cuttable
   - 
   - 
   - 
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Game
+    uniqueID: 960514471
     locked: 0

@@ -76,7 +76,6 @@ public class playerMovement : MonoBehaviour {
     private void updateScore(float timeScore)
     {
         score = Mathf.RoundToInt(timeScore / 2) * 10;
-        Debug.Log(score);
         if (score == 0 || score == 00) {
             scoreText.text = "$0";
         } else {

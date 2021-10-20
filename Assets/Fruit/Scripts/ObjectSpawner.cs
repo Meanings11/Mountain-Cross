@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour {
-    
     public delegate void ObjectSpawnedHandler(CuttableObject obj);
     public event ObjectSpawnedHandler OnObjectSpawned;
+
+    private GameObject sceneController;
+    private SceneController sceneCtrl;
 
     [Header("Target")]
     public GameObject prefab;
@@ -20,7 +22,16 @@ public class ObjectSpawner : MonoBehaviour {
     public Sprite[] sprites;
 
     void Start() {
+        sceneController = GameObject.Find("SceneController");
+        sceneCtrl = sceneController.GetComponent<SceneController>();
+
         InvokeRepeating("Spawn", interval, interval);
+    }
+
+    void Update() {
+        if (sceneCtrl.timeRemaining <= 0 || sceneCtrl.remainLives <= 0) {
+            CancelInvoke();
+        }
     }
 
     private void Spawn() {

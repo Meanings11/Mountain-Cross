@@ -23,6 +23,7 @@ public class SceneController : MonoBehaviour {
 
     public AudioSource timesUp;
 
+    private bool isGameOver = false;
     private int score = 0;
 
     void Start() {
@@ -48,7 +49,9 @@ public class SceneController : MonoBehaviour {
             GameoverText.text = "Times Up!";
             timesUp.Play();
             
-            EndGame();
+            if (!isGameOver) {
+                EndGame();
+            }
         }
     }
 
@@ -77,6 +80,7 @@ public class SceneController : MonoBehaviour {
     }
 
     void EndGame() {
+        isGameOver = true;
         scoreText.gameObject.SetActive(false);
 
         // Get total score
@@ -87,6 +91,7 @@ public class SceneController : MonoBehaviour {
         // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
         PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
+
 
         // load back to main board
         StartCoroutine(LoadEndScene());

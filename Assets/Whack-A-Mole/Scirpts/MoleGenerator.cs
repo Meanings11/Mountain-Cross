@@ -16,9 +16,17 @@ public class MoleGenerator : MonoBehaviour
     private BoxCollider2D moleCollider; 
 
     private float nextTimeToSpawn = 0f;
-    private float spawnSpeedRange = 2.5f;
+    private float spawnSpeedRange = 2f;
 
     public int hiddenIndex = 0;
+
+    public bool isBride = false;
+
+    // sprite change
+    public Sprite moleSprite;
+    public Sprite brideSprite;
+    public SpriteRenderer spriteRender;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +37,8 @@ public class MoleGenerator : MonoBehaviour
         mole = Instantiate(mole);
         moleCollider = mole.gameObject.GetComponent<BoxCollider2D>();
 
+        spriteRender = mole.gameObject.GetComponent<SpriteRenderer>();
+
         Spawn();
     }
 
@@ -37,6 +47,8 @@ public class MoleGenerator : MonoBehaviour
     {
         if (hammerCtr.timeRemaining > 0) {
             if (Time.time >= nextTimeToSpawn) {
+
+                spawnBrideOrMole();
                 mole.gameObject.SetActive(false);
                 emptyMoleList[hiddenIndex].gameObject.SetActive(true);
                 // Destroy(mole);
@@ -69,5 +81,17 @@ public class MoleGenerator : MonoBehaviour
         mole.gameObject.SetActive(true);
 
         moleAudio.Play();
+    }
+
+    public void spawnBrideOrMole() {
+        float rand = UnityEngine.Random.Range(0f, 1f);
+        // Debug.Log(rand);
+        if (UnityEngine.Random.Range(0.0f, 1f) < 0.2f) {
+            isBride = true;
+            spriteRender.sprite = brideSprite;
+        } else {
+            isBride = false;
+            spriteRender.sprite = moleSprite;
+        }
     }
 }

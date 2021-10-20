@@ -1667,6 +1667,10 @@ MonoBehaviour:
   - {fileID: 1718127237}
   moleAudio: {fileID: 1143735083}
   hiddenIndex: 0
+  isBride: 0
+  moleSprite: {fileID: 21300000, guid: 544cb1633f2afbe4db2904d1d54fcd1b, type: 3}
+  brideSprite: {fileID: 21300000, guid: a004cd9ed902ab4468fc7daf910885f8, type: 3}
+  spriteRender: {fileID: 0}
 --- !u!4 &1143735082
 Transform:
   m_ObjectHideFlags: 0

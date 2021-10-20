@@ -179,7 +179,9 @@ MonoBehaviour:
   TotalPoint: {fileID: 1482520889}
   scoreText: {fileID: 167450529}
   timer: {fileID: 1916264657}
-  timesUp: {fileID: 166091738}
+  audioSource: {fileID: 0}
+  sliceAudio: {fileID: 8300000, guid: d1773efd35af3914cb32020ca9f83db4, type: 3}
+  hitAudio: {fileID: 8300000, guid: 151f706d42b6e465597331c3f4cb89e5, type: 3}
 --- !u!82 &166091738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -192,7 +194,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.848
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -368,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 235.79999, y: -75.399994}
+  m_AnchoredPosition: {x: 235.79999, y: -75.400024}
   m_SizeDelta: {x: 369.35, y: 129.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &632025331

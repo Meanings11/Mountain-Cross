@@ -9,28 +9,24 @@ public class CuttableObject : MonoBehaviour {
 
     public int destoryTime = 2;
     public GameObject effect;
-    AudioSource audioSource;
-    public AudioClip sliceAudio;
-    public AudioClip hitAudio;
     public bool harmful;
 
-    void Start() {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     void OnCollisionEnter2D (Collision2D collision) {
         if (collision.gameObject.tag == "Cut") {
             if (harmful) {
-                audioSource.PlayOneShot(hitAudio);
+                SceneController.instance.playBomb();
             } else {
-                audioSource.PlayOneShot(sliceAudio);
+                SceneController.instance.playSlice();
             }
             
             if (OnDestroyed != null) {
                 OnDestroyed(harmful);
             }
+
+            Vector3 temp = transform.position;
             Destroy(gameObject);
-            var instance = Instantiate(effect, collision.transform.position, Quaternion.identity);
+            var instance = Instantiate(effect, temp, Quaternion.identity);
             Destroy(instance, 1);
         }
     }

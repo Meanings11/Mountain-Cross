@@ -7,6 +7,7 @@ using System;
 using System.Globalization;
 
 public class SceneController : MonoBehaviour {
+    public static SceneController instance;
 
     [Header("Gameplay")]
     public int remainLives;
@@ -21,13 +22,24 @@ public class SceneController : MonoBehaviour {
     public Text scoreText;
     public Text timer;
 
-    public AudioSource timesUp;
+    public AudioSource audioSource;
+    public AudioClip sliceAudio;
+    public AudioClip hitAudio;
 
     private bool isGameOver = false;
     private int score = 0;
 
+    private void Awake() {
+        if (instance == null) {
+            instance = this;
+        }    
+        else if (instance != this) {
+            Destroy(gameObject);
+        }
+    }
+
     void Start() {
-        timesUp = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -47,7 +59,7 @@ public class SceneController : MonoBehaviour {
         } else {
             timer.text = "00:00:00";
             GameoverText.text = "Times Up!";
-            timesUp.Play();
+            audioSource.Play();
             
             if (!isGameOver) {
                 EndGame();
@@ -77,6 +89,14 @@ public class SceneController : MonoBehaviour {
         if (remainLives <= 0) {
             EndGame();
         }
+    }
+
+    public void playBomb(){
+        audioSource.PlayOneShot(hitAudio);
+    }
+
+    public void playSlice(){
+        audioSource.PlayOneShot(sliceAudio);
     }
 
     void EndGame() {

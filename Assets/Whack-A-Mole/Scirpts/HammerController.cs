@@ -17,6 +17,8 @@ public class HammerController : MonoBehaviour
     public Text TotalPoint;
     public Text GameoverText;
 
+    public GameObject bridePanel;
+
     public Animator animator;
 
     public float timeRemaining = 30f;
@@ -37,6 +39,9 @@ public class HammerController : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+
+        // hide bride panel by default
+        bridePanel.SetActive(false);
 
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
@@ -90,12 +95,16 @@ public class HammerController : MonoBehaviour
                 // play sound while hit the mole
                 audioSource.PlayOneShot(hitAudio);
 
+                // hide the old alert while hit new mole
+                bridePanel.SetActive(false);
+
                 MoleHitted();
                 animator.SetTrigger("Hammer");
                 
                 // update score while hit the mole
                 if (moleGt.isBride) {
                     score = 0;
+                    bridePanel.SetActive(true); // show lose point alert
                 } else {
                     score += 10;
                 }
@@ -108,7 +117,7 @@ public class HammerController : MonoBehaviour
 
                 animator.SetTrigger("Unhammer");
 
-                //disable collider
+                // disable collider
                 hit.collider.enabled = false;
             }
         }

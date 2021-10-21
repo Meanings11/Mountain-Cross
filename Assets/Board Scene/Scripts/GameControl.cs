@@ -7,7 +7,8 @@ using System.Collections.Generic;
 public class GameControl : MonoBehaviour {
     public GameObject landscapeCanvas;
     public GameObject portraitCanvas;
-    public GameObject shop;
+    // public GameObject shop;
+    private GameObject shop;
 
     private static GameObject playerMoveCount;
 
@@ -70,6 +71,7 @@ public class GameControl : MonoBehaviour {
 
         playerMoveCount = GameObject.Find("PlayerMoveCount");
         player = GameObject.Find("Player");
+        shop = GameObject.Find("Shop");
         sceneManager = GameObject.Find("SceneManager");
         sceneAudio = GetComponent<AudioSource>();
 

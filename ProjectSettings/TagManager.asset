@@ -56,6 +56,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Game
+  - name: Cuttable
     uniqueID: 960514471
+    locked: 0
+  - name: GameOver
+    uniqueID: 636889647
     locked: 0

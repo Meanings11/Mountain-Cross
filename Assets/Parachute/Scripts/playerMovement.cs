@@ -152,7 +152,6 @@ public class playerMovement : MonoBehaviour {
         PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
                 
         // End scene
-        // SceneManager.LoadScene("BoardScene");
         StartCoroutine(LoadEndScene());
         // Invoke("LoadEndScene", 2f);
     }

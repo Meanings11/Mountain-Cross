@@ -965,8 +965,6 @@ MonoBehaviour:
   eatSound: {fileID: 8300000, guid: 8e8218f6a01e74bd5894788e3f912635, type: 3}
   hitPlayer: {fileID: 8300000, guid: ed249e373679d4a11adc0b58a4477f45, type: 3}
   timesUp: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
-  firstHit: 1
-  moveSpeed: 200
 --- !u!199 &689725664
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5992,7 +5990,7 @@ Transform:
   - {fileID: 1529131356}
   - {fileID: 689725660}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &771229772
 MonoBehaviour:
@@ -6337,6 +6335,7 @@ MonoBehaviour:
   bonePrefab: {fileID: 1590979917}
   pointText: {fileID: 773569578}
   timer: {fileID: 376089461}
+  playerPoint: 0
 --- !u!4 &1245167430
 Transform:
   m_ObjectHideFlags: 0
@@ -6349,7 +6348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1529131354
 GameObject:
@@ -6846,7 +6845,7 @@ RectTransform:
   - {fileID: 378043557}
   - {fileID: 241979163}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

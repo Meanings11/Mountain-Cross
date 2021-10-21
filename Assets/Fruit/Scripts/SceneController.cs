@@ -74,7 +74,12 @@ public class SceneController : MonoBehaviour {
     void OnObjectDestroyed(bool harmful) {
         if (!harmful) {
             score += 10;
-            scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
+
+            if (score == 0 || score == 00) {
+                scoreText.text = "$0";
+            } else {
+                scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
+            }
         } else {
             LoseLife();
         }

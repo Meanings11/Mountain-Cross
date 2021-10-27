@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour {
     public static bool gameOver = false;
 
     public static bool hasFinishedReward = true;
+    public static bool isInStore = false;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
     private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
@@ -263,7 +264,8 @@ public class GameControl : MonoBehaviour {
                     StartCoroutine(disableDice());
                 } else {
                     if (currentIndex == 23) {
-                        shop.gameObject.SetActive(true); // go to shop
+                        shop.gameObject.SetActive(true); // go to 
+                        isInStore = true;
                     } else if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {

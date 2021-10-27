@@ -21,8 +21,9 @@ public class Dice : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!GameControl.gameOver && GameControl.hasFinishedReward && coroutineAllowed)
+        if (!GameControl.gameOver && GameControl.hasFinishedReward && coroutineAllowed && !GameControl.isInStore) {
             StartCoroutine("RollTheDice");
+        }
     }
 
     private IEnumerator RollTheDice()

@@ -17,10 +17,12 @@ public class StoreManager : MonoBehaviour
         // ID
         storeItems[1,1] = 1;
         storeItems[1,2] = 2;
+        storeItems[1,3] = 3;
 
         // Price
         storeItems[2,1] = 100;
-        storeItems[2,2] = 2000;
+        storeItems[2,2] = 150;
+        storeItems[2,3] = 2000;
         
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - Cloud
   - Wall
   - Cut
+  - Event
   layers:
   - Default
   - TransparentFX

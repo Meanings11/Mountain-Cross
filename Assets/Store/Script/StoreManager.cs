@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 
 public class StoreManager : MonoBehaviour
@@ -18,8 +19,8 @@ public class StoreManager : MonoBehaviour
         storeItems[1,2] = 2;
 
         // Price
-        storeItems[2,1] = 10;
-        storeItems[2,2] = 20;
+        storeItems[2,1] = 100;
+        storeItems[2,2] = 2000;
         
     }
 
@@ -32,6 +33,8 @@ public class StoreManager : MonoBehaviour
         {
             currentGameScore -= storeItems[2, ButtonRef.GetComponent<ProductButton>().itemId];
             PlayerPrefs.SetInt("totalGameScore", currentGameScore);
+        } else {
+            EditorUtility.DisplayDialog("Cannot afford the item!","","OK", "");
         }
     }
 }

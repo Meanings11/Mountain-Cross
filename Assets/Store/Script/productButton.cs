@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class productButton : MonoBehaviour
+public class ProductButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int itemId;
+    public Text priceText;
+    public GameObject StoreManager;
 
-    // Update is called once per frame
+    // Start is called before the first frame update
     void Update()
     {
-        
+        priceText.text = "$" + StoreManager.GetComponent<StoreManager>().storeItems[2,itemId].ToString();
     }
+
 }

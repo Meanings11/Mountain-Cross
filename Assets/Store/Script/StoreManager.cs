@@ -6,8 +6,11 @@ using UnityEngine.EventSystems;
 using UnityEditor;
 
 
+
 public class StoreManager : MonoBehaviour
 {
+    public const int ID = 1;
+    public const int PRICE = 2;
 
     public int[,] storeItems = new int[4,4];
 
@@ -15,26 +18,29 @@ public class StoreManager : MonoBehaviour
     void Start()
     {
         // ID
-        storeItems[1,1] = 1;
-        storeItems[1,2] = 2;
-        storeItems[1,3] = 3;
+        storeItems[ID,1] = 1;
+        storeItems[ID,2] = 2;
+        storeItems[ID,3] = 3;
 
         // Price
-        storeItems[2,1] = 100;
-        storeItems[2,2] = 150;
-        storeItems[2,3] = 2000;
+        storeItems[PRICE,1] = 100;
+        storeItems[PRICE,2] = 150;
+        storeItems[PRICE,3] = 2000;
         
     }
 
     public void Buy() 
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
+        int itemId = ButtonRef.GetComponent<ProductButton>().itemId;
 
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        if (currentGameScore >= storeItems[2, ButtonRef.GetComponent<ProductButton>().itemId])
+        if (currentGameScore >= storeItems[PRICE, itemId])
         {
-            currentGameScore -= storeItems[2, ButtonRef.GetComponent<ProductButton>().itemId];
+            currentGameScore -= storeItems[PRICE, itemId];
             PlayerPrefs.SetInt("totalGameScore", currentGameScore);
+
+            PlayerStats.addItem(itemId);
         } else {
             EditorUtility.DisplayDialog("Cannot afford the item!","","OK", "");
         }

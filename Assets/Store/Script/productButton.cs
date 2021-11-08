@@ -10,9 +10,14 @@ public class ProductButton : MonoBehaviour
     public GameObject StoreManager;
 
     // Start is called before the first frame update
+    void OnEnable() {
+        gameObject.GetComponent<Button>().interactable = true;
+    }
+
     void Update()
     {
         priceText.text = "$" + StoreManager.GetComponent<StoreManager>().storeItems[2,itemId].ToString();
     }
 
+    public void BtnOnClick() { gameObject.GetComponent<Button>().interactable = false; }
 }

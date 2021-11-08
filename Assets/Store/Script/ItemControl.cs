@@ -6,11 +6,13 @@ public class ItemControl : MonoBehaviour
 {
     // Start is called before the first frame update
     public Button planeButton;
+    public Button stepNumButton;
 
     void Start()
     {
 
         planeButton = GameObject.Find("PlaneButton").GetComponent<Button>();
+        stepNumButton = GameObject.Find("StepNumButton").GetComponent<Button>();
     }
 
     // Update is called once per frame

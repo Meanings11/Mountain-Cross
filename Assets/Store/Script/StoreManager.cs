@@ -26,7 +26,8 @@ public class StoreManager : MonoBehaviour
         storeItems[PRICE,1] = 100;
         storeItems[PRICE,2] = 150;
         storeItems[PRICE,3] = 2000;
-        
+
+        PlayerPrefs.SetInt("totalGameScore", 2000);   
     }
 
     public void Buy() 

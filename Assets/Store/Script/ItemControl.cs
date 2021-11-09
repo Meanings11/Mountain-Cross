@@ -49,7 +49,7 @@ public class ItemControl : MonoBehaviour
 
     public void refreshCurrentItems() 
     {
-        int ticketNum = PlayerStats.getItemNum(2); // get plane ticket count
+        int ticketNum = PlayerStats.getItemNum(PlayerStats.plantTicket); // get plane ticket count
 
         if (ticketNum > 0) planeButton.gameObject.SetActive(true);
         else planeButton.gameObject.SetActive(false);
@@ -66,11 +66,18 @@ public class ItemControl : MonoBehaviour
 
             isChooseSteps = true;
         } else {
-
+            
+            // Remove step num button
             Vector2 currentPos = stepNumButton.gameObject.transform.localPosition;
 		    Vector2 endPos = new Vector2 (64, currentPos.y);
 		    stepNumButton.gameObject.transform.localPosition = endPos;
             stepNumButton.gameObject.SetActive(false);
+
+            // Move player and decrease item
+            GameControl.MovePlayer(StepNumButton.num);
+            PlayerStats.useOneItem(PlayerStats.plantTicket);
+            refreshCurrentItems();
+            isChooseSteps = false;
         }
     }
 }

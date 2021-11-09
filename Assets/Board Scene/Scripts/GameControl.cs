@@ -194,6 +194,23 @@ public class GameControl : MonoBehaviour {
         player.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 
+
+      // move player through props     
+      public static void MovePlayer(int steps) {
+        // Reset reward status
+        hasFinishedReward = false;
+
+        // Setup UI
+        playerMoveCount.gameObject.SetActive(true);
+        playerMoveCount.GetComponent<Text>().text = "Move " + steps + " steps";
+
+        // Setup player movement
+        player.GetComponent<PlayerMovement>().moveForward = true;
+        player.GetComponent<PlayerMovement>().destinationWaypointIndex = player.GetComponent<PlayerMovement>().currentWaypointIndex + steps;
+        player.GetComponent<PlayerMovement>().moveFinished = false;
+        player.GetComponent<PlayerMovement>().moveAllowed = true;
+    }
+
     private void rewardPlayer() {
         sceneAudio.PlayOneShot(changeSceneSound);
         // Current Index

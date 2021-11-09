@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public static class PlayerStats
 {
+    public const int insurance = 1;
+    public const int plantTicket = 2;
+    
+
     public static int getItemNum(int index) { 
         if (index > quantity.Length) {
             Debug.Log("Wrong product index");
@@ -22,6 +26,16 @@ public static class PlayerStats
         } 
 
         quantity[index-1]++;
+        Debug.Log( index + ": " +quantity[index-1]);
+     }
+
+     public static void useOneItem(int index) {
+         if (index > quantity.Length) {
+            Debug.Log("Wrong product index");
+            return;
+        } 
+
+        quantity[index-1]--;
         Debug.Log( index + ": " +quantity[index-1]);
      }
    

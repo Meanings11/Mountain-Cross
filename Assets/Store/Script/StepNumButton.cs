@@ -7,11 +7,16 @@ public class StepNumButton : MonoBehaviour
 {
     // Start is called before the first frame update
     public Text numText;
-    public int num;
+    public static int num;
     public static bool isMovingRight = false;
     public static bool isMovingLeft = false;
     void Start()
     {
+        num = 1;
+        numText = GameObject.Find("StepNumText").GetComponent<Text>();
+    }
+
+    private void OnEnable() {
         num = 1;
         numText = GameObject.Find("StepNumText").GetComponent<Text>();
     }

@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour {
     public static bool gameOver = false;
 
     public static bool hasFinishedReward = true;
+    public static bool isInStore = false;
 
     HashSet<int> minigamesIndexes = new HashSet<int>();
     private int[] waypoints_reward = {0, 0, 4, 0, 0, 0, 0,
@@ -78,7 +79,10 @@ public class GameControl : MonoBehaviour {
         player.GetComponent<PlayerMovement>().moveAllowed = false;
 
         playerMoveCount.gameObject.SetActive(false);
+
+        // set shop to close initially
         shop.gameObject.SetActive(false);
+        ItemControl.instance.refreshCurrentItems();
 
         // set endless mode to 0
         PlayerPrefs.SetInt("endlessMode", 0);
@@ -190,6 +194,23 @@ public class GameControl : MonoBehaviour {
         player.GetComponent<PlayerMovement>().moveAllowed = true;
     }
 
+
+      // move player through props     
+      public static void MovePlayer(int steps) {
+        // Reset reward status
+        hasFinishedReward = false;
+
+        // Setup UI
+        playerMoveCount.gameObject.SetActive(true);
+        playerMoveCount.GetComponent<Text>().text = "Move " + steps + " steps";
+
+        // Setup player movement
+        player.GetComponent<PlayerMovement>().moveForward = true;
+        player.GetComponent<PlayerMovement>().destinationWaypointIndex = player.GetComponent<PlayerMovement>().currentWaypointIndex + steps;
+        player.GetComponent<PlayerMovement>().moveFinished = false;
+        player.GetComponent<PlayerMovement>().moveAllowed = true;
+    }
+
     private void rewardPlayer() {
         sceneAudio.PlayOneShot(changeSceneSound);
         // Current Index
@@ -202,6 +223,9 @@ public class GameControl : MonoBehaviour {
         if (rewardedSteps == 0) {
             int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
+            // check and automic apply insurance
+            bool isInsuranceApplicable = (PlayerStats.getItemNum(PlayerStats.insurance) > 1);
+
             // Adjust gamescore if it is a rewarded score
             if (score_rewad[currentIndex] != 0) {
                 // Show reward
@@ -209,7 +233,11 @@ public class GameControl : MonoBehaviour {
                 if (score_rewad[currentIndex] > 0) {
                     playerMoveCount.GetComponent<Text>().text = "Rewarded with $" + score_rewad[currentIndex];
                 } else {
-                    if (currentGameScore + score_rewad[currentIndex] <= 0) {
+
+                    if (isInsuranceApplicable) {
+                        playerMoveCount.GetComponent<Text>().text = "Your insurance saved you\nfrom panelty!";
+                    }
+                    else if (currentGameScore + score_rewad[currentIndex] <= 0) {
                         playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
                     } else {
                         playerMoveCount.GetComponent<Text>().text = "Lose $" + Mathf.Abs(score_rewad[currentIndex]);
@@ -217,8 +245,12 @@ public class GameControl : MonoBehaviour {
                 }
 
                 // Adjust score
-                int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
-                PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                if (!isInsuranceApplicable) {
+                    int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
+                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                } else {
+                    PlayerStats.useOneItem(PlayerStats.insurance);
+                }
 
                 hasFinishedReward = true;
             } else {
@@ -263,7 +295,8 @@ public class GameControl : MonoBehaviour {
                     StartCoroutine(disableDice());
                 } else {
                     if (currentIndex == 23) {
-                        shop.gameObject.SetActive(true); // go to shop
+                        shop.gameObject.SetActive(true); // go to 
+                        isInStore = true;
                     } else if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {

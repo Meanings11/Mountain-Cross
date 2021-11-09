@@ -16,13 +16,10 @@ public class ExitButton : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     private void TaskOnClick()
     {
         shop.gameObject.SetActive(false);
+        GameControl.isInStore = false;
+        ItemControl.instance.refreshCurrentItems();
     }
 }

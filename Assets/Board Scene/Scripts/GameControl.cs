@@ -223,6 +223,9 @@ public class GameControl : MonoBehaviour {
         if (rewardedSteps == 0) {
             int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
+            // check and automic apply insurance
+            bool isInsuranceApplicable = (PlayerStats.getItemNum(PlayerStats.insurance) > 1);
+
             // Adjust gamescore if it is a rewarded score
             if (score_rewad[currentIndex] != 0) {
                 // Show reward
@@ -230,7 +233,11 @@ public class GameControl : MonoBehaviour {
                 if (score_rewad[currentIndex] > 0) {
                     playerMoveCount.GetComponent<Text>().text = "Rewarded with $" + score_rewad[currentIndex];
                 } else {
-                    if (currentGameScore + score_rewad[currentIndex] <= 0) {
+
+                    if (isInsuranceApplicable) {
+                        playerMoveCount.GetComponent<Text>().text = "Your insurance saved you\nfrom panelty!";
+                    }
+                    else if (currentGameScore + score_rewad[currentIndex] <= 0) {
                         playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
                     } else {
                         playerMoveCount.GetComponent<Text>().text = "Lose $" + Mathf.Abs(score_rewad[currentIndex]);
@@ -238,8 +245,12 @@ public class GameControl : MonoBehaviour {
                 }
 
                 // Adjust score
-                int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
-                PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                if (!isInsuranceApplicable) {
+                    int newGameScore = Math.Max(currentGameScore + score_rewad[currentIndex], 0);
+                    PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                } else {
+                    PlayerStats.useOneItem(PlayerStats.insurance);
+                }
 
                 hasFinishedReward = true;
             } else {

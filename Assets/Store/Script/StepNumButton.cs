@@ -8,6 +8,8 @@ public class StepNumButton : MonoBehaviour
     // Start is called before the first frame update
     public Text numText;
     public int num;
+    public static bool isMovingRight = false;
+    public static bool isMovingLeft = false;
     void Start()
     {
         num = 1;
@@ -15,10 +17,11 @@ public class StepNumButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    // void Update()
-    // {
-    //     numText.text = num;
-    // }
+    void Update()
+    {
+        // numText.text = num;
+        
+    }
 
     public void onClick() {
         num++;

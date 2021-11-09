@@ -20,5 +20,6 @@ public class ExitButton : MonoBehaviour
     {
         shop.gameObject.SetActive(false);
         GameControl.isInStore = false;
+        ItemControl.instance.refreshCurrentItems();
     }
 }

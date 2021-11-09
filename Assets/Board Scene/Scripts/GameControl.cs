@@ -79,7 +79,10 @@ public class GameControl : MonoBehaviour {
         player.GetComponent<PlayerMovement>().moveAllowed = false;
 
         playerMoveCount.gameObject.SetActive(false);
+
+        // set shop to close initially
         shop.gameObject.SetActive(false);
+        ItemControl.instance.refreshCurrentItems();
 
         // set endless mode to 0
         PlayerPrefs.SetInt("endlessMode", 0);

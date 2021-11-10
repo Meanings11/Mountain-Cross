@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuttableObject : MonoBehaviour {
-
+public class CuttableObject : MonoBehaviour
+{
     public delegate void ObjectDestoryedHandler(bool harmful);
     public event ObjectDestoryedHandler OnDestroyed;
 
@@ -11,25 +11,30 @@ public class CuttableObject : MonoBehaviour {
     public GameObject effect;
     public bool harmful;
 
+    internal int fruitIndex;
 
-    void OnCollisionEnter2D (Collision2D collision) {
-        if (collision.gameObject.tag == "Cut") {
-            if (harmful) {
-                SceneController.instance.playBomb();
-            } else {
-                SceneController.instance.playSlice();
-            }
-            
-            if (OnDestroyed != null) {
-                OnDestroyed(harmful);
-            }
-
-            Vector3 temp = transform.position;
-            Destroy(gameObject);
-            var instance = Instantiate(effect, temp, Quaternion.identity);
-            Destroy(instance, 1);
+    public void OnHit()
+    {
+        if (harmful)
+        {
+            SceneController.instance.playBomb();
         }
+        else
+        {
+            SceneController.instance.playSlice();
+            FruitSpriteData.Instance.CreatePartFruit(fruitIndex, transform);
+        }
+
+        // shake
+        Handheld.Vibrate();
+        if (OnDestroyed != null)
+        {
+            OnDestroyed(harmful);
+        }
+
+        Vector3 temp = transform.position;
+        Destroy(gameObject);
+        var instance = Instantiate(effect, temp, Quaternion.identity);
+        Destroy(instance, 1);
     }
-
-
 }

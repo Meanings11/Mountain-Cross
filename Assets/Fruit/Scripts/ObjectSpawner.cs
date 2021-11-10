@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectSpawner : MonoBehaviour {
+public class ObjectSpawner : MonoBehaviour
+{
     public delegate void ObjectSpawnedHandler(CuttableObject obj);
     public event ObjectSpawnedHandler OnObjectSpawned;
 
@@ -21,29 +22,39 @@ public class ObjectSpawner : MonoBehaviour {
     [Header("Visuals")]
     public Sprite[] sprites;
 
-    void Start() {
+    void Start()
+    {
         sceneController = GameObject.Find("SceneController");
         sceneCtrl = sceneController.GetComponent<SceneController>();
 
         InvokeRepeating("Spawn", interval, interval);
     }
 
-    void Update() {
-        if (sceneCtrl.timeRemaining <= 0 || sceneCtrl.remainLives <= 0) {
+    void Update()
+    {
+        if (sceneCtrl.timeRemaining <= 0 || sceneCtrl.remainLives <= 0)
+        {
             CancelInvoke();
         }
     }
 
-    private void Spawn() {
+    private void Spawn()
+    {
         GameObject instance = Instantiate(prefab);
         instance.transform.position = new Vector2(Random.Range(minimumX, maximumX), y);
         instance.transform.SetParent(transform);
 
-        if (OnObjectSpawned != null) {
+        if (OnObjectSpawned != null)
+        {
             OnObjectSpawned(instance.GetComponent<CuttableObject>());
         }
 
-        Sprite randomSprite = sprites[Random.Range(0, sprites.Length)];
+        int fruitIndex = Random.Range(0, sprites.Length);
+        Sprite randomSprite = sprites[fruitIndex];
         instance.GetComponent<SpriteRenderer>().sprite = randomSprite;
+        if (sprites.Length > 1 && instance.TryGetComponent(out CuttableObject co))
+        {
+            co.fruitIndex = fruitIndex;
+        }
     }
 }

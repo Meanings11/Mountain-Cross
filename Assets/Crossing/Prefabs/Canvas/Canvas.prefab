@@ -1086,9 +1086,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4609040240707486835}
+        - m_Target: {fileID: 4138906231114779323}
           m_TargetAssemblyTypeName: 
-          m_MethodName: 
+          m_MethodName: OnMove
           m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

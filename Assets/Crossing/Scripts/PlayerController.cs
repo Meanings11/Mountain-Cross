@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private static int cherryCount;
 
-    private static int hP;
+    private static int hP = 1;
 
     public float IsBulkTimer;
     public float IsDownsizingTimer;

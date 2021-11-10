@@ -113,7 +113,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.36, y: 0.28}
+  m_Size: {x: 2.25, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -177,7 +177,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.25, y: 1.75}
-    newSize: {x: 0.36, y: 0.28}
+    newSize: {x: 2.25, y: 1.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -201,11 +201,12 @@ MonoBehaviour:
   rightPoint: {fileID: 8052356813018831864}
   Speed: 4
   rb: {fileID: 0}
+  IsMove: 1
   faceLeft: 1
   FallObj: {fileID: 8133504093771467702, guid: 3cb18a6192a0d8342b799e7111ae0b5e, type: 3}
   leftX: 0
   rightX: 0
-  IsMove: 1
+  IsOnup: 0.5
   IsDes: 0
 --- !u!82 &5670498941996226706
 AudioSource:

@@ -53,6 +53,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,8 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 37
-  m_Sprite: {fileID: -1075854790282143660, guid: e3531be27cb827743bac8ea66dae5bfd,
-    type: 3}
+  m_Sprite: {fileID: -1075854790282143660, guid: e3531be27cb827743bac8ea66dae5bfd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,11 +171,12 @@ MonoBehaviour:
   rightPoint: {fileID: 1785574526670597151}
   Speed: 2
   rb: {fileID: 0}
+  IsMove: 1
   faceLeft: 1
   FallObj: {fileID: 1740366370037564760, guid: 80f4ac973ad3fac4ab68eb75bb9008a4, type: 3}
   leftX: 0
   rightX: 0
-  IsMove: 1
+  IsOnup: 0.5
   IsDes: 0
 --- !u!82 &8688797227105877813
 AudioSource:

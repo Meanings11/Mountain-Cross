@@ -37,48 +37,28 @@ public class Menu : MonoBehaviour
         int score = Int32.Parse(cherryTextNum.text.TrimStart('$'));
         PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
 
-
         if (IsWin)
         {
             WinUI.SetActive(true);
         }
         else
         {
-            Debug.Log(IsWin);
+            // Debug.Log(IsWin);
             OverUI.SetActive(true);
         }
+        
+        SceneManager.LoadScene("BoardScene");
+        // StartCoroutine(LoadEndScene());
     }
 
+    // IEnumerator LoadEndScene() {
+    //     yield return new WaitForSeconds(1.2f);
+    //     Debug.Log("Win");
+    //     SceneManager.LoadScene("BoardScene");
+    // }
 
-    public void PlayGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-    public void PlayGame(string gamename)
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(gamename);
-    }
-    public void QuitGame(){
-        Time.timeScale = 1f;
-        Application.Quit();
-    }
-
-    public void UIEnable(){
-        GameObject.Find("Canvas/MainMenu/UI").SetActive(true);
-    }
-
-    public void PauseGame(){
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeGame(){
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void SetVolume(float volume) {
-        audioMixer.SetFloat("MainVolume", volume);
-    }
+    // public void PlayGame() {
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    // }
 
 }

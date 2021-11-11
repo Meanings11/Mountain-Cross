@@ -28,13 +28,13 @@ public class OnEndCol : MonoBehaviour
                 Destroy(this.gameObject);
                 return;
             }
-            // UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
-            // StartCoroutine(LoadEndScene());
+
+            StartCoroutine(LoadEndScene());
         }
     }
 
-    // IEnumerator LoadEndScene() {
-    //     yield return new WaitForSeconds(3f);
-    //     SceneManager.LoadScene("BoardScene");
-    // }
+    IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("BoardScene");
+    }
 }

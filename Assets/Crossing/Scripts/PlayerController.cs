@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         ClickButtonJump();
 
         // cherryTextNum.text = cherryCount.ToString();
-        Debug.Log(cherryCount);
+        // Debug.Log(cherryCount);
         if (cherryCount == 0 || cherryCount == 00) {
             cherryTextNum.text = "$0";
         } else {

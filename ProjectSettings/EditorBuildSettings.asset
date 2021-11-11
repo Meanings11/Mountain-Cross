@@ -33,6 +33,9 @@ EditorBuildSettings:
     path: Assets/Fruit/Scenes/FruitScene.unity
     guid: 656190d1785a4ae4f9bde614c29684da
   - enabled: 1
+    path: Assets/Crossing/Scenes/CrossingScene.unity
+    guid: 204f947592f5f44778f0b76a9de6038d
+  - enabled: 1
     path: Assets/Dialogues/Scenes/EndingDialogue1.unity
     guid: 922b3d634317a464089aeb5373b34b9f
   - enabled: 1

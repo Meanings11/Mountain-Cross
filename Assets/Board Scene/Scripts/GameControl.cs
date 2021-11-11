@@ -260,7 +260,9 @@ public class GameControl : MonoBehaviour {
                     playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                     // Go to mini-game
-                    if (currentIndex == 5) {
+                    if (currentIndex == 4) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene");
+                    } else if (currentIndex == 5) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
                     } else if (currentIndex == 9) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene");
@@ -274,7 +276,7 @@ public class GameControl : MonoBehaviour {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                     } else {
                         // randomly go to unassigned games
-                        int randomIndex = UnityEngine.Random.Range(0, 6); // random decide for now
+                        int randomIndex = UnityEngine.Random.Range(0, 7); // random decide for now
                         // if (randomIndex == 0) {
                         //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                         // } else {
@@ -289,6 +291,7 @@ public class GameControl : MonoBehaviour {
                             case 3: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole"); break;
                             case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
                             case 5: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene"); break;
+                            case 6: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene"); break;
                         }
                     }
 

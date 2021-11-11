@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEditor;
-
-
 
 public class StoreManager : MonoBehaviour
 {
+    public Text warningText;
     public const int ID = 1;
     public const int PRICE = 2;
 
@@ -17,17 +15,24 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        warningText = GameObject.Find("WarningText").GetComponent<Text>();
+        warningText.gameObject.SetActive(false);
+
         // ID
         storeItems[ID,1] = 1;
         storeItems[ID,2] = 2;
         storeItems[ID,3] = 3;
 
         // Price
-        storeItems[PRICE,1] = 100;
-        storeItems[PRICE,2] = 150;
+        storeItems[PRICE,1] = 200;
+        storeItems[PRICE,2] = 300;
         storeItems[PRICE,3] = 2000;
 
-        PlayerPrefs.SetInt("totalGameScore", 2000);   
+        // PlayerPrefs.SetInt("totalGameScore", 2000);   
+    }
+
+    private void OnEnable() {
+        if (warningText) warningText.gameObject.SetActive(false);
     }
 
     public void Buy() 
@@ -38,12 +43,14 @@ public class StoreManager : MonoBehaviour
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
         if (currentGameScore >= storeItems[PRICE, itemId])
         {
+            warningText.gameObject.SetActive(false);
+
             currentGameScore -= storeItems[PRICE, itemId];
             PlayerPrefs.SetInt("totalGameScore", currentGameScore);
 
             PlayerStats.addItem(itemId);
         } else {
-            EditorUtility.DisplayDialog("Cannot afford the item!","","OK", "");
+            warningText.gameObject.SetActive(true);
         }
     }
 }

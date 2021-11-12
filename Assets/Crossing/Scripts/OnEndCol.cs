@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OnEndCol : MonoBehaviour
-{
-    public GameObject Win;
-    public bool IsEnd;
+{   
     // Start is called before the first frame update
     void Start()
     {
@@ -18,23 +16,15 @@ public class OnEndCol : MonoBehaviour
     {
 
     }
+
+    // end game if hit the sign
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            if (IsEnd)
-            {
-                Menu.Ins.GameOver(true);
-                Destroy(this.gameObject);
-                return;
-            }
-
-            StartCoroutine(LoadEndScene());
+            PlayerController.Ins.GameOver();
+            Destroy(this.gameObject);
+            return;
         }
-    }
-
-    IEnumerator LoadEndScene() {
-        yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("BoardScene");
     }
 }

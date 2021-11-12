@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D coll, disColl;
     public Transform cellCheck, groundCheck;
     public Text cherryTextNum, HPTextNum;
+    public Text gameOverText, totalPoint;
     [Space]
     public float speed, jumpforce;
     [SerializeField]
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
             hP = value;
             if (hP <= 0)
             {
-                Menu.Ins.GameOver(false);
+                PlayerController.Ins.GameOver();
             }
         }
     }
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
         if (cherryCount == 0 || cherryCount == 00) {
             cherryTextNum.text = "$0";
         } else {
-            cherryTextNum.text = "$" + cherryCount.ToString();
+            cherryTextNum.text = "$" + string.Format("{0:0,0}", Int32.Parse(cherryCount.ToString()));
         }
 
         HPTextNum.text = HP.ToString();
@@ -123,7 +124,8 @@ public class PlayerController : MonoBehaviour
             timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
         } else {
             timer.text = "00:00:00";
-            Menu.Ins.GameOver(true);
+            gameOverText.text = "Times Up!";
+            GameOver();
         }
     }
     
@@ -226,7 +228,6 @@ public class PlayerController : MonoBehaviour
             {
                 collider.GetComponent<Collection>().Death();
             }
-          
         }
     }
 
@@ -238,7 +239,7 @@ public class PlayerController : MonoBehaviour
             Enemy enemy = collider.gameObject.GetComponent<Enemy>();
             if (anim.GetBool("falling") && transform.position.y - enemy.transform.position.y > enemy.IsOnup)
             {
-                if (enemy.IsDes==false)
+                if (enemy.IsDes == false)
                 {
                     enemy.JumpOn();
                     Jump();
@@ -346,5 +347,26 @@ public class PlayerController : MonoBehaviour
     {
         // cherryCount++;
         cherryCount += 10;
+    }
+
+    public void GameOver()
+    {
+        // Get total score
+        totalPoint.text = "Earned " + cherryTextNum.text + " in total";
+
+        // Set global score
+        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + cherryCount);
+        // Debug.Log(PlayerPrefs.GetInt("totalGameScore", 0));
+
+        gameOverText.gameObject.SetActive(true);
+        totalPoint.gameObject.SetActive(true);
+        
+        StartCoroutine(LoadEndScene());
+    }
+
+    IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("BoardScene");
     }
 }

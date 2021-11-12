@@ -7,7 +7,7 @@ public class Collection : MonoBehaviour
 {
     public void Death()
     {
-        Debug.Log("Collection: " + name);
+        // Debug.Log("Collection: " + name);
         if (name.Contains("Cherry"))
         {
             FindObjectOfType<PlayerController>().CherryPlus();

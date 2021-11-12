@@ -1955,6 +1955,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1654276684145417037, guid: 4ea450066334f4e5991948b4a4edbd71, type: 3}
+      propertyPath: totalPoint
+      value: 
+      objectReference: {fileID: 1646128211}
+    - target: {fileID: 1654276684145417037, guid: 4ea450066334f4e5991948b4a4edbd71, type: 3}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 695041645}
+    - target: {fileID: 1654276684145417037, guid: 4ea450066334f4e5991948b4a4edbd71, type: 3}
       propertyPath: cherryTextNum
       value: 
       objectReference: {fileID: 1646128209}
@@ -2357,6 +2365,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6804ccc959385cd4faf6c32e762c2f9b, type: 3}
+--- !u!114 &695041645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7587123850891421235, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
+  m_PrefabInstance: {fileID: 1646128206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &720290973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2654,7 +2673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a1d24181a91fc4cb17fd59f2c835e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Win: {fileID: 0}
   IsEnd: 1
 --- !u!212 &817185988
 SpriteRenderer:
@@ -5832,10 +5850,10 @@ PrefabInstance:
     - target: {fileID: 1429309842310997337, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: OverTotalPoint
       value: 
-      objectReference: {fileID: 1646128212}
+      objectReference: {fileID: 0}
     - target: {fileID: 1445010618822853429, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5979,7 +5997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7587123850891421235, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_Text
-      value: Times Up!
+      value: Game Over!
       objectReference: {fileID: 0}
     - target: {fileID: 7653140137723276862, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_Text
@@ -6072,17 +6090,6 @@ MonoBehaviour:
 --- !u!114 &1646128211 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 615285862981594303, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
-  m_PrefabInstance: {fileID: 1646128206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1646128212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3209370488967107373, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
   m_PrefabInstance: {fileID: 1646128206}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

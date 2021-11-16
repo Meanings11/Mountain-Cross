@@ -188,9 +188,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 166091736}
-  - component: {fileID: 166091738}
   - component: {fileID: 166091737}
   - component: {fileID: 166091739}
+  - component: {fileID: 166091738}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -250,7 +250,7 @@ MonoBehaviour:
   TotalPoint: {fileID: 1482520889}
   scoreText: {fileID: 167450529}
   timer: {fileID: 1916264657}
-  audioSource: {fileID: 166091738}
+  timesUp: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
   sliceAudio: {fileID: 8300000, guid: d1773efd35af3914cb32020ca9f83db4, type: 3}
   hitAudio: {fileID: 8300000, guid: 151f706d42b6e465597331c3f4cb89e5, type: 3}
   hitInfoUI: {fileID: 1458623931}
@@ -265,7 +265,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.848
   m_Pitch: 1
@@ -903,7 +903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -170, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1482520885
@@ -1109,7 +1109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 50}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633431653
@@ -1358,8 +1358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 30, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1713487784
 MonoBehaviour:

@@ -18,6 +18,10 @@ public class CuttableObject : MonoBehaviour
         if (harmful)
         {
             SceneController.instance.playBomb();
+            // vibrate if cut bomb
+            #if UNITY_IPHONE || UNITY_ANDROID
+            Handheld.Vibrate();
+            #endif
         }
         else
         {
@@ -25,8 +29,6 @@ public class CuttableObject : MonoBehaviour
             FruitSpriteData.Instance.CreatePartFruit(fruitIndex, transform);
         }
 
-        // shake
-        Handheld.Vibrate();
         if (OnDestroyed != null)
         {
             OnDestroyed(harmful);

@@ -23,7 +23,9 @@ public class SceneController : MonoBehaviour
     public Text scoreText;
     public Text timer;
 
-    public AudioSource audioSource;
+    AudioSource audioSource;
+
+    public AudioClip timesUp;
     public AudioClip sliceAudio;
     public AudioClip hitAudio;
 
@@ -78,7 +80,7 @@ public class SceneController : MonoBehaviour
         {
             timer.text = "00:00:00";
             GameoverText.text = "Times Up!";
-            audioSource.Play();
+            audioSource.PlayOneShot(timesUp);
 
             if (!isGameOver)
             {
@@ -129,10 +131,11 @@ public class SceneController : MonoBehaviour
     {
         remainLives--;
 
-        lifeCounter.LoseLife();
-
-        // gameover
-        if (remainLives <= 0)
+        if (remainLives > 0)
+        {
+            lifeCounter.LoseLife();
+        }
+        else
         {
             EndGame();
         }
@@ -167,7 +170,7 @@ public class SceneController : MonoBehaviour
 
         if (showHitInfo)
         {
-            if (fruitCount > 1 && fruitCount > int.Parse(hitCountText.text))
+            if (fruitCount > 0 && fruitCount > int.Parse(hitCountText.text))
             {
                 hitCountText.text = fruitCount.ToString();
                 hitInfoUI.SetActive(true);
@@ -207,7 +210,6 @@ public class SceneController : MonoBehaviour
         // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
         PlayerPrefs.SetInt("totalGameScore", currentGameScore + score);
-
 
         // load back to main board
         StartCoroutine(LoadEndScene());

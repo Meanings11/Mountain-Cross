@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Globalization;
 
-public class SceneController : MonoBehaviour {
+public class SceneController : MonoBehaviour
+{
     public static SceneController instance;
 
     [Header("Gameplay")]
     public int remainLives;
     public float timeRemaining = 30f;
-    public ObjectSpawner fruitSpawner;
-    public ObjectSpawner bombSpawner;
+    public ObjectSpawner[] fruitSpawners;
+    public ObjectSpawner[] bombSpawners;
 
     [Header("Interfaces")]
     public LifeCounter lifeCounter;
@@ -28,17 +29,26 @@ public class SceneController : MonoBehaviour {
 
     private bool isGameOver = false;
     private int score = 0;
+    public GameObject hitInfoUI;
+    public Text hitCountText;
+    Dictionary<GameObject, List<bool>> swordHitObj;
+    Stack<GameObject> clearObjs;
+    float missTimeCounter = 0;
 
-    private void Awake() {
-        if (instance == null) {
+    private void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
-        }    
-        else if (instance != this) {
+        }
+        else if (instance != this)
+        {
             Destroy(gameObject);
         }
     }
 
-    void Start() {
+    void Start()
+    {
         audioSource = GetComponent<AudioSource>();
 
         // set gameover to invisible
@@ -47,64 +57,145 @@ public class SceneController : MonoBehaviour {
 
         lifeCounter.SetLives(remainLives);
 
-        fruitSpawner.OnObjectSpawned += OnObjectSpawned;
-        bombSpawner.OnObjectSpawned += OnObjectSpawned;
+        for (int i = 0, length = fruitSpawners.Length; i < length; i++)
+            fruitSpawners[i].OnObjectSpawned += OnObjectSpawned;
+        for (int i = 0, length = bombSpawners.Length; i < length; i++)
+            bombSpawners[i].OnObjectSpawned += OnObjectSpawned;
+
+        // create saver
+        swordHitObj = new Dictionary<GameObject, List<bool>>();
+        clearObjs = new Stack<GameObject>();
     }
 
     void Update()
     {
-        if (timeRemaining > 0) {
+        if (timeRemaining > 0)
+        {
             timeRemaining -= Time.deltaTime;
             timer.text = "00:00:" + Mathf.RoundToInt(timeRemaining).ToString("d2");
-        } else {
+        }
+        else
+        {
             timer.text = "00:00:00";
             GameoverText.text = "Times Up!";
             audioSource.Play();
-            
-            if (!isGameOver) {
+
+            if (!isGameOver)
+            {
                 EndGame();
+            }
+        }
+
+        if (hitInfoUI.activeSelf)
+        {
+            missTimeCounter += Time.deltaTime;
+            if (missTimeCounter >= 1)
+            {
+                missTimeCounter = 0;
+
+                hitCountText.text = "0";
+                hitInfoUI.SetActive(false);
             }
         }
     }
 
-    void OnObjectSpawned(CuttableObject obj) {
+    void OnObjectSpawned(CuttableObject obj)
+    {
         obj.OnDestroyed += OnObjectDestroyed;
     }
 
-    void OnObjectDestroyed(bool harmful) {
-        if (!harmful) {
+    void OnObjectDestroyed(bool harmful)
+    {
+        if (!harmful)
+        {
             score += 10;
 
-            if (score == 0 || score == 00) {
+            if (score == 0 || score == 00)
+            {
                 scoreText.text = "$0";
-            } else {
+            }
+            else
+            {
                 scoreText.text = "$" + string.Format("{0:0,0}", Int32.Parse(score.ToString()));
             }
-        } else {
+        }
+        else
+        {
             LoseLife();
         }
     }
 
-    void LoseLife() {
+    void LoseLife()
+    {
         remainLives--;
 
         lifeCounter.LoseLife();
 
         // gameover
-        if (remainLives <= 0) {
+        if (remainLives <= 0)
+        {
             EndGame();
         }
     }
 
-    public void playBomb(){
+    public void HitCuttable(GameObject sword, bool bomber)
+    {
+        // clear
+        foreach (var item in swordHitObj)
+        {
+            if (item.Key == null)
+                clearObjs.Push(item.Key);
+        }
+        for (int i = 0, length = clearObjs.Count; i < length; i++)
+            swordHitObj.Remove(clearObjs.Pop());
+
+        if (!swordHitObj.ContainsKey(sword))
+            swordHitObj.Add(sword, new List<bool>());
+
+        swordHitObj[sword].Add(bomber);
+
+        bool showHitInfo = !bomber;
+        int fruitCount = 0;
+        for (int i = 0, length = swordHitObj[sword].Count; i < length; i++)
+        {
+            showHitInfo &= !swordHitObj[sword][i];
+            fruitCount++;
+
+            if (!showHitInfo)
+                break;
+        }
+
+        if (showHitInfo)
+        {
+            if (fruitCount > 1 && fruitCount > int.Parse(hitCountText.text))
+            {
+                hitCountText.text = fruitCount.ToString();
+                hitInfoUI.SetActive(true);
+            }
+        }
+        else
+        {
+            hitCountText.text = "0";
+            hitInfoUI.SetActive(false);
+        }
+    }
+
+    public void playBomb()
+    {
+        missTimeCounter = 0;
+
         audioSource.PlayOneShot(hitAudio);
     }
 
-    public void playSlice(){
+    public void playSlice()
+    {
+        missTimeCounter = 0;
+
         audioSource.PlayOneShot(sliceAudio);
     }
 
-    void EndGame() {
+    void EndGame()
+    {
         isGameOver = true;
         scoreText.gameObject.SetActive(false);
 
@@ -122,7 +213,8 @@ public class SceneController : MonoBehaviour {
         StartCoroutine(LoadEndScene());
     }
 
-    IEnumerator LoadEndScene() {
+    IEnumerator LoadEndScene()
+    {
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("BoardScene");
     }

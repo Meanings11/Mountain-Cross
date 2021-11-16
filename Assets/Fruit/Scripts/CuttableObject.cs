@@ -8,7 +8,7 @@ public class CuttableObject : MonoBehaviour
     public event ObjectDestoryedHandler OnDestroyed;
 
     public int destoryTime = 2;
-    public GameObject effect;
+    public GameObject[] effects;
     public bool harmful;
 
     internal int fruitIndex;
@@ -34,7 +34,16 @@ public class CuttableObject : MonoBehaviour
 
         Vector3 temp = transform.position;
         Destroy(gameObject);
-        var instance = Instantiate(effect, temp, Quaternion.identity);
+        var instance = Instantiate(effects[fruitIndex], temp, Quaternion.identity);
         Destroy(instance, 1);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Cut")
+        {
+            SceneController.instance.HitCuttable(collision.gameObject, harmful);
+            OnHit();
+        }
     }
 }

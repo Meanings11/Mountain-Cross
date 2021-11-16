@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4916241242922135340}
   - component: {fileID: 824083405811100085}
   m_Layer: 8
-  m_Name: bomb
+  m_Name: bomb 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumXSpeed: -3
   maximumXSpeed: 3
-  minimumYSpeed: 12
-  maximumYSpeed: 15
+  minimumYSpeed: -3
+  maximumYSpeed: -5
   lifetime: 3
 --- !u!114 &824083405811100085
 MonoBehaviour:

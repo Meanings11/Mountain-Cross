@@ -10,8 +10,8 @@ public class FruitPart : MonoBehaviour
 
     public void Init(FruitPartData data)
     {
-        //this.part1.sprite = data.part1;
-        //this.part2.sprite = data.part2;
+        this.part1.sprite = data.part1;
+        this.part2.sprite = data.part2;
         for (int i = 0, length = rigs.Length; i < length; i++)
             rigs[i].AddForce(Random.insideUnitCircle * 100);
 

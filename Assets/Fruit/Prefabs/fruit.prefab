@@ -104,7 +104,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &4916241242922135379
@@ -147,8 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumXSpeed: -3
   maximumXSpeed: 3
-  minimumYSpeed: 12
-  maximumYSpeed: 15
+  minimumYSpeed: 10
+  maximumYSpeed: 12
   lifetime: 3
 --- !u!114 &2206026497303654683
 MonoBehaviour:
@@ -163,11 +163,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destoryTime: 2
-  effects:
-  - {fileID: 1385446251111439851, guid: 3ceb1e116e424c64f84ec7e1b9f77687, type: 3}
-  - {fileID: 1385446251111439851, guid: 35a3fad47fc19a3439a07290265168ee, type: 3}
-  - {fileID: 1385446251111439851, guid: c8bb3e8a8a65cff448207e739fccfeb6, type: 3}
-  - {fileID: 1385446251111439851, guid: fed803202fe81fe4f8c3d14887731325, type: 3}
-  - {fileID: 1385446251111439851, guid: 35a3fad47fc19a3439a07290265168ee, type: 3}
-  - {fileID: 1385446251111439851, guid: 3ceb1e116e424c64f84ec7e1b9f77687, type: 3}
+  effect: {fileID: 1385446251111439851, guid: 3ceb1e116e424c64f84ec7e1b9f77687, type: 3}
   harmful: 0

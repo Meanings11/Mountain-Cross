@@ -7,7 +7,7 @@ public class FruitSpriteData : MonoBehaviour
     public static FruitSpriteData Instance;
 
     public FruitPartData[] fruitPartDatas;
-    public FruitPart[] fruitPartPfs;
+    public FruitPart fruitPartPf;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class FruitSpriteData : MonoBehaviour
 
     public void CreatePartFruit(int fruitIndex, Transform trans)
     {
-        FruitPart obj = Instantiate(fruitPartPfs[fruitIndex]);
+        FruitPart obj = Instantiate(fruitPartPf);
 
         obj.Init(fruitPartDatas[fruitIndex]);
         obj.transform.position = trans.position;

@@ -17,7 +17,8 @@ public class ObjectSpawner : MonoBehaviour
     public float interval;
     public float minimumX;
     public float maximumX;
-    public float y;
+    public float minY;
+    public float maxY;
 
     [Header("Visuals")]
     public Sprite[] sprites;
@@ -41,7 +42,7 @@ public class ObjectSpawner : MonoBehaviour
     private void Spawn()
     {
         GameObject instance = Instantiate(prefab);
-        instance.transform.position = new Vector2(Random.Range(minimumX, maximumX), y);
+        instance.transform.position = new Vector2(Random.Range(minimumX, maximumX), Random.Range(minY, maxY));
         instance.transform.SetParent(transform);
 
         if (OnObjectSpawned != null)

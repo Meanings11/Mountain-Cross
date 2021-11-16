@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4916241242922135342}
   - component: {fileID: 4916241242922135379}
   - component: {fileID: 4916241242922135340}
-  - component: {fileID: 824083405811100085}
+  - component: {fileID: 2206026497303654683}
   m_Layer: 8
-  m_Name: bomb
+  m_Name: fruit 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 960514471
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ccbb636c370f3164eb9f548a35563bef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da95b236f5f56b948b0925589dd8b908, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &4916241242922135379
@@ -124,7 +124,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.11, y: 7.15}
+    oldSize: {x: 5.51, y: 6}
     newSize: {x: 5.51, y: 6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -145,12 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33eed8488917484691612bcca055fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumXSpeed: -3
-  maximumXSpeed: 3
-  minimumYSpeed: 12
-  maximumYSpeed: 15
+  minimumXSpeed: -5
+  maximumXSpeed: -10
+  minimumYSpeed: -2
+  maximumYSpeed: 10
   lifetime: 3
---- !u!114 &824083405811100085
+--- !u!114 &2206026497303654683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,5 +164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destoryTime: 2
   effects:
-  - {fileID: 8735431683099021509, guid: 7376be602eadc9b4893f0042fd40e214, type: 3}
-  harmful: 1
+  - {fileID: 1385446251111439851, guid: 3ceb1e116e424c64f84ec7e1b9f77687, type: 3}
+  - {fileID: 1385446251111439851, guid: 35a3fad47fc19a3439a07290265168ee, type: 3}
+  - {fileID: 1385446251111439851, guid: c8bb3e8a8a65cff448207e739fccfeb6, type: 3}
+  - {fileID: 1385446251111439851, guid: fed803202fe81fe4f8c3d14887731325, type: 3}
+  - {fileID: 1385446251111439851, guid: 35a3fad47fc19a3439a07290265168ee, type: 3}
+  - {fileID: 1385446251111439851, guid: 3ceb1e116e424c64f84ec7e1b9f77687, type: 3}
+  harmful: 0

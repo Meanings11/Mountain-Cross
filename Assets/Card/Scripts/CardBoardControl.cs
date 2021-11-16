@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CardBoardControl : MonoBehaviour {
 
@@ -64,7 +65,7 @@ public class CardBoardControl : MonoBehaviour {
     private MainCard _secondRevealed;
 
     private int _score = 0;
-    [SerializeField] private TextMesh scoreLabel;
+    [SerializeField] private Text scoreLabel;
 
     public bool canReveal
     {

@@ -147,8 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumXSpeed: -3
   maximumXSpeed: 3
-  minimumYSpeed: 12
-  maximumYSpeed: 15
+  minimumYSpeed: 10
+  maximumYSpeed: 12
   lifetime: 3
 --- !u!114 &824083405811100085
 MonoBehaviour:
@@ -163,6 +163,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destoryTime: 2
-  effects:
-  - {fileID: 8735431683099021509, guid: 7376be602eadc9b4893f0042fd40e214, type: 3}
+  effect: {fileID: 8735431683099021509, guid: 7376be602eadc9b4893f0042fd40e214, type: 3}
   harmful: 1

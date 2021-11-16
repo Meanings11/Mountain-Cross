@@ -24,6 +24,7 @@ public class Sword : MonoBehaviour
 
     void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             dragging = true;
@@ -33,46 +34,47 @@ public class Sword : MonoBehaviour
         {
             SpawnCut();
         }
-        // if (Input.GetMouseButton(0))
-        // {
-        //    Hit(Input.mousePosition);
-        // }
-        // if (Input.touchCount > 0)
-        // {
-        //    for (int i = 0, length = Input.touchCount; i < length; i++)
-        //    {
-        //        int index = i;
-        //        int fingerId = Input.touches[index].fingerId;
-        //        Vector3 point = mainCamera.ScreenToWorldPoint(Input.touches[index].position);
-        //        point.Set(point.x, point.y, -1);
-        //        switch (Input.touches[index].phase)
-        //        {
-        //            case TouchPhase.Began:
-        //                if (!lineInsts.ContainsKey(fingerId))
-        //                {
-        //                    lineInsts[fingerId] = Instantiate(linePf);
-        //                    lineInsts[fingerId].Init();
-        //                }
+        if (Input.GetMouseButton(0))
+        {
+            Hit(Input.mousePosition);
+        }
+#endif
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0, length = Input.touchCount; i < length; i++)
+            {
+                int index = i;
+                int fingerId = Input.touches[index].fingerId;
+                Vector3 point = mainCamera.ScreenToWorldPoint(Input.touches[index].position);
+                point.Set(point.x, point.y, -5);
+                switch (Input.touches[index].phase)
+                {
+                    case TouchPhase.Began:
+                        if (!lineInsts.ContainsKey(fingerId))
+                        {
+                            lineInsts[fingerId] = Instantiate(linePf);
+                            lineInsts[fingerId].Init();
+                        }
 
-        //                lineInsts[fingerId].AddPos(point);
-        //                break;
-        //            case TouchPhase.Moved:
-        //            case TouchPhase.Stationary:
-        //                if (lineInsts.TryGetValue(fingerId, out HitLine hl))
-        //                    hl.AddPos(point);
-        //                break;
-        //            default:
-        //                if (lineInsts.ContainsKey(fingerId))
-        //                {
-        //                    Destroy(lineInsts[fingerId].gameObject);
-        //                    lineInsts.Remove(fingerId);
-        //                }
-        //                break;
-        //        }
+                        lineInsts[fingerId].AddPos(point);
+                        break;
+                    case TouchPhase.Moved:
+                    case TouchPhase.Stationary:
+                        if (lineInsts.TryGetValue(fingerId, out HitLine hl))
+                            hl.AddPos(point);
+                        break;
+                    default:
+                        if (lineInsts.ContainsKey(fingerId))
+                        {
+                            Destroy(lineInsts[fingerId].gameObject);
+                            lineInsts.Remove(fingerId);
+                        }
+                        break;
+                }
 
-        //        Hit(Input.touches[index].position);
-        //    }
-        // }
+                Hit(Input.touches[index].position);
+            }
+        }
     }
 
     void Hit(Vector2 screenPos)
@@ -87,13 +89,13 @@ public class Sword : MonoBehaviour
         Vector2 swipeEnd = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         GameObject cutInstance = Instantiate(cutPrefab, swipeStart, Quaternion.identity);
-        cutInstance.GetComponent<LineRenderer>().SetPosition(0, new Vector3(swipeStart.x, swipeStart.y, 0));
-        cutInstance.GetComponent<LineRenderer>().SetPosition(1, new Vector3(swipeEnd.x, swipeEnd.y, 0));
+        cutInstance.GetComponent<LineRenderer>().SetPosition(0, swipeStart);
+        cutInstance.GetComponent<LineRenderer>().SetPosition(1, swipeEnd);
 
-        Vector2[] colliderPoints = new Vector2[2];
-        colliderPoints[0] = Vector2.zero;
-        colliderPoints[1] = swipeEnd - swipeStart;
-        cutInstance.GetComponent<EdgeCollider2D>().points = colliderPoints;
+        //Vector2[] colliderPoints = new Vector2[2];
+        //colliderPoints[0] = Vector2.zero;
+        //colliderPoints[1] = swipeEnd - swipeStart;
+        //cutInstance.GetComponent<EdgeCollider2D>().points = colliderPoints;
 
         Destroy(cutInstance, cutLifetime);
     }

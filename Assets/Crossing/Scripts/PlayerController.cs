@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     public Transform cellCheck, groundCheck;
     public Text cherryTextNum, HPTextNum;
     public Text gameOverText, totalPoint;
+
+    AudioSource audioSource;
+    public AudioClip timesUp;
+
     [Space]
     public float speed, jumpforce;
     [SerializeField]
@@ -30,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private static int cherryCount;
 
     private static int hP = 1;
+
+    private bool firstHit = true;
 
     public float IsBulkTimer;
     public float IsDownsizingTimer;
@@ -73,6 +79,7 @@ public class PlayerController : MonoBehaviour
         }
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
@@ -125,7 +132,13 @@ public class PlayerController : MonoBehaviour
         } else {
             timer.text = "00:00:00";
             gameOverText.text = "Times Up!";
-            GameOver();
+
+            if (firstHit == true) {
+                audioSource.PlayOneShot(timesUp);
+                GameOver();
+            }
+
+            firstHit = false;
         }
     }
     

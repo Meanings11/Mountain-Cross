@@ -219,12 +219,12 @@ public class GameControl : MonoBehaviour {
         // Check steps
         int rewardedSteps = waypoints_reward[currentIndex];
 
+        // check and automic apply insurance
+        bool isInsuranceApplicable = (PlayerStats.getItemNum(PlayerStats.insurance) > 0);
         // Set reward finish if no reward
         if (rewardedSteps == 0) {
             int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
 
-            // check and automic apply insurance
-            bool isInsuranceApplicable = (PlayerStats.getItemNum(PlayerStats.insurance) > 1);
 
             // Adjust gamescore if it is a rewarded score
             if (score_rewad[currentIndex] != 0) {
@@ -235,7 +235,7 @@ public class GameControl : MonoBehaviour {
                 } else {
 
                     if (isInsuranceApplicable) {
-                        playerMoveCount.GetComponent<Text>().text = "Your insurance saved you\nfrom panelty!";
+                        playerMoveCount.GetComponent<Text>().text = "Your insurance saved you\nfrom penalty!";
                     }
                     else if (currentGameScore + score_rewad[currentIndex] <= 0) {
                         playerMoveCount.GetComponent<Text>().text = "Lose all the money...";
@@ -260,7 +260,9 @@ public class GameControl : MonoBehaviour {
                     playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                     // Go to mini-game
-                    if (currentIndex == 5) {
+                    if (currentIndex == 4) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene");
+                    } else if (currentIndex == 5) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
                     } else if (currentIndex == 9) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene");
@@ -274,7 +276,7 @@ public class GameControl : MonoBehaviour {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                     } else {
                         // randomly go to unassigned games
-                        int randomIndex = UnityEngine.Random.Range(0, 6); // random decide for now
+                        int randomIndex = UnityEngine.Random.Range(0, 7); // random decide for now
                         // if (randomIndex == 0) {
                         //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
                         // } else {
@@ -289,6 +291,7 @@ public class GameControl : MonoBehaviour {
                             case 3: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole"); break;
                             case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
                             case 5: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene"); break;
+                            case 6: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene"); break;
                         }
                     }
 
@@ -309,21 +312,30 @@ public class GameControl : MonoBehaviour {
                         PlayerPrefs.SetInt("totalGameScore", newGameScore);
                     } else if (currentIndex == 3 || currentIndex == 16) {
                         int randomReward = UnityEngine.Random.Range(-100, 101);
-                        int adjustedReward = randomReward * 10;
+                        int adjustedReward = randomReward * 5;
+
                         if (adjustedReward > 0) {
+                            //Reward
                             playerMoveCount.GetComponent<Text>().text = "Surprise! You get $" + adjustedReward;
                         } else if (adjustedReward == 0) {
                             playerMoveCount.GetComponent<Text>().text = "Hmm... Nothing changes";
                         } else {
-                            if (currentGameScore + adjustedReward <= 0) {
+                            //Penalty
+                            if (isInsuranceApplicable) {
+                                playerMoveCount.GetComponent<Text>().text = "Your insurance saved you\nfrom penalty!";
+                            } else if (currentGameScore + adjustedReward <= 0) {
                                 playerMoveCount.GetComponent<Text>().text = "Oops! You lose all your money...";
                             } else {
                                 playerMoveCount.GetComponent<Text>().text = "Oops! You lose $" + Mathf.Abs(adjustedReward);
                             }
                         }
                         // Adjust score
-                        int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
-                        PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                        if (!isInsuranceApplicable) {
+                            int newGameScore = Math.Max(currentGameScore + adjustedReward, 0);
+                            PlayerPrefs.SetInt("totalGameScore", newGameScore);
+                        } else {
+                            PlayerStats.useOneItem(PlayerStats.insurance);
+                        }
                     }
                     hasFinishedReward = true;
                 }

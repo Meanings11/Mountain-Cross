@@ -33,12 +33,12 @@ public class Sword : MonoBehaviour
         {
             SpawnCut();
         }
-        //if (Input.GetMouseButton(0))
-        //{
+        // if (Input.GetMouseButton(0))
+        // {
         //    Hit(Input.mousePosition);
-        //}
-        //if (Input.touchCount > 0)
-        //{
+        // }
+        // if (Input.touchCount > 0)
+        // {
         //    for (int i = 0, length = Input.touchCount; i < length; i++)
         //    {
         //        int index = i;
@@ -72,7 +72,7 @@ public class Sword : MonoBehaviour
 
         //        Hit(Input.touches[index].position);
         //    }
-        //}
+        // }
     }
 
     void Hit(Vector2 screenPos)

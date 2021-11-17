@@ -259,8 +259,19 @@ public class GameControl : MonoBehaviour {
                     playerMoveCount.GetComponent<Text>().text = "Game Time!";
 
                     // Go to mini-game
-                    if (currentIndex == 4) {
+                    if (currentIndex == 1) {
+                        sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CardScene");
+                    } else if (currentIndex == 4) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene");
+
+                        // // go to random level
+                        // int randomIndex = UnityEngine.Random.Range(0, 4);
+                        // switch (randomIndex)
+                        // {
+                        //     case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene1"); break;
+                        //     case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene2"); break;
+                        //     case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene3"); break;
+                        // }
                     } else if (currentIndex == 5) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
                     } else if (currentIndex == 9) {
@@ -273,25 +284,6 @@ public class GameControl : MonoBehaviour {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene");
                     } else if (currentIndex == 21) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-                    } else {
-                        // randomly go to unassigned games
-                        int randomIndex = UnityEngine.Random.Range(0, 7); // random decide for now
-                        // if (randomIndex == 0) {
-                        //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene");
-                        // } else {
-                        //     sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "HexgonScene");
-                        // }
-
-                        switch (randomIndex)
-                        {
-                            case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
-                            case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
-                            case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
-                            case 3: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole"); break;
-                            case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
-                            case 5: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene"); break;
-                            case 6: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene"); break;
-                        }
                     }
 
                     StartCoroutine(disableDice());

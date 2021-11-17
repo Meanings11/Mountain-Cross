@@ -12,6 +12,7 @@ public class TestGames : MonoBehaviour
     public Button parachute;
     public Button rhythm;
     public Button mosquito;
+    public Button card;
     public Button crossing;
     public Button store;
 
@@ -25,6 +26,7 @@ public class TestGames : MonoBehaviour
         Button parachuteBtn = parachute.GetComponent<Button>();
         Button rhythmBtn = rhythm.GetComponent<Button>();
         Button mosquitoBtn = mosquito.GetComponent<Button>();
+        Button cardBtn = card.GetComponent<Button>();
         Button crossingBtn = crossing.GetComponent<Button>();
         Button storeBtn = store.GetComponent<Button>();
 
@@ -34,6 +36,7 @@ public class TestGames : MonoBehaviour
         parachuteBtn.onClick.AddListener(TaskOnParachute);
         rhythmBtn.onClick.AddListener(TaskOnRhythm);
         mosquitoBtn.onClick.AddListener(TaskOnMosquito);
+        cardBtn.onClick.AddListener(TaskOnCard);
         crossingBtn.onClick.AddListener(TaskOnCrossing);
         storeBtn.onClick.AddListener(TaskOnStore);
     }
@@ -64,6 +67,10 @@ public class TestGames : MonoBehaviour
 
     void TaskOnMosquito() {
         SceneManager.LoadScene("MosquitoScene");
+    }
+
+    void TaskOnCard() {
+        SceneManager.LoadScene("CardScene");
     }
 
     void TaskOnCrossing() {

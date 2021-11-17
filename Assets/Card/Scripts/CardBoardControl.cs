@@ -25,7 +25,10 @@ public class CardBoardControl : MonoBehaviour {
 
     // UI
     [SerializeField] private Text scoreLabel;
-    public Text gamerOverText;
+
+    public GameObject gamerOverCanvas;
+
+    public Text totalPoint;
     public Text timerText;
 
     // ---------------------------------
@@ -40,9 +43,7 @@ public class CardBoardControl : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 
         // hide gameover
-        gamerOverText = GameObject.Find("GamerOverText").GetComponent<Text>();
-        timerText = GameObject.Find("TimerText").GetComponent<Text>();
-        gamerOverText.gameObject.SetActive(false);
+        gamerOverCanvas.SetActive(false);
 
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
 
@@ -158,18 +159,16 @@ public class CardBoardControl : MonoBehaviour {
 
         _firstRevealed = null;
         _secondRevealed = null;
-
     }
 
-    public void ExitGame(){
-        gamerOverText.gameObject.SetActive(true);
+    public void ExitGame() {
         int finalScore = (correctNum == (gridCols*gridRows/2)) ? (200 - (trial-12)*10) : 0;
-        gamerOverText.text = "You got $ " + finalScore + " in this game!";
-        Debug.Log("final score: " +  finalScore);
+        // Debug.Log("final score: " +  finalScore);
+        totalPoint.text = "Earned $" + finalScore + " in total";
+        gamerOverCanvas.SetActive(true);
 
-         // Set global score
+        // Set global score
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-
         PlayerPrefs.SetInt("totalGameScore", currentGameScore + finalScore);
         
         // End scene
@@ -177,7 +176,7 @@ public class CardBoardControl : MonoBehaviour {
     }
 
      IEnumerator LoadEndScene() {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("BoardScene");
     }
 

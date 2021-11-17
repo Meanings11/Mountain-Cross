@@ -20,15 +20,20 @@ public class CardBoardControl : MonoBehaviour {
     private int correctNum = 0;
     private int trial = 0;
 
+    private float timeRemaining = 30f;
+    private bool firstHit = true;
+
     // UI
     [SerializeField] private Text scoreLabel;
     public Text gamerOverText;
+    public Text timerText;
 
     // ---------------------------------
     public AudioSource audioSource;
     public AudioClip flipSound; 
     public AudioClip scoreSound; 
     public AudioClip failSound; 
+    public AudioClip timesUp;
 
     private void Start()
     {   
@@ -36,6 +41,7 @@ public class CardBoardControl : MonoBehaviour {
 
         // hide gameover
         gamerOverText = GameObject.Find("GamerOverText").GetComponent<Text>();
+        timerText = GameObject.Find("TimerText").GetComponent<Text>();
         gamerOverText.gameObject.SetActive(false);
 
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
@@ -64,6 +70,22 @@ public class CardBoardControl : MonoBehaviour {
                 float posX = (offsetX * i) + startPos.x;
                 float posY = (offsetY * j) + startPos.y;
                 card.transform.position = new Vector3(posX, posY, startPos.z);
+            }
+        }
+    }
+
+    void Update(){
+        // end the game after 30s
+        if (timeRemaining > 0) {
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining > 10) timerText.text = "0:" + (int)timeRemaining;
+            else timerText.text = "0:0" + (int)timeRemaining;
+        } else {
+            timerText.text = "0:00";
+            if (firstHit == true) {
+                audioSource.PlayOneShot(timesUp);
+                ExitGame();
+                firstHit = false;
             }
         }
     }
@@ -141,9 +163,22 @@ public class CardBoardControl : MonoBehaviour {
 
     public void ExitGame(){
         gamerOverText.gameObject.SetActive(true);
-        int finalScore = (200 - (trial-12)*10);
+        int finalScore = (correctNum == (gridCols*gridRows/2)) ? (200 - (trial-12)*10) : 0;
         gamerOverText.text = "You got $ " + finalScore + " in this game!";
         Debug.Log("final score: " +  finalScore);
+
+         // Set global score
+        int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
+
+        PlayerPrefs.SetInt("totalGameScore", currentGameScore + finalScore);
+        
+        // End scene
+        StartCoroutine(LoadEndScene());
+    }
+
+     IEnumerator LoadEndScene() {
+        yield return new WaitForSeconds(3.5f);
+        SceneManager.LoadScene("BoardScene");
     }
 
     public void Restart()

@@ -19,7 +19,10 @@ public class CardBoardControl : MonoBehaviour {
 
     private int correctNum = 0;
     private int trial = 0;
+
+    // UI
     [SerializeField] private Text scoreLabel;
+    public Text gamerOverText;
 
     // ---------------------------------
     public AudioSource audioSource;
@@ -30,6 +33,11 @@ public class CardBoardControl : MonoBehaviour {
     private void Start()
     {   
         audioSource = GetComponent<AudioSource>();
+
+        // hide gameover
+        gamerOverText = GameObject.Find("GamerOverText").GetComponent<Text>();
+        gamerOverText.gameObject.SetActive(false);
+
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
 
         int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3};
@@ -100,7 +108,7 @@ public class CardBoardControl : MonoBehaviour {
         }
 
         if (correctNum == (gridCols*gridRows/2)) {
-            Debug.Log("final score: " + (200 - (trial-12)*10));
+            ExitGame();
         }
     }
 
@@ -129,6 +137,13 @@ public class CardBoardControl : MonoBehaviour {
         _firstRevealed = null;
         _secondRevealed = null;
 
+    }
+
+    public void ExitGame(){
+        gamerOverText.gameObject.SetActive(true);
+        int finalScore = (200 - (trial-12)*10);
+        gamerOverText.text = "You got $ " + finalScore + " in this game!";
+        Debug.Log("final score: " +  finalScore);
     }
 
     public void Restart()

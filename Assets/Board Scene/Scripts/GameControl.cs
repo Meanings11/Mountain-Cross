@@ -59,9 +59,9 @@ public class GameControl : MonoBehaviour {
         }*/
         ScreenRotate();
 
+        minigamesIndexes.Add(1);
         minigamesIndexes.Add(4);
         minigamesIndexes.Add(5);
-        minigamesIndexes.Add(6);
         minigamesIndexes.Add(9);
         minigamesIndexes.Add(10);
         minigamesIndexes.Add(12);
@@ -299,7 +299,7 @@ public class GameControl : MonoBehaviour {
                     if (currentIndex == 13 || currentIndex == 23) {
                         shop.gameObject.SetActive(true); // go to store
                         isInStore = true;
-                    } else if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
+                    } else if (currentIndex == 3 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {
                         int newGameScore = 0;
@@ -309,7 +309,7 @@ public class GameControl : MonoBehaviour {
                         int newGameScore = currentGameScore * 2;
                         playerMoveCount.GetComponent<Text>().text = "Double your money!";
                         PlayerPrefs.SetInt("totalGameScore", newGameScore);
-                    } else if (currentIndex == 3 || currentIndex == 16) {
+                    } else if (currentIndex == 6 || currentIndex == 16) {
                         int randomReward = UnityEngine.Random.Range(-100, 101);
                         int adjustedReward = randomReward * 5;
 

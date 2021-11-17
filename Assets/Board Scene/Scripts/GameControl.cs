@@ -65,7 +65,6 @@ public class GameControl : MonoBehaviour {
         minigamesIndexes.Add(9);
         minigamesIndexes.Add(10);
         minigamesIndexes.Add(12);
-        minigamesIndexes.Add(13);
         minigamesIndexes.Add(15);
         minigamesIndexes.Add(19);
         minigamesIndexes.Add(21);
@@ -297,8 +296,8 @@ public class GameControl : MonoBehaviour {
 
                     StartCoroutine(disableDice());
                 } else {
-                    if (currentIndex == 23) {
-                        shop.gameObject.SetActive(true); // go to 
+                    if (currentIndex == 13 || currentIndex == 23) {
+                        shop.gameObject.SetActive(true); // go to store
                         isInStore = true;
                     } else if (currentIndex == 1 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";

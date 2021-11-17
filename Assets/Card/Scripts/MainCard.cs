@@ -6,6 +6,7 @@ public class MainCard : MonoBehaviour {
 
     [SerializeField] private CardBoardControl controller;
     [SerializeField] private GameObject Card_Back;
+    private int _id;
 
     public void OnMouseDown()
     {
@@ -16,7 +17,6 @@ public class MainCard : MonoBehaviour {
         }
     }
 
-    private int _id;
     public int id
     {
         get { return _id; }

@@ -14,6 +14,13 @@ public class CardBoardControl : MonoBehaviour {
     [SerializeField] private MainCard originalCard;
     [SerializeField] private Sprite[] images;
 
+    private MainCard _firstRevealed;
+    private MainCard _secondRevealed;
+
+    private int correctNum = 0;
+    private int trial = 0;
+    [SerializeField] private Text scoreLabel;
+
     private void Start()
     {
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
@@ -60,20 +67,18 @@ public class CardBoardControl : MonoBehaviour {
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------
-
-    private MainCard _firstRevealed;
-    private MainCard _secondRevealed;
-
-    private int _score = 0;
-    [SerializeField] private Text scoreLabel;
-
     public bool canReveal
     {
         get { return _secondRevealed == null; }
     }
 
     public void CardRevealed(MainCard card)
-    {
+    {  
+
+        //increment trial
+        trial++;
+        scoreLabel.text = "Trial: " + trial;
+
         if(_firstRevealed == null)
         {
             _firstRevealed = card;
@@ -83,14 +88,18 @@ public class CardBoardControl : MonoBehaviour {
             _secondRevealed = card;
             StartCoroutine(CheckMatch());
         }
+
+        if (correctNum == (gridCols*gridRows/2)) {
+            Debug.Log("final score: " + (200 - (trial-12)*10));
+        }
     }
 
     private IEnumerator CheckMatch()
     {
         if(_firstRevealed.id == _secondRevealed.id)
         {
-            _score++;
-            scoreLabel.text = "Score: " + _score;
+            correctNum++;
+            //scoreLabel.text = "Score: " + correctNum;
         }
         else
         {

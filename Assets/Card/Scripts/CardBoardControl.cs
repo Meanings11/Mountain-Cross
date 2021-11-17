@@ -21,8 +21,15 @@ public class CardBoardControl : MonoBehaviour {
     private int trial = 0;
     [SerializeField] private Text scoreLabel;
 
+    // ---------------------------------
+    public AudioSource audioSource;
+    public AudioClip flipSound; 
+    public AudioClip scoreSound; 
+    public AudioClip failSound; 
+
     private void Start()
-    {
+    {   
+        audioSource = GetComponent<AudioSource>();
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
 
         int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3};
@@ -78,6 +85,9 @@ public class CardBoardControl : MonoBehaviour {
         //increment trial
         trial++;
         scoreLabel.text = "Trial: " + trial;
+        
+        // play sound 
+        audioSource.PlayOneShot(flipSound);
 
         if(_firstRevealed == null)
         {
@@ -100,6 +110,9 @@ public class CardBoardControl : MonoBehaviour {
         {
             correctNum++;
             //scoreLabel.text = "Score: " + correctNum;
+            
+            //sound
+            audioSource.PlayOneShot(scoreSound);
         }
         else
         {
@@ -107,6 +120,10 @@ public class CardBoardControl : MonoBehaviour {
 
             _firstRevealed.Unreveal();
             _secondRevealed.Unreveal();
+
+            
+            //sound
+            audioSource.PlayOneShot(failSound);
         }
 
         _firstRevealed = null;

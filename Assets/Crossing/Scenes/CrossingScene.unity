@@ -2673,7 +2673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a1d24181a91fc4cb17fd59f2c835e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsEnd: 1
 --- !u!212 &817185988
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5857,11 +5856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5881,11 +5880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 235
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 100.5
       objectReference: {fileID: 0}
     - target: {fileID: 1772859201067435588, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -5897,11 +5896,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5913,11 +5912,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 155
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1858691331364351908, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -5989,7 +5988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6984967178121519229, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 36
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 7291619141052245812, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_Color.a
@@ -6029,11 +6028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9159342106036914154, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 9159342106036914154, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 9159342106036914154, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6057,7 +6056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9159342106036914154, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9159342106036914154, guid: 64d1dc6b82a5142e286ca04dae1b0c9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

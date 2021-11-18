@@ -144,6 +144,11 @@ public class CardBoardControl : MonoBehaviour {
             
             //sound
             audioSource.PlayOneShot(scoreSound);
+
+            //vibrate
+            #if UNITY_IPHONE || UNITY_ANDROID
+            Handheld.Vibrate();
+            #endif
         }
         else
         {

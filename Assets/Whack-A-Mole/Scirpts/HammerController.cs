@@ -104,6 +104,12 @@ public class HammerController : MonoBehaviour
                 // update score while hit the mole
                 if (moleGt.isBride) {
                     score = 0;
+
+                    // Vibrate if hit the bride
+                    #if UNITY_IPHONE || UNITY_ANDROID
+                    Handheld.Vibrate();
+                    #endif
+
                     bridePanel.SetActive(true); // show lose point alert
                 } else {
                     score += 10;

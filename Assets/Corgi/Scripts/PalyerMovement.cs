@@ -111,6 +111,12 @@ public class PalyerMovement : MonoBehaviour
             HealthBar healthBarScript = healthBar.GetComponent<HealthBar>();
             if (other.gameObject.tag == "lightCircle") {
                 spinSource.PlayOneShot(hitPlayer);
+
+                // Vibrate if hit
+                #if UNITY_IPHONE || UNITY_ANDROID
+                Handheld.Vibrate();
+                #endif
+
                 if (healthBarScript.currentHealth <= 1) {
                     if (firstHit == true) {
                         EndGame();

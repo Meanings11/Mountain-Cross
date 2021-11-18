@@ -121,6 +121,11 @@ public class playerMovement : MonoBehaviour {
             Destroy(col.gameObject);
 
             if (firstHit == true) {
+                // Vibrate if hit
+                #if UNITY_IPHONE || UNITY_ANDROID
+                Handheld.Vibrate();
+                #endif
+                
                 animator.SetTrigger("Dead");
                 Instantiate(hitEffect, col.transform.position, Quaternion.identity);
 

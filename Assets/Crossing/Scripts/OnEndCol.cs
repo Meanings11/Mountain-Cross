@@ -22,6 +22,11 @@ public class OnEndCol : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            // Vibrate if hit the ending sign
+            #if UNITY_IPHONE || UNITY_ANDROID
+            Handheld.Vibrate();
+            #endif
+            
             PlayerController.Ins.GameOver();
             Destroy(this.gameObject);
             return;

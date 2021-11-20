@@ -12,6 +12,8 @@ public class BeginScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        
         beginVideo = GetComponent<VideoPlayer>();
         beginVideo.Play();
         beginVideo.loopPointReached += CheckOver;
@@ -20,7 +22,7 @@ public class BeginScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     void CheckOver(UnityEngine.Video.VideoPlayer vp)

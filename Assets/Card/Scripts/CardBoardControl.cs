@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class CardBoardControl : MonoBehaviour {
 
     public const int gridRows = 2;
-    public const int gridCols = 4;
-    public const float offsetX = 4f;
-    public const float offsetY = 5f;
+    public const int gridCols = 5;
+    public const float offsetX = 3.6f;
+    public const float offsetY = 4.8f;
 
     [SerializeField] private MainCard originalCard;
     [SerializeField] private Sprite[] images;
@@ -47,7 +47,7 @@ public class CardBoardControl : MonoBehaviour {
 
         Vector3 startPos = originalCard.transform.position; //The position of the first card. All other cards are offset from here.
 
-        int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3};
+        int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
         numbers = ShuffleArray(numbers); //This is a function we will create in a minute!
 
         for(int i = 0; i < gridCols; i++)

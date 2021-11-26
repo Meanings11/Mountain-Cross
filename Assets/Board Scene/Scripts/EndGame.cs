@@ -32,6 +32,6 @@ public class EndGame : MonoBehaviour
     IEnumerator LoadEndScene()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("EndingDialogue3");
+        SceneManager.LoadScene("ChooseEndScene");
     }
 }

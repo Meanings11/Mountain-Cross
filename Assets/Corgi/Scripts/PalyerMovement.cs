@@ -70,14 +70,12 @@ public class PalyerMovement : MonoBehaviour
         {
             RotateCounterClockwise();
             playerRenderer.flipX = true;
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             RotateClockwise();
             playerRenderer.flipX = false;
-            // transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
         // stop movement

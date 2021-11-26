@@ -27,8 +27,10 @@ public class ItemControl : MonoBehaviour
 
     void Start()
     {
-        planeButton = GameObject.Find("PlaneButton").GetComponent<Button>();
-        stepNumButton = GameObject.Find("StepNumButton").GetComponent<Button>();
+        // planeButton = GameObject.Find("PlaneButton").GetComponent<Button>();
+        // stepNumButton = GameObject.Find("StepNumButton").GetComponent<Button>();
+        planeButton = planeButton.GetComponent<Button>();
+        stepNumButton = stepNumButton.GetComponent<Button>();
 
         stepNumButton.gameObject.SetActive(false);
     }

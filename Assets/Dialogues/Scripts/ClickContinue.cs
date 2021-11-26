@@ -14,11 +14,11 @@ public class ClickContinue : MonoBehaviour
     public Text dialogueText;
     public Image character;
     public AudioSource typeSound;
-    // public AudioClip changeScene;
+    public AudioClip changeScene;
 
     private Queue<Dialogue> dialogues = new Queue<Dialogue>();
 
-    // private bool firstChangeClick = true;
+    private bool firstChangeClick = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -49,10 +49,10 @@ public class ClickContinue : MonoBehaviour
     // Update is called once per frame
     private void TaskOnClick() {
         if (dialogues.Count == 0) {
-            // if (firstChangeClick) {
-            //     typeSound.PlayOneShot(changeScene);
-            // }
-            // firstChangeClick = false;
+            if (firstChangeClick) {
+                typeSound.PlayOneShot(changeScene);
+            }
+            firstChangeClick = false;
 
             // change scene to main board
             StartCoroutine(LoadEndScene());

@@ -42,6 +42,9 @@ public class playerMovement : MonoBehaviour {
         // set gameover to invisible
         GameoverText.gameObject.SetActive(false);
         TotalPoint.gameObject.SetActive(false);
+        
+        //initialize pos
+        pos = new Vector3(0f, -3f, 0f);
 	}
 	
 	// Update is called once per frame
@@ -94,25 +97,32 @@ public class playerMovement : MonoBehaviour {
 
     void moveUpdate()
     {
-        if (Input.touchCount > 0)
-        {
-            Vector3 touchPosition = Input.GetTouch(0).position;
-            touchPosition.z = player.transform.position.z - Camera.main.transform.position.z;
-            touchPosition = Camera.main.ScreenToWorldPoint(touchPosition);
-            // touchPosition.y = player.transform.position.y;
-            player.transform.position = Vector3.MoveTowards(player.transform.position, touchPosition, Time.deltaTime * speed);
-        }
+        // Debug.Log(Input.mousePosition.x + " " + Input.mousePosition.y );
 
         if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
-            pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 1));
+            if (Input.touchCount > 0)
+            {
+                Vector3 touchPosition = Input.GetTouch(0).position;
+                touchPosition.z = player.transform.position.z - Camera.main.transform.position.z;
+                touchPosition = Camera.main.ScreenToWorldPoint(touchPosition);
+                // touchPosition.y = player.transform.position.y;
+                player.transform.position = Vector3.MoveTowards(player.transform.position, touchPosition, Time.deltaTime * speed);
+                
+                pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 0f));
+            }
         }
         else
         {
-            pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+            if (Input.mousePosition.x > 0 || Input.mousePosition.x < Screen.width || 
+                Input.mousePosition.y > 0 || Input.mousePosition.y < Screen.height) {
+
+                    pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+            }
         }
 
-        transform.position = new Vector3(pos.x, pos.y + 1, pos.z);
+        // Debug.Log(pos);
+        transform.position = new Vector3(pos.x, pos.y, 0);
     }
 
     void OnCollisionEnter2D(Collision2D col) {

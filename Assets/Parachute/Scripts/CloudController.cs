@@ -8,11 +8,13 @@ public class CloudController : MonoBehaviour
     public GameObject cloud2;
     public GameObject cloud3;
 
+    public float freq = 0.5f;
+
 
     // Use this for initialization
     void Start ()
     {
-        InvokeRepeating("cloudGenerator", 1.0f , Time.deltaTime/0.01f);
+        InvokeRepeating("cloudGenerator", 1.0f , freq);
 	}
 	
     void cloudGenerator()

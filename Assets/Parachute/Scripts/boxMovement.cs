@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class boxMovement : MonoBehaviour {
-    private float boxSpeed = 0.01f;
+    private float boxSpeed = 0.1f;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +15,7 @@ public class boxMovement : MonoBehaviour {
     void Start()
     {
         // boxSpeed = Random.Range(0.2f, 0.03f);
-        transform.position = new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(3.6f, 6.0f), 0);
+        transform.position = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(3.6f, 6.0f), 0);
     }
 
     // Update is called once per frame

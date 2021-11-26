@@ -291,6 +291,9 @@ public class GameControl : MonoBehaviour {
                     if (currentIndex == 13 || currentIndex == 23) {
                         shop.gameObject.SetActive(true); // go to store
                         isInStore = true;
+
+                        // hide test buttons
+                        GameObject.Find("TestGames").SetActive(false);
                     } else if (currentIndex == 3 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {

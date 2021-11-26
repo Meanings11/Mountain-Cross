@@ -80,5 +80,8 @@ public class TestGames : MonoBehaviour
     void TaskOnStore() {
         shop.gameObject.SetActive(true);
         GameControl.isInStore = true;
+
+        // hide test buttons
+        GameObject.Find("TestGames").SetActive(false);
     }
 }

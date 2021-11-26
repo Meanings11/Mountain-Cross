@@ -9,6 +9,8 @@ public class ExitButton : MonoBehaviour
 
     public GameObject shop;
 
+    public GameObject testGames;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,9 @@ public class ExitButton : MonoBehaviour
 
     private void TaskOnClick()
     {
+        // show test buttons
+        testGames.SetActive(true);
+
         shop.gameObject.SetActive(false);
         GameControl.isInStore = false;
         ItemControl.instance.refreshCurrentItems();

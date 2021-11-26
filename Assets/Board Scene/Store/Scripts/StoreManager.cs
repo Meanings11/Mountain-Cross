@@ -15,7 +15,7 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        warningText = GameObject.Find("WarningText").GetComponent<Text>();
+        // warningText = GameObject.Find("WarningText").GetComponent<Text>();
         warningText.gameObject.SetActive(false);
 
         // ID
@@ -28,7 +28,7 @@ public class StoreManager : MonoBehaviour
         storeItems[PRICE,2] = 300;
         storeItems[PRICE,3] = 2000;
 
-        // PlayerPrefs.SetInt("totalGameScore", 2000);   
+        // PlayerPrefs.SetInt("totalGameScore", 2000);
     }
 
     private void OnEnable() {

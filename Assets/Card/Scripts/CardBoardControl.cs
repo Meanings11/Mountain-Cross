@@ -167,7 +167,8 @@ public class CardBoardControl : MonoBehaviour {
     }
 
     public void ExitGame() {
-        int finalScore = (correctNum == (gridCols*gridRows/2)) ? (200 - (trial-12)*10) : 0;
+        // calculate score
+        int finalScore = (correctNum == (gridCols*gridRows/2)) ? (200 - (trial-16)*10) : 0;
         // Debug.Log("final score: " +  finalScore);
         totalPoint.text = "Earned $" + finalScore + " in total";
         gamerOverCanvas.SetActive(true);

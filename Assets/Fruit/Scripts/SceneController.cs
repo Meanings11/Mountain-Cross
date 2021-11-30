@@ -32,6 +32,7 @@ public class SceneController : MonoBehaviour
     private bool isGameOver = false;
     private int score = 0;
     public GameObject hitInfoUI;
+    public Text hitTitle;
     public Text hitCountText;
     Dictionary<GameObject, List<bool>> swordHitObj;
     Stack<GameObject> clearObjs;
@@ -170,14 +171,17 @@ public class SceneController : MonoBehaviour
 
         if (showHitInfo)
         {
-            if (fruitCount > 0 && fruitCount > int.Parse(hitCountText.text))
+            // if (fruitCount > 1 && fruitCount > int.Parse(hitCountText.text))
+            if (fruitCount > 1)
             {
-                hitCountText.text = fruitCount.ToString();
+                hitTitle.text = fruitCount.ToString() + " Fruit\nCombo";
+                hitCountText.text = "+ " + fruitCount.ToString();
                 hitInfoUI.SetActive(true);
             }
         }
         else
         {
+            hitTitle.text = "Fruit";
             hitCountText.text = "0";
             hitInfoUI.SetActive(false);
         }

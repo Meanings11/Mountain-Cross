@@ -1695,7 +1695,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: af1e0ed4cb20ecc4b87415683e1b0891, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9c81708937d7b400f94950a59f4ca6bb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2083,6 +2083,7 @@ MonoBehaviour:
   hammer: {fileID: 1147030703}
   hitAudio: {fileID: 8300000, guid: ed249e373679d4a11adc0b58a4477f45, type: 3}
   timerAudio: {fileID: 8300000, guid: 8e5cf119a511ec94d87b0f8be834365e, type: 3}
+  misHitAudio: {fileID: 8300000, guid: 1dbb5ead026fc4efdbb51bf4d3943bed, type: 3}
   timer: {fileID: 2138803735}
   scoreText: {fileID: 1112852441}
   TotalPoint: {fileID: 49633846}

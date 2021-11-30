@@ -9,9 +9,14 @@ using System.Globalization;
 public class HammerController : MonoBehaviour
 {
     public GameObject hammer;
+
+    //Audio
     AudioSource audioSource;
     public AudioClip hitAudio;
     public AudioClip timerAudio;
+    public AudioClip misHitAudio;
+
+    //UI
     public Text timer;
     public Text scoreText;
     public Text TotalPoint;
@@ -92,9 +97,6 @@ public class HammerController : MonoBehaviour
             Vector2 currPos2D = new Vector2(pos.x, pos.y);
             RaycastHit2D hit = Physics2D.Raycast(currPos2D, Vector2.zero);
             if (hit.collider != null) {
-                // play sound while hit the mole
-                audioSource.PlayOneShot(hitAudio);
-
                 // hide the old alert while hit new mole
                 bridePanel.SetActive(false);
 
@@ -110,9 +112,14 @@ public class HammerController : MonoBehaviour
                     Handheld.Vibrate();
                     #endif
 
+                    // play sound while hit the mole
+                    audioSource.PlayOneShot(misHitAudio);
+
                     bridePanel.SetActive(true); // show lose point alert
                 } else {
                     score += 10;
+                    // play sound while hit the mole
+                    audioSource.PlayOneShot(hitAudio);
                 }
 
                 if (score == 0 || score == 00) {

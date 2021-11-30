@@ -7,6 +7,9 @@ using System.Collections.Generic;
 public class GameControl : MonoBehaviour {
     public GameObject landscapeCanvas;
     public GameObject portraitCanvas;
+
+    private GameObject rule;
+    
     // public GameObject shop;
     private GameObject shop;
 
@@ -20,8 +23,6 @@ public class GameControl : MonoBehaviour {
     public AudioClip changeSceneSound;
 
     public static int diceSideThrown = 0;
-
-    private int totalgamescore = 0;
 
     public static bool gameOver = false;
 
@@ -85,6 +86,16 @@ public class GameControl : MonoBehaviour {
 
         // set endless mode to 0
         PlayerPrefs.SetInt("endlessMode", 0);
+
+        // check if show game rules
+        rule = GameObject.Find("Rule");
+        rule.gameObject.SetActive(false);
+        int isRuleShow = PlayerPrefs.GetInt("showGameRules", 0);
+        if (isRuleShow == 1) {
+            StartCoroutine(displayGameRules());
+        } else if (isRuleShow == 0) {
+            rule.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -136,6 +147,18 @@ public class GameControl : MonoBehaviour {
 
         // check if need to go to the ending scene
         GoToEndScene();
+    }
+
+    IEnumerator displayGameRules() {
+        yield return new WaitForSeconds(0.7f);
+        rule.gameObject.SetActive(true);
+        StartCoroutine(closeGameRules());
+    }
+
+    IEnumerator closeGameRules() {
+        yield return new WaitForSeconds(5f);
+        rule.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("showGameRules", 0);
     }
 
     public void ScreenRotate() {
@@ -292,8 +315,8 @@ public class GameControl : MonoBehaviour {
                         shop.gameObject.SetActive(true); // go to store
                         isInStore = true;
 
-                        // hide test buttons
-                        GameObject.Find("TestGames").SetActive(false);
+                        // // hide test buttons
+                        // GameObject.Find("TestGames").SetActive(false);
                     } else if (currentIndex == 3 || currentIndex == 11 || currentIndex == 22) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {
@@ -365,18 +388,20 @@ public class GameControl : MonoBehaviour {
     }
 
     public void GoToEndScene() {
-        totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
+        int totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
         int endingMode = PlayerPrefs.GetInt("endlessMode", 0);
 
-        if (totalgamescore >= 10000 && endingMode != 3) {
-            sceneAudio.PlayOneShot(changeSceneSound);
-            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
-        } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
-            sceneAudio.PlayOneShot(changeSceneSound);
-            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
-        } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
-            sceneAudio.PlayOneShot(changeSceneSound);
-            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
+        if (endingMode != 1 && endingMode != 2 && endingMode != 3) {
+            if (totalgamescore >= 10000 && endingMode != 3) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
+            } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
+            } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
+                sceneAudio.PlayOneShot(changeSceneSound);
+                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
+            }
         }
     }
 }

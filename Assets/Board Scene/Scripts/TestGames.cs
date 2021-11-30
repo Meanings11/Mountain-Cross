@@ -81,7 +81,7 @@ public class TestGames : MonoBehaviour
         shop.gameObject.SetActive(true);
         GameControl.isInStore = true;
 
-        // hide test buttons
-        GameObject.Find("TestGames").SetActive(false);
+        // // hide test buttons
+        // GameObject.Find("TestGames").SetActive(false);
     }
 }

@@ -47,12 +47,15 @@ public class StoreManager : MonoBehaviour
         int itemId = ButtonRef.GetComponent<ProductButton>().itemId;
 
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
-        if (currentGameScore >= storeItems[PRICE, itemId])
-        {
+        if (currentGameScore >= storeItems[PRICE, itemId]) {
             // play sound
             audioSource.PlayOneShot(successSound);
 
-            warningText.gameObject.SetActive(false);
+            if (itemId == 1) {
+                warningText.text = "Congrats! You bought the insurance and will save you from losing money";
+            } else if (itemId == 2) {
+                warningText.text = "Congrats! You bought the fly ticket and can choose to jump 1 - 6 steps";
+            }
 
             //deduct money
             currentGameScore -= storeItems[PRICE, itemId];
@@ -61,7 +64,8 @@ public class StoreManager : MonoBehaviour
             PlayerStats.addItem(itemId);
         } else {
             audioSource.PlayOneShot(failSound);
-            warningText.gameObject.SetActive(true);
         }
+
+        warningText.gameObject.SetActive(true);
     }
 }

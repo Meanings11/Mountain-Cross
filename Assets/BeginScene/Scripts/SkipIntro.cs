@@ -15,12 +15,6 @@ public class SkipIntro : MonoBehaviour
 		btn.onClick.AddListener(TaskOnClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void TaskOnClick()
     {
         StartCoroutine(LoadEndScene());
@@ -30,5 +24,6 @@ public class SkipIntro : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("BoardScene");
+        PlayerPrefs.SetInt("showGameRules", 1);
     }
 }

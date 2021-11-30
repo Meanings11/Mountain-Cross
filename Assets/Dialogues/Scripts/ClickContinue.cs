@@ -70,5 +70,6 @@ public class ClickContinue : MonoBehaviour
     IEnumerator LoadEndScene() {
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("BoardScene");
+        PlayerPrefs.SetInt("showGameRules", 1);
     }
 }

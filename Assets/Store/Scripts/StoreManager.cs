@@ -12,11 +12,17 @@ public class StoreManager : MonoBehaviour
 
     public int[,] storeItems = new int[4,4];
 
+    // Audio 
+    public AudioSource audioSource;
+    public AudioClip successSound; 
+    public AudioClip failSound; 
+
     // Start is called before the first frame update
     void Start()
     {
         // warningText = GameObject.Find("WarningText").GetComponent<Text>();
         warningText.gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
 
         // ID
         storeItems[ID,1] = 1;
@@ -43,13 +49,18 @@ public class StoreManager : MonoBehaviour
         int currentGameScore = PlayerPrefs.GetInt("totalGameScore", 0);
         if (currentGameScore >= storeItems[PRICE, itemId])
         {
+            // play sound
+            audioSource.PlayOneShot(successSound);
+
             warningText.gameObject.SetActive(false);
 
+            //deduct money
             currentGameScore -= storeItems[PRICE, itemId];
             PlayerPrefs.SetInt("totalGameScore", currentGameScore);
 
             PlayerStats.addItem(itemId);
         } else {
+            audioSource.PlayOneShot(failSound);
             warningText.gameObject.SetActive(true);
         }
     }

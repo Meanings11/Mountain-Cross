@@ -259,7 +259,7 @@ public class GameControl : MonoBehaviour {
                         // GameObject.Find("TestGames").SetActive(false);
                     } else if (currentIndex == 22) {
                         // play one random mini game
-                        int randomIndex = UnityEngine.Random.Range(0, 10);
+                        int randomIndex = UnityEngine.Random.Range(0, 7);
                         switch (randomIndex)
                         {
                             case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CardScene"); break;
@@ -269,8 +269,7 @@ public class GameControl : MonoBehaviour {
                             case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
                             case 5: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
                             case 6: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
-                            case 7: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
-                            case 8: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
+                            case 7: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
 
                         }
                     } else if (currentIndex == 3 || currentIndex == 11) {

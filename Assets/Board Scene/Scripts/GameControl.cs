@@ -258,8 +258,12 @@ public class GameControl : MonoBehaviour {
                         // // hide test buttons
                         // GameObject.Find("TestGames").SetActive(false);
                     } else if (currentIndex == 22) {
+                        // Show reward
+                        playerMoveCount.gameObject.SetActive(true);
+                        playerMoveCount.GetComponent<Text>().text = "Play a random game!";
+
                         // play one random mini game
-                        int randomIndex = UnityEngine.Random.Range(0, 7);
+                        int randomIndex = UnityEngine.Random.Range(0, 9);
                         switch (randomIndex)
                         {
                             case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CardScene"); break;

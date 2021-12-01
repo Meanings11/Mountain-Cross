@@ -57,7 +57,7 @@ public class StoreManager : MonoBehaviour
                 warningText.text = "Congrats! You bought the fly ticket and can choose to jump 1 - 6 steps";
             }
 
-            //deduct money
+            // deduct money
             currentGameScore -= storeItems[PRICE, itemId];
             PlayerPrefs.SetInt("totalGameScore", currentGameScore);
 

@@ -251,7 +251,7 @@ public class GameControl : MonoBehaviour {
 
                     StartCoroutine(disableDice());
                 } else {
-                    if (currentIndex == 13 || currentIndex == 23) {
+                    if (currentIndex == 3 || currentIndex == 13 || currentIndex == 23) {
                         shop.gameObject.SetActive(true); // go to store
                         isInStore = true;
 
@@ -276,7 +276,7 @@ public class GameControl : MonoBehaviour {
                             case 7: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
 
                         }
-                    } else if (currentIndex == 3 || currentIndex == 11) {
+                    } else if (currentIndex == 11) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {
                         int newGameScore = 0;

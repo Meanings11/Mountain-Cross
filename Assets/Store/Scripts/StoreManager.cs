@@ -66,6 +66,13 @@ public class StoreManager : MonoBehaviour
             audioSource.PlayOneShot(failSound);
         }
 
+        StartCoroutine(toggleWarning());
+    }
+
+    IEnumerator toggleWarning() {
+        Debug.Log("toggle");
         warningText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        warningText.gameObject.SetActive(false);
     }
 }

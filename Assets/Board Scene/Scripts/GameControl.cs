@@ -41,23 +41,6 @@ public class GameControl : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        // Screen.orientation = ScreenOrientation.LandscapeLeft;
-        // Screen.orientation = ScreenOrientation.AutoRotation;
-
-        /*if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
-            landscapeCanvas.gameObject.SetActive(true);
-            portraitCanvas.gameObject.SetActive(false);
-        } else {
-            if (Screen.width / Screen.height > 1.4f) {
-                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-                    landscapeCanvas.gameObject.SetActive(true);
-                    portraitCanvas.gameObject.SetActive(false);
-                }
-            } else {
-                landscapeCanvas.gameObject.SetActive(false);
-                portraitCanvas.gameObject.SetActive(true);
-            }
-        }*/
         ScreenRotate();
 
         minigamesIndexes.Add(1);
@@ -97,23 +80,6 @@ public class GameControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        // Debug.Log(PlayerPrefs.GetInt("lastWaypointIndex", 0));
-        // Screen.orientation = ScreenOrientation.AutoRotation;
-
-        /*if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
-            landscapeCanvas.gameObject.SetActive(true);
-            portraitCanvas.gameObject.SetActive(false);
-        } else {
-            if (Screen.width / Screen.height > 1.4f) {
-                if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight) {
-                    landscapeCanvas.gameObject.SetActive(true);
-                    portraitCanvas.gameObject.SetActive(false);
-                }
-            } else {
-                landscapeCanvas.gameObject.SetActive(false);
-                portraitCanvas.gameObject.SetActive(true);
-            }
-        }*/
         ScreenRotate();
 
         // Check if the player finish the movement this round
@@ -127,20 +93,6 @@ public class GameControl : MonoBehaviour {
                 rewardPlayer();
             }
         }
-
-        // // Check if finish the board once
-        // if (player.GetComponent<PlayerMovement>().moveFinished && player.GetComponent<PlayerMovement>().currentWaypointIndex == player.GetComponent<PlayerMovement>().waypoints.Length) {
-        //    print(player.GetComponent<PlayerMovement>().destinationWaypointIndex);
-        //    print(player.GetComponent<PlayerMovement>().currentWaypointIndex);
-        //    player.GetComponent<PlayerMovement>().destinationWaypointIndex = player.GetComponent<PlayerMovement>().destinationWaypointIndex - player.GetComponent<PlayerMovement>().currentWaypointIndex;
-        //    player.GetComponent<PlayerMovement>().currentWaypointIndex = 0;
-        //    print("Destination Set");
-        //    print(player.GetComponent<PlayerMovement>().destinationWaypointIndex);
-
-        //     // TODO: Add dialog to show the reward when every round is finished.
-        //     // playerMoveCount.gameObject.SetActive(false);
-        //     // gameOver = true; The gameover will be used when the user finished the game
-        // }
 
         // check if need to go to the ending scene
         GoToEndScene();
@@ -164,7 +116,7 @@ public class GameControl : MonoBehaviour {
         } else if (portraitCanvas.gameObject.activeSelf) {
             landscapeCanvas.gameObject.SetActive(false);
         }
-        if (Application.platform != RuntimePlatform.IPhonePlayer && Application.platform != RuntimePlatform.Android) {
+        if (Application.platform != RuntimePlatform.Android) {
             landscapeCanvas.gameObject.SetActive(true);
             portraitCanvas.gameObject.SetActive(false);
         } else {

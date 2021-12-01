@@ -84,9 +84,6 @@ public class GameControl : MonoBehaviour {
         shop.gameObject.SetActive(false);
         ItemControl.instance.refreshCurrentItems();
 
-        // set endless mode to 0
-        PlayerPrefs.SetInt("endlessMode", 0);
-
         // check if show game rules
         rule = GameObject.Find("Rule");
         rule.gameObject.SetActive(false);
@@ -389,19 +386,18 @@ public class GameControl : MonoBehaviour {
 
     public void GoToEndScene() {
         int totalgamescore = PlayerPrefs.GetInt("totalGameScore", 0);
-        int endingMode = PlayerPrefs.GetInt("endlessMode", 0);
+        int endingMode = PlayerStats.getMode();
+        // Debug.Log(endingMode);
 
-        if (endingMode != 1 && endingMode != 2 && endingMode != 3) {
-            if (totalgamescore >= 10000 && endingMode != 3) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
-            } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
-            } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
-                sceneAudio.PlayOneShot(changeSceneSound);
-                sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
-            }
+        if (totalgamescore >= 10000 && endingMode != 3) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue3");
+        } else if (totalgamescore >= 7500 && totalgamescore < 10000 && endingMode != 2) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue2");
+        } else if (totalgamescore >= 5000 && totalgamescore < 7500 && endingMode != 1) {
+            sceneAudio.PlayOneShot(changeSceneSound);
+            sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "EndingDialogue1");
         }
     }
 }

@@ -235,15 +235,6 @@ public class GameControl : MonoBehaviour {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CardScene");
                     } else if (currentIndex == 4) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene");
-
-                        // // go to random level
-                        // int randomIndex = UnityEngine.Random.Range(0, 4);
-                        // switch (randomIndex)
-                        // {
-                        //     case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene1"); break;
-                        //     case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene2"); break;
-                        //     case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene3"); break;
-                        // }
                     } else if (currentIndex == 5) {
                         sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole");
                     } else if (currentIndex == 9) {
@@ -266,7 +257,23 @@ public class GameControl : MonoBehaviour {
 
                         // // hide test buttons
                         // GameObject.Find("TestGames").SetActive(false);
-                    } else if (currentIndex == 3 || currentIndex == 11 || currentIndex == 22) {
+                    } else if (currentIndex == 22) {
+                        // play one random mini game
+                        int randomIndex = UnityEngine.Random.Range(0, 10);
+                        switch (randomIndex)
+                        {
+                            case 0: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CardScene"); break;
+                            case 1: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CrossingScene"); break;
+                            case 2: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "Whack-A-Mole"); break;
+                            case 3: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "FruitScene"); break;
+                            case 4: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "ParachuteScene"); break;
+                            case 5: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "RhythmScene"); break;
+                            case 6: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
+                            case 7: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "CorgiScene"); break;
+                            case 8: sceneManager.GetComponent<SceneTransitions>().loadScene(sceneName: "MosquitoScene"); break;
+
+                        }
+                    } else if (currentIndex == 3 || currentIndex == 11) {
                         playerMoveCount.GetComponent<Text>().text = "Skip";
                     } else if (currentIndex == 7) {
                         int newGameScore = 0;
